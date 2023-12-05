@@ -53,7 +53,7 @@
 + ***Alarme de facturation***
 + ***Configuration du certificat***
 
-###**9. Chocolatey pour Windows**
+### **9. Chocolatey pour Windows**
 
 + ***Le premier outil que nous allons installer est `chocolatey`.***
 
@@ -94,7 +94,7 @@
 + https://community.chocolatey.org/packages
 
 
-### **Homebrew pour MacOS**
+### **10. Homebrew pour MacOS**
             
             ******************** Open Your Terminal and paste ******************
             /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
