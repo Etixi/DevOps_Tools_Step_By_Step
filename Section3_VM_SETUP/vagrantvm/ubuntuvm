@@ -1,0 +1,20 @@
+########################## UBUNTU: VAGRNT COMMANDS ###########################
+$ pwd
+$ cd ..
+$ ls
+$ cd ubuntu/
+$ pwd
+$ vagrant init ubuntu/jammy64
+$ ls
+$ vagrant up
+$ vagrant status
+$ vagrant global-status
+$ vagrant global-status --prune
+$ vagrant ssh
+vagrant@ubuntu-jammy:~$ pwd
+vagrant@ubuntu-jammy:~$ sudo -i
+root@ubuntu-jammy:~# exit
+vagrant@ubuntu-jammy:~$ exit
+
+
+$ vagrant halt

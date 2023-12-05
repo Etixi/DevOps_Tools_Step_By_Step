@@ -1,0 +1,58 @@
+########################## CENTOS: VAGRNT COMMANDS ###########################
+
+$ pwd
+
+$ mkdir /c/vagrant-vms
+
+$ mkdir ~/Desktop/vagrant-vms
+
+$ cd /c/vagrant-vms
+
+$ pwd
+
+$ ls
+
+$ mkdir centos
+
+$ mkdir ubuntu
+
+$ ls
+
+$ cd centos/
+
+$ pwd
+
+$ cd /c/vagrant-vms/centos/
+
+$ vagrant init eurolinux-vagrant/centos-stream-9
+
+$ ls
+
+$ cat Vagrantfile
+
+$ vagrant up
+
+$ vagrant box-list
+
+$ vagrant status
+
+$ vagrant ssh
+
+[vagrant@pc-258 ~]$ pwd
+/home/vagrant
+[vagrant@pc-258 ~]$ sudo -i
+[root@pc-258 ~]# whoami
+root
+[root@pc-258 ~]# exit
+[vagrant@pc-258 ~]$ exit
+
+$ vagrant halt
+$ vagrant up
+$ vagrant reload
+$ vagrant destroy
+$ vagrant status
+$ vagrant up
+$ vagrant box-list
+$ vagrant halt
+
+########################## CENTOS: VAGRNT COMMANDS ###########################
