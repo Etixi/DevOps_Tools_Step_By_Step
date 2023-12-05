@@ -95,7 +95,7 @@
     + **Système D'exploitation Invité (OS invité)**
         + Il s'agit du système d'exploitation qui s'exécutent à l'intérieur de la machine virtuelle.
 
-<img src= "images/téléchargement.jpg"/>
+
 
 
 ### **Configuration de la machine virtuelle**
