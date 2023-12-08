@@ -1,0 +1,20 @@
+========================== **26. Éditeur Vim** ==========================
+
+[vagrant@pc-258 ~]$ whoami
+[vagrant@pc-258 ~]$ cat /etc/os-release
+# Intallation de vim
+[vagrant@pc-258 ~]$ sudo yum install vim -y
+# version vim
+[vagrant@pc-258 ~]$ vim --version
+[vagrant@pc-258 ~]$ ls
+[vagrant@pc-258 ~]$ pwd
+[vagrant@pc-258 ~]$ vim firstfile.txt
+====================================
+Welcome to Linux.
+I hope you enjoy Commands.
+It is super important for you to practice linux before getting into Devops.
+====================================
+[vagrant@pc-258 ~]$ cat firstfile.txt
+[root@pc-258 ~]# ls
+[root@pc-258 ~]# cat anaconda-ks.cfg
+[root@pc-258 ~]# vim anaconda-ks.cfg

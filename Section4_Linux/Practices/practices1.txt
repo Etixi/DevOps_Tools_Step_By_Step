@@ -1,0 +1,49 @@
+$ cd /c/vagrant-vms/centos/
+$ vagrant up
+$ vagrant ssh
+
+[vagrant@pc-258 ~]$ whoami
+[vagrant@pc-258 ~]$ pwd
+[vagrant@pc-258 ~]$ ls
+[vagrant@pc-258 ~]$ cat /etc/os-release
+
+[vagrant@pc-258 ~]$ sudo -i
+[root@pc-258 ~]# whoami
+[root@pc-258 ~]# pwd
+[root@pc-258 ~]# ls
+anaconda-ks.cfg  original-ks.cfg
+[root@pc-258 ~]# cd /
+[root@pc-258 /]# pwd
+[root@pc-258 /]# ls
+[root@pc-258 /]# cd
+[root@pc-258 ~]# pwd
+[root@pc-258 ~]# whoami
+[root@pc-258 ~]# cd /
+[root@pc-258 /]# pwd
+[root@pc-258 /]# ls
+[root@pc-258 /]# cd /bin
+[root@pc-258 bin]# ls
+[root@pc-258 bin]# cd /sbin/
+[root@pc-258 sbin]# ls
+[root@pc-258 sbin]# cd /etc/
+[root@pc-258 etc]# ls
+[root@pc-258 etc]# cat /etc/hostname
+[root@pc-258 etc]# cd /tmp/
+[root@pc-258 tmp]# ls
+[root@pc-258 tmp]# cd /boot/
+[root@pc-258 boot]# ls
+[root@pc-258 boot]# cd grub
+[root@pc-258 boot]# cd ..
+[root@pc-258 boot]# cd grub2/
+[root@pc-258 grub2]# ls
+[root@pc-258 grub2]# pwd
+[root@pc-258 grub2]# cd
+[root@pc-258 ~]# pwd
+[root@pc-258 ~]# cd /proc/
+[root@pc-258 proc]# ls
+[root@pc-258 proc]# uptime
+[root@pc-258 proc]# cat /proc/uptime
+[root@pc-258 proc]# free -m
+[root@pc-258 proc]# whoami
+[root@pc-258 proc]# exit
+[vagrant@pc-258 ~]$ exit

@@ -1,0 +1,64 @@
+========================== **25. Plus de commandes (mkdir, cp, mv, touch etc.)** ==========================
+
+$ vagrant ssh
+[vagrant@pc-258 ~]$ sudo -i
+[root@pc-258 ~]# ls
+[root@pc-258 ~]# pwd
+[root@pc-258 ~]# mkdir dev
+[vagrant@pc-258 ~]$ mkdir dev ops beckupdir
+[vagrant@pc-258 ~]$ ls
+beckupdir  dev  ops
+[vagrant@pc-258 ~]$ pwd
+/home/vagrant
+[vagrant@pc-258 ~]$ touch testfile.txt
+[vagrant@pc-258 ~]$ ls
+beckupdir  dev  ops  testfile.txt
+[vagrant@pc-258 ~]$ touch devopsfile{1..10}.txt
+[vagrant@pc-258 ~]$ ls
+[vagrant@pc-258 ~]$ cp devopsfile1.txt dev/
+[vagrant@pc-258 ~]$ ls dev/
+[vagrant@pc-258 ~]$ ls
+[vagrant@pc-258 ~]$ cd /tmp/
+[vagrant@pc-258 tmp]$ ls
+[vagrant@pc-258 tmp]$ ls /home/vagrant/dev/
+[vagrant@pc-258 tmp]$ cd
+[vagrant@pc-258 ~]$ ls
+[vagrant@pc-258 ~]$ mv beckupdir backupdir
+[vagrant@pc-258 ~]$ ls
+[vagrant@pc-258 ~]$ pwd
+/home/vagrant
+[vagrant@pc-258 ~]$ cd /tmp/
+[vagrant@pc-258 tmp]$ cp /home/vagrant/devopsfile2.txt /home/vagrant/dev/
+[vagrant@pc-258 tmp]$ cd ~
+[vagrant@pc-258 ~]$ pwd
+[vagrant@pc-258 ~]$ ls
+[vagrant@pc-258 ~]$ cp dev backupdir/
+cp: -r not specified; omitting directory 'dev'
+[vagrant@pc-258 ~]$ ls backupdir/
+[vagrant@pc-258 ~]$ ls /home/vagrant/backupdir/
+[vagrant@pc-258 ~]$ cp -r dev backupdir/
+[vagrant@pc-258 ~]$ ls backupdir/
+[vagrant@pc-258 ~]$ ls /home/vagrant/backupdir/
+[vagrant@pc-258 ~]$ cp --help
+[vagrant@pc-258 ~]$ pwd
+[vagrant@pc-258 ~]$ ls
+[vagrant@pc-258 ~]$ mv devopsfile3.txt ops/
+[vagrant@pc-258 ~]$ ls ops/
+[vagrant@pc-258 ~]$ mv ops dev/
+[vagrant@pc-258 ~]$ ls
+[vagrant@pc-258 ~]$ ls dev/
+[vagrant@pc-258 ~]$ ls
+[vagrant@pc-258 ~]$ mv testfile.txt testfile22.txt
+[vagrant@pc-258 ~]$ ls
+[vagrant@pc-258 ~]$ cd textdir/
+[vagrant@pc-258 textdir]$ ls
+[vagrant@pc-258 textdir]$ rm devopsfile10.txt
+[vagrant@pc-258 textdir]$ mkdir mobile
+[vagrant@pc-258 textdir]$ ls
+[vagrant@pc-258 textdir]$ rm -r mobile
+[vagrant@pc-258 textdir]$ ls
+[vagrant@pc-258 textdir]$ mkdir textdir{1..5}
+[vagrant@pc-258 textdir]$ ls
+[vagrant@pc-258 textdir]$ rm -rf *
+[vagrant@pc-258 textdir]$ ls
+[vagrant@pc-258 textdir]$ pwd

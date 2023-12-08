@@ -1,0 +1,65 @@
+$ cd /c/vagrant-vms/centos/
+$ vagrant ssh
+[vagrant@pc-258 ~]$ sudo -i
+[root@pc-258 ~]# pwd
+[root@pc-258 ~]# ls -l
+[root@pc-258 ~]# mkdir devopsdir
+[root@pc-258 ~]# ls -l
+[root@pc-258 ~]# file anaconda-ks.cfg
+[root@pc-258 ~]# cd /bin/
+[root@pc-258 bin]# ls
+[root@pc-258 bin]# file /bin/pwd
+[root@pc-258 bin]# file /bin/pwd
+[root@pc-258 bin]# cd
+[root@pc-258 ~]# ls -l
+[root@pc-258 ~]# cd cd /dev/
+-bash: cd: too many arguments
+[root@pc-258 ~]# ls -l
+total 8
+-rw-------. 1 root root 2027 Aug 24 10:53 anaconda-ks.cfg
+drwxr-xr-x. 2 root root    6 Aug 24 11:24 devopsdir
+-rw-------. 1 root root 1388 Jul 13 22:23 original-ks.cfg
+[root@pc-258 ~]# pwd
+/root
+[root@pc-258 ~]# ls
+anaconda-ks.cfg  devopsdir  original-ks.cfg
+[root@pc-258 ~]# mkdir /opt/dev/ops/devops/test
+mkdir: cannot create directory ‘/opt/dev/ops/devops/test’: No such file or directory
+[root@pc-258 ~]# mkdir -p /opt/dev/ops/devops/test
+[root@pc-258 ~]# ls
+anaconda-ks.cfg  devopsdir  original-ks.cfg
+[root@pc-258 ~]# mkdir -p /opt/dev/ops/devops/test
+[root@pc-258 ~]# mkdir /opt/dev/ops/devops/test
+mkdir: cannot create directory ‘/opt/dev/ops/devops/test’: File exists
+[root@pc-258 ~]# vim /opt/dev/ops/devops/test
+[root@pc-258 ~]# vim /opt/dev/ops/devops/test/commands.txt
+============================================================
+ls
+pwd
+whoami
+cd
+uptime
+touch
+mkdir
+
+============================================================
+[root@pc-258 ~]# ln -s /opt/dev/ops/devops/test/commands.txt cmds
+[root@pc-258 ~]# ls -l
+[root@pc-258 ~]# cat cmds
+[root@pc-258 ~]# mv /opt/dev/ops/devops/test/commands.txt /tmp/
+[root@pc-258 ~]# ls -l
+[root@pc-258 ~]# mv /tmp/commands.txt /opt/dev/ops/devops/test/commands.txt
+[root@pc-258 ~]# ls -l
+[root@pc-258 ~]# ln -s /opt/dev/ops/devops/test/commands.txt cmds
+[root@pc-258 ~]# ls -l
+[root@pc-258 ~]# ls -lt
+[root@pc-258 ~]# ls -ltr
+[root@pc-258 ~]# ls -ltr /etc/
+[root@pc-258 ~]# vim /etc/hostname
+======================================================
+centos.devops.in
+=======================================================
+[root@pc-258 ~]# hostname centos.devops.in
+$ vagrant ssh
+[vagrant@centos ~]$ hostname
+[vagrant@centos ~]$ ls -ltr /etc/
