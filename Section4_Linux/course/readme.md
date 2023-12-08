@@ -662,7 +662,7 @@
 
 
 + **ls /etc/yum.repos.d/**
-<img src="images/image_62.png"/>
+<img src="../images/image_62.png"/>
 
 
 #### **Montre l'utilisation de la commande YUM avec des options**
@@ -674,17 +674,18 @@
 #### **Pour mettre à jour tous vos packages**
 
 + **# yum update**
-<img src="images/image_52.png"/>
+<img src="../images/image_52.png"/>
 
 #### **Pour installer httpd**
 
 + **# yum install httpd -y**
-<img src="images/image_53.png"/>
+<img src="../images/image_53.png"/>
 
 #### **Pour supprimer httpd**
 
 + **# yum remove httpd -y**
-<img src="images/image_54.png"/>
+
+<img src="../images/image_54.png"/>
 
 ### **Pour Ubuntu**
 
@@ -699,12 +700,12 @@
 + **Les sources. Le fichier list est un facteur clé dans l’ajout ou la mise à niveau d’applications vers votre installation Ubuntu. C'est également utilisé par votre système pour les mises à jour du système. Le fichier est essentiellement la feuille de route permettant à votre système de savoir où il peut télécharger des programmes pour l'installation ou la mise à niveau.**
 
 + **# cat /etc/apt/sources.list**
-<img src="images/image_56.png"/>
+<img src="../images/image_56.png"/>
 
 #### **Montre l'utilisation de la commande apt avec des options**
 
 + **# apt --help**
-<img src="images/image_57.png"/>
+<img src="../images/image_57.png"/>
 
 #### **Pour mettre à jour toutes vos listes de packages**
 
@@ -715,15 +716,15 @@
 #### **POUR rechercher un apache2**
 
 + **# apt search apache2**
-<img src="images/image_59.png"/>
+<img src="../images/image_59.png"/>
 
 #### **Pour installer apache2**
 + **# apt install apache2 -y**
-<img src="images/image_60.png"/>
+<img src="../images/image_60.png"/>
 
 #### **Pour supprimer Apache2**
 + **# apt remove apache2 -y**
-<img src="images/image_61.png"/>
+<img src="../images/image_61.png"/>
 
 | Commands                                         | Description                                                                                                                         | ...    |
 |--------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------|--------|
