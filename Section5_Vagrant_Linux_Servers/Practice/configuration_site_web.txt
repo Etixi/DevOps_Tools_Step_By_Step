@@ -1,0 +1,74 @@
+$ vagrant global-status
+$ mkdir /c/vagrant-vms/finance
+$ cd /c/vagrant-vms/finance
+$ vagrant box list
+$ vagrant init
+$ vagrant init eurolinux-vagrant/centos-stream-9
+$ vim Vagrantfile
+$ vagrant up
+$ vagrant ssh
+[vagrant@pc-286 ~]$ sudo -i
+[root@pc-286 ~]# vi /etc/hostname
+[root@pc-286 ~]# hostname finance
+[root@pc-286 ~]# exit
+[vagrant@pc-286 ~]$ exit
+
+$ vagrant ssh
+[vagrant@finance ~]$ sudo -i
+[root@finance ~]# cat /etc/os-release
+===================================================
+NAME="CentOS Stream"
+VERSION="9"
+ID="centos"
+ID_LIKE="rhel fedora"
+VERSION_ID="9"
+PLATFORM_ID="platform:el9"
+PRETTY_NAME="CentOS Stream 9"
+ANSI_COLOR="0;31"
+LOGO="fedora-logo-icon"
+CPE_NAME="cpe:/o:centos:centos:9"
+HOME_URL="https://centos.org/"
+BUG_REPORT_URL="https://bugzilla.redhat.com/"
+REDHAT_SUPPORT_PRODUCT="Red Hat Enterprise Linux 9"
+REDHAT_SUPPORT_PRODUCT_VERSION="CentOS Stream"
+===========================================================
+
+[root@finance ~]# yum install httpd wget vim unzip -y
+[root@finance ~]# systemctl start httpd
+[root@finance ~]# systemctl enable httpd
+[root@finance ~]# ip addr show
+[root@finance ~]# cd /var/www/html/
+[root@finance html]# ls
+[root@finance html]# vim index.html
+
+===========================================================
+this is my first website setup.
+===========================================================
+
+[root@finance html]# systemctl restart httpd
+[root@finance html]# cd /tmp/
+[root@finance tmp]# wget https://www.tooplate.com/zip-templates/2135_mini_finance.zip
+[root@finance tmp]# ls
+[root@finance tmp]# unzip 2135_mini_finance.zip
+[root@finance tmp]# ls
+[root@finance tmp]# cd 2135_mini_finance/
+[root@finance 2135_mini_finance]# pwd
+[root@finance 2135_mini_finance]# ls
+[root@finance 2135_mini_finance]# cp -r * /var/www/html
+cp: overwrite '/var/www/html/index.html'? y
+[root@finance 2135_mini_finance]# ls /var/www/html/
+[root@finance 2135_mini_finance]# ls /var/www/html/
+[root@finance 2135_mini_finance]# systemctl restart httpd
+[root@finance 2135_mini_finance]# systemctl status httpd
+[root@finance 2135_mini_finance]# ls /var/www/html/
+[root@finance 2135_mini_finance]# systemctl status firewald
+[root@finance 2135_mini_finance]# systemctl status firewalld
+[root@finance 2135_mini_finance]# systemctl stop firewalld
+[root@finance 2135_mini_finance]# systemctl disable firewalld
+[root@finance 2135_mini_finance]# ls /var/www/html/
+[root@finance 2135_mini_finance]# ip addr show
+[root@finance 2135_mini_finance]# exit
+[vagrant@finance ~]$ exit
+
+$ vagrant halt
+$ vagrant destroy
