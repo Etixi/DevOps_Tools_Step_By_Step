@@ -372,6 +372,20 @@
 |C'est tout!|
 
 
+### **QUIZZ IAC**
 
+#### **Question 1 :**
++ ***`L'infrastructure en tant que code (IaC`) est le processus de gestion et de provisionnement de l'infrastructure (réseaux, machines virtuelles, équilibreurs de charge et topologie de connexion) via des fichiers `CODE/config`.***
+    + ***Par exemple***
+        + ***Vagrant pour Terraform local pour Cloud***
+        + ***Ansible pour les serveurs***
+        + ***Cloudformation pour AWS***
+        + ***etc.***
+
+            + ***VRAI***
+
+#### **Question 2 :**
++ ***Le provisionnement est le processus de configuration et de déploiement d'une ressource système de technologie de l'information (TI), soit localement, soit dans le cloud. Dans l'informatique d'entreprise, le terme est souvent associé aux machines virtuelles (VM) et aux instances de ressources cloud.***
+    + ***`VRAI`***
 
  
