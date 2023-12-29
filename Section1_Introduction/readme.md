@@ -16,9 +16,9 @@
 
 
 ### **Qu'est ce DevOps**
-+ Je sias que c'est la première réponse que tout le monde rechercherait et je n'essaierai pas de la definir.
-+ Parce que tant de gens l'ont tenté déjà fait et devinez qu'il existe de nombreuses définitions différentes.
-+ Tout le monde dans l'industrie informatique en parle. L'organisation envoie des postes aux piliers pour ebaucher des ingénieurs DevOps et il y a une une forte demande demande pour cela.
++ Je sais que c'est la première réponse que tout le monde rechercherait et je n'essaierai pas de la definir.
++ Parce que tant de gens l'ont déjà fait et devinez quoi il existe de nombreuses définitions différentes.
++ Tout le monde dans l'industrie informatique en parle. L'organisation envoie des postes aux piliers pour embaucher des ingénieurs DevOps et il y a une une forte demande pour cela.
 + Certains disent que c'est `automatisé`, mais d'autres disent que c'est une question de culture, ces deux croyances se contredisent.
 
 
@@ -26,11 +26,10 @@
 + Alors vous diriez que c'est la culture, mais si c'est juste la culture, pourquoi tant d'outils d'automisation? Vous auriez l'impression maintenant que je vous confonds, mais croyez-moi, je vais prouver certains points plus tard, continuez simplement à lire.
 
 
-+ Si vous lisez ceci, vous êtes en quelque sorte lié à l'industrie du logiciel. Oui, l'industriue du logiciel a pour seul objectif de créerdes logiciels et de les fournir à l'utilisateur. Nous pouvons dire que depuis le tout debut, l'industrie du logiciel est divisée en deux parties:
-+ le `developpement et les opérations`. Le `developpement` se concentre surla creation et le test de logiciels.
++ Si vous lisez ceci, vous êtes en quelque sorte lié à l'industrie du logiciel. Oui, l'industriue du logiciel a pour seul objectif de créer des logiciels et de les fournir à l'utilisateur. Nous pouvons dire que depuis le tout debut, l'industrie du logiciel est divisée en deux parties:
++ le `developpement et les opérations`. Le `developpement` se concentre sur la creation et le test de logiciels.
 
-+ Les opérationsse concentrent sur la fourniture de ces logiciels à l'utilisateur sous la forme d'un site `Web` ou d'un logiciel installable. Une fois livré, nous maintenons le logicile, nous fournissons de nouvelles fonctionnalités à nos utilisateurs et veillons à ce que le logiciel
-+ reste opérationnel et sain.
++ `Les opérations` se concentrent sur la fourniture de ces logiciels à l'utilisateur sous la forme d'un site `Web` ou d'un logiciel installable. Une fois livré, nous maintenons le logicile, nous fournissons de nouvelles fonctionnalités à nos utilisateurs et veillons à ce que le logiciel reste opérationnel et sain.
 
 
 ### **Rôles professionels et leur devise**
@@ -357,7 +356,7 @@
 
 ### **Résumé**
 
-+ `DevOps` ne peut être défini en une seule phase. `DevOps` c'est la culture et aussi la mise en oeuvre d'aoutils d'automatisation. Cela dépend de quel domaine vous le définissez.
++ `DevOps` ne peut être défini en une seule phase. `DevOps` c'est la culture et aussi la mise en oeuvre d'outils d'automatisation. Cela dépend de quel domaine vous le définissez.
 + La majorité du developpement logiciel s'effectue avec le `modèle Agile`, ce qui entraine des modfications de code de manière incrémentielle et fréquente.
 + Les opérations ne s'accordent pas bien avec l'équipe Agile car les deux ont des principes différentes.
 + `L'équipe Agile` veut un changement rapide, `Ops` veut maintenir la stabilité du système en n'effectuant pas de changement fréquents.
@@ -412,8 +411,6 @@
   + *Plus d'exercices sur Terraform*
 
   + *Quiz*
-
-+ ***Remarque : Tous ces éléments sont testés avant l'enregistrement, mais il y a toujours des chances que vous rencontriez des problèmes. Dans de telles situations, publiez-le dans Q & A avec tous les détails, captures d'écran, erreurs, journaux, etc. Je fais de mon mieux pour vous donner le meilleur de ce que la formation DevOps a à offrir. Merci pour votre soutien.***
 
 
 
