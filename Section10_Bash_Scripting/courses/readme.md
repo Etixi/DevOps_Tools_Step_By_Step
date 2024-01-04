@@ -49,4 +49,84 @@
 + Chaque fois que vous créez un fichier dans le Système Linux par défaut, il n'aura pas une `autorisation d'éxécution`, c'est pour des raisons de sécurité.
 + Vous rendrez votre script exécutable et alors vous pouvez l'exécuter.
 
+<img src= "../images/image1.jpg"/>
+
++ Sans donner l'autorisation d'execution, nous pouvons également exécuter le script, mais nous forunissosn ensuite un shell et lui demandons d'exécuter toutes les commandes du script sur ce shell.
+
+
+### **Variables**
+
++ Stockage temporaire d'informations en mémoire.
+
+**Comment travaillent-ils ?**
++ Une `variable` est un stockage pour une information.
++ Nous pourrions effectuer deux actions pour les variables :
+    + Définir une valeur pour une variable.
+    + Lire ou utiliser la valeur d'une variable.
+
++ Pour attribuer une variable, nous utilisons `= signe`, `VariableName=Value`
++ Pour lire/accéder à la valeur de la variable, nous utilisons : `$VariableName`.
+
+<img src= "../images/image2.jpg"/>
+
+
+**Arguments de ligne de Commande**
++ Lorsque nous exécutons un programme sur la ligne de commande, vous êtes habitué à fournir des arguments après celui-ci pour contrôler son comportement.
++ Par exemple, nous pourrions exécuter la commande `ls -l/tmp`.
++ `-l` et `/tmp` sont tous deux arguments de ligne de commande pour la commande `ls`.
++ Nous pouvons faire la même chose avec nos scripts bash. 
++ Pour ce faire, utilisons les variables `$1` pour représenter le premier argument de ligne de commande, `$2` pour représenter le deuxième argument de ligne de commande et ainsi de suite.
++ Ceux-ci sont automatiquement définis par le système lorsque nous executons notre script, il nous suffit donc de nous y référer.
++ Regardons un exemple.
+
+<img src= "../images/image3.jpg"/>
+
+**Explication**
+
++ `Ligne 3` - exécutez `cp` avec le premier argument de ligne de commande comme source et le deuxième argument de ligne de commande comme destination.
++ `Ligne 5` - exécutez la commande `echo` pour imprimer un message.
++ `Ligne 6` - Une fois la copie terminée, exécutez la commande `ls` pour la destination juste pour vérifier qu'elle a fonctionné. Nous avons inclus les options `l` pour nous montrer des informations supplémentaires et `h` pour rendre la taille lisible par l'homme afin que nous puissions vérifier qu'elle a été copiée correctement.
+
+
+**Certaines Variables Systèmes**
+
++ Le système définit également quelques autres variables que vous pouvez utiliser.
+
+    + `$0` - Le nom du script Bash.
+    + `$1 - $9` - Les 9 premiers arguments du script Bash(Comme mentionné ci-dessus).
+    + `$#` - Combien d'arguments ont été transmis au script Bash.
+    + `$@` - Tous les arguments fournis au script Bash.
+    + `$?` - L'état de sortie du processus executé le plus récemment.
+    + `$$` - L'ID de processus du script actuel.
+    + `$USER` - Le nom de l'utilisateur qui exécute le script.
+    + `$HOSTNAME` - Le nom de l'hôte de la machine sur laquelle le script est executé.
+    + `$SECONDS` - le nombre de secondes depuis le démarrage du script.
+    + `$RANDOM` - Renvoie un nombre aléatoire différent à chaque fois qu'il est mentionné.
+    + `$LINENO` - Renvoie le numéro de ligne actuel dans le script Bash.
+
+**Définir Vos Propres Variables**
+
+<img src= "../images/image4.jpg"/>
+
+**Citations**
+
++ Stocker un seul mot dans une variable fonctionne bien sans guillemets, mais si nous voulons stocker une phrase et également stocker des caractères spéciaux comme `$, %, @ etc`, notre affectation normale de variable ne fonctionnera pas.
+  <img src= "../images/image5.jpg"/>
+
++ Cependant, lorsque nous voulons que les variables stockent des valeurs plus complexes, nous devons utiliser des guillemets.
++ En effet, dans les circonstances normales, `Bash` utilise un espace pour déterminer les éléments distincts.
++ Lorsque nous mettons notre contenu entre guillemets, nous indiquons à `Bash` que le contenu doit être considéré comme un seul élément.
++ Vous pouvez utiliser des guillemets simples `(')` ou des guillemets doubles `(")`.
++ Les guillemets simples traiteront chaque caractère littéralement.
++ Les guillemets doubles, vous permettront d'effectuer une substitution(c'est-à-dire d'inclure des variables dans le réglage de la valeur).
+
+<img src= "../images/image6.jpg"/>
+
+**Remplacement De Commande**
++ La variable définie dans le script part avec elle et meurt à la fin du script.
++ Si nous voulons accessible à tous les scripts de votre shell actuel, nous devons l'exporter.
+
+<img src= "../images/image7.jpg"/>
+
+
 
