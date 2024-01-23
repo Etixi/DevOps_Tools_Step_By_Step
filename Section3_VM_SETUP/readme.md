@@ -178,10 +178,10 @@
 
 + [CentOS](https://repo.almalinux.org/almalinux/9/isos/x86_64/AlmaLinux-9.3-x86_64-boot.iso)
 
-<img src = "images/config1.jpg"/>
-<img src = "images/config2.jpg"/>
-<img src = "images/config3.jpg"/>
-<img src = "images/config3.jpg"/>
+<img src = "images/config1.jpg" alt=""/>
+<img src = "images/config2.jpg" alt=""/>
+<img src = "images/config3.jpg" alt=""/>
+<img src = "images/config3.jpg" alt=""/>
 
 + Passer ensuite aux configurations suivantes :
     + Installation Destination
@@ -202,9 +202,9 @@
 
 + [Ubuntu](https://releases.ubuntu.com/jammy/ubuntu-22.04.3-live-server-amd64.iso)
 
-<img src = "images/config1_ubuntu.jpg"/>
-<img src = "images/config2_ubuntu.jpg"/>
-<img src = "images/config3_ubuntu.jpg"/>
+<img src = "images/config1_ubuntu.jpg" alt=""/>
+<img src = "images/config2_ubuntu.jpg" alt=""/>
+<img src = "images/config3_ubuntu.jpg" alt=""/>
 
     Sélectionner la langue
     cliquer sur `continue without updating`
@@ -252,7 +252,7 @@
 
 #### **Vagrant architecture**
 
-<img src = "images/vagrant_architecture.png"/>
+<img src = "images/vagrant_architecture.png" alt=""/>
 
 #### **Steps**
 
