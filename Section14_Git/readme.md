@@ -7,7 +7,7 @@
 + Le **système de contrôle de version (ou contrôle de révision ou contrôle de source)** consiste à gérer plusieurs versions de documents, programmes, sites web, etc.
 + Un **système de contrôle de version(VCS)** vous permet de suivre l'historique d'une collection de fichiers.
 
-<code><img src= "images/image1.jpeg"/></code>
+![Alt Text](images/image1.jpeg)
 
 + Les systèmes de contrôle de version sont une catégorie d'outils logiciels qui aident une équipe à gérer les modifications apportées au code source au fil du temps.
 + Le logiciel de contrôle de version garde une trace de chaque modification du code dans un type spécial de base de données.
@@ -87,7 +87,7 @@
 + Un système de contrôle de version centralisé fournit un composant logiciel serveur qui stocke et gère les différentes versions des fichiers.
 + Un développeur peut copier (extraire) une certaine version du serveur central sur son ordinateur individuel. Par exemple: `CVS, SVN`, etc.
 
-<img src="images/image2.jpeg"/>
+![Alt Text](images/image2.jpeg)
 
 + Dans `Subversion, CVS, Perforce, etc`. Un référentiel de serveur central (repo) contient la `copie officielle` du code.
     + Le serveur conserve le seul historique des versions du dépôt.
@@ -104,7 +104,7 @@
 + Les deux systèmes rendent également plus difficile le travail en parallèle sur différents fonctionnalités.
 + Par exemple: `Git, Mercurial, etc`.
 
-<img src="images/image3.jpeg"/>
+![Alt Text](images/image3.jpeg)
 
 
 ## **Systèmes de contrôle de version célèbres**
@@ -186,7 +186,7 @@
 
 + **Linux**
 
-<img src="images/image4.jpeg"/>
+![Alt Text](images/image4.jpeg)
 
 ### **Zones Git Locales et Workflow Git de base**
 
@@ -200,7 +200,7 @@
   + Organisés les fichiers sont prêts à être validés
   + Une validation enregistre un instantané de l'état de toutes les étapes.
 
-<img src="images/image5.jpeg"/>
+![Alt Text](images/image5.jpeg)
 
 #### **Flux de Travail Git De Base**
 
@@ -208,7 +208,7 @@
 + Mettez en scène les fichiers, en ajoutant des instantanés de ceux-ci à votre zone de préparation.
 + `commit`, qui prend les fichiers dans la zone de transit et stocke cet instantané de manière permanente dans votre repertoire `Git`.
 
-<img src="images/image6.jpeg"/>
+![Alt Text](images/image6.jpeg)
 
 ### **Configuration initiale de Git**
 
