@@ -15,7 +15,7 @@
 + Autrefois, lorsque nous n'avions `ni virtualisation ni cloud computing`, nous les utilisons pour les exécuter directement sur un serveur physique.
 + Ainsi, si je souhaite héberger une application sur 10 serveurs Web, j'ai besoin de 10 serveurs physiques sous équilibreur de charge servant le trafic Web.
 
-![Alt Text](C:\DevOps_Tools_Step_By_Step\Section21_Docker\images\image1.jpeg)
+![Alt Text](images/image1.jpeg)
 
 + Ces serveurs sont très chers et nous devons effectuer beaucoup de maintenance pour eux.
 
@@ -28,7 +28,7 @@
     + Par exemple, si nous avons besoin d'une application Web, d'une application de base de données et quelques applications backend.
     + Nous pourrions finir par avoir plusieurs systèmes exécutant chacun une seule instance de cette application.
 
-![Alt Text](C:\DevOps_Tools_Step_By_Step\Section21_Docker\images\image2.jpeg)
+![Alt Text](images/image2.jpeg)
 
 <br/>
 
@@ -46,7 +46,7 @@
 + Nous pourrions désormais isolées dans des systèmes d'exploitation distincts mais sur le même serveur physique.
 + **Dans le chapitre sur la Virtualisation. Nous avons discuté des avantages et des fonctionnalités de la virtualisation, l'architecture de l'hyperviseur.**
 
-![Alt Text](C:\DevOps_Tools_Step_By_Step\Section21_Docker\images\image3.jpeg)
+![Alt Text](images/image3.jpeg)
 
 # Problèmes avec l'architecture de l'hyperviseur.
 
@@ -81,7 +81,7 @@
 + Chaque `conteneur` aura une `adresse IP et un port` sur lesquels l'application à l'intérieur du conteneur est exécutée.
 + Cela peut ressembler à une machine virtuelle, mais ce n'est pas le cas, rappelez-vous que la `VM` a son propre `système d'exploitation` et que les `conteneurs n'en ont pas`.
 
-![Alt Text](C:\DevOps_Tools_Step_By_Step\Section21_Docker\images\image4.jpeg)
+![Alt Text](images/image4.jpeg)
 
 + Les `conteneurs` sont très `légers` car ils ne contiennent que `les bibliothèques et les applications`. 
 + Cela signifie donc que moins de ressources de calcul sont utilisées et cela signifie plus d'espace libre pour exécuter les conteneurs.
@@ -108,7 +108,7 @@
   + `Docker` la technologie d'exécution et d'orchestration du conteneur
   + `Docker` le projet open source
 
-![Alt Text](C:\DevOps_Tools_Step_By_Step\Section21_Docker\images\image5.jpeg)
+![Alt Text](images/image5.jpeg)
 
 
 + Lorsque la plupart des gens parlent de `Docker`, ils font généralement référence au `Docker Engine`.
@@ -116,11 +116,11 @@
 + A partir de maintenant, nous pouvons penser le `moteur Docker` comme un `hyperviseur`.
 + De la même manière que la technologie d'hyperviseur qui exécute les machines virtuelles, `le moteur Docker` est le moteur d'exécution principal des `contenrus` qui exécute les conteneurs.
 
-![Alt Text](C:\DevOps_Tools_Step_By_Step\Section21_Docker\images\image6.jpeg)
+![Alt Text](images/image6.jpeg)
 
 + Il existe de nombreuses technologies Docker qui sont intégrés au `moteur Docker` pour automatiser, orchestrer ou gérer les `conteneurs Docker`.
 
-![Alt Text](C:\DevOps_Tools_Step_By_Step\Section21_Docker\images\image7.jpeg)
+![Alt Text](images/image7.jpeg)
 
 # Installation De Docker
 
@@ -134,37 +134,37 @@
 
 + Les anciennes versions de `Docker` étaient appelées `docker ou docker-engine`. Si ceux-ci sont installés, désinstallez-les :
 
-![Alt Text](C:\DevOps_Tools_Step_By_Step\Section21_Docker\images\image8.jpeg)
+![Alt Text](images/image8.jpeg)
 
 + Ce n'est pas grave si `apt-get` signale qu'aucun de ces packages n'est installé. Ajoutez la clé `GPG` pour le référentiel `Docker`.
 
-![Alt Text](C:\DevOps_Tools_Step_By_Step\Section21_Docker\images\image9.jpeg)
+![Alt Text](images/image9.jpeg)
 
 + Ajouter le référentiel `Docker`
 
-![Alt Text](C:\DevOps_Tools_Step_By_Step\Section21_Docker\images\image10.jpeg)
+![Alt Text](images/image10.jpeg)
 
 + Mettre à jour le package
 
-![Alt Text](C:\DevOps_Tools_Step_By_Step\Section21_Docker\images\image11.jpeg)
+![Alt Text](images/image11.jpeg)
 
 + Installer `Docker`
 
-![Alt Text](C:\DevOps_Tools_Step_By_Step\Section21_Docker\images\image12.jpeg)
+![Alt Text](images/image12.jpeg)
 
 + `Docker` doit maintenant être installé, le `daemon` et le processus activé pour démarrer au démarrage.
 + Vérifiez qu'il fonctionne :
 
-![Alt Text](C:\DevOps_Tools_Step_By_Step\Section21_Docker\images\image13.jpeg)
+![Alt Text](images/image13.jpeg)
 
 + Les commandes `Docker` peuvent être exécutées par l'utilisateur `root` ou en fournissant `sudo`.
 + Nous pouvons également exécuter les commandes `docker` avec un utilisateur normal, pour ce faire, nous devons ajouter l'utilisateur dans le `groupe Docker`.
 
-![Alt Text](C:\DevOps_Tools_Step_By_Step\Section21_Docker\images\image14.jpeg)
+![Alt Text](images/image14.jpeg)
 
 + Vous devez vous déconnecter et vous connecter pour refléter les modifications. Exécutez la commande `Docker` pour vérifier si elle fonctionne.
 
-![Alt Text](C:\DevOps_Tools_Step_By_Step\Section21_Docker\images\image15.jpeg)
+![Alt Text](images/image15.jpeg)
 
 + Lorsque vous installez le `moteur Docker`, vous obtenez deux composants :
 
@@ -185,18 +185,18 @@
 + Les `boîtes vagrant` sont l'état arrêté d'une `VM et des images`  et l'état arrêté des `conteneurs`.
 + Exécutez la commande `Docker Images`.
 
-![Alt Text](C:\DevOps_Tools_Step_By_Step\Section21_Docker\images\image16.jpeg)
+![Alt Text](images/image16.jpeg)
 
 + Cette commande répertoriera les images téléchargées sur votre ordinateur, vous ne verrez donc rien dans la sortie.
 + Nous devons télécharger quelques images, dans le monde `Docker`, nous l'appelons `image Pullingan`.
 + Alors, doù tire-t-il l'image. Encore une fois, même analogie avec les `boîtes vagrant`. Nous téléchargeons les `boîtes vagrant` depuis le `cloud vagrant`, les `images Docker` sont téléchargées depuis les `registres Docker`, le `registre Docker` le plus célèbre est `DockerHub`.
 + Il existe également depuis d'autres registres de Google, Redhat, etc.
 
-![Alt Text](C:\DevOps_Tools_Step_By_Step\Section21_Docker\images\image17.jpeg)
+![Alt Text](images/image17.jpeg)
 
 + Exécutez à nouveau la commande `docker images` pour voir l'`ubuntu:latest image` que vous venez d'extraire.
 
-![Alt Text](C:\DevOps_Tools_Step_By_Step\Section21_Docker\images\image18.jpeg)
+![Alt Text](images/image18.jpeg)
 
 + Nous entrerons dans les détails de l'endroit où l'image est stockée et de ce qu'elle contient dans le chapitre suivant.
 + Pour l'instant, il suffit de comprendre qu'il contient suffisamment de système d'exploitation (OS), ainsi que tout le code pour exécuter n'importe quelle application pour laquelle il est conçu.
@@ -206,7 +206,7 @@
 
 + Maintenant que nous avons une image extraite localement sur notre `hôte Docker` nous pouvons utiliser la commande `docker run` pour lancer un conteneur à partir de celle-ci.
 
-![Alt Text](C:\DevOps_Tools_Step_By_Step\Section21_Docker\images\image19.jpeg)
+![Alt Text](images/image19.jpeg)
 
 + Regardez attentivement le résultat de la commande ci-dessus. Vous devriez remarque que l'invite de votre shell a changé.
 + En effet, votre shell est maintenant attaché à celui du nouveau conteneur - vous êtes littéralement à l'intérieur du nouveau conteneur ! Examinons cette commande `docker run`.
@@ -217,7 +217,7 @@
   
 + Exécutez la commande `ps` suivante depuis l'intérieur du conteneur pour répertorier du conteneur pour répertorier tous les processus en cours.
 
-![Alt Text](C:\DevOps_Tools_Step_By_Step\Section21_Docker\images\image20.jpeg)
+![Alt Text](images/image20.jpeg)
 
 + Comme vous pouvez le voir sur le résultat de la commande `ps` seuls deux processus s'exécutent à l'intérieur du conteneur :
 
@@ -231,7 +231,7 @@
 + En faisant cela depuis l'intérieur d'un conteneur, vous sortirez du conteneur sans le tuer.
 + Vous pouvez voir tous les conteneurs en cours d'exécution d'exécution sur votre système à l'aide de la commande `docker ps`.
 
-![Alt Text](C:\DevOps_Tools_Step_By_Step\Section21_Docker\images\image21.jpeg)
+![Alt Text](images/image21.jpeg)
 
 + La sortie ci-dessus montre un seul conteneur en cours d'exécution. Il s'agit du conteneur que vous avez crée précédemment.
 + La présence de votre conteneur dans cette sortie prouve qu'il est toujours en cours d'exécution. 
@@ -244,7 +244,7 @@
 + **Remarque :** L'exemple ci-dessus fait reférence à un conteneur appelé `inspiring_heyrovsky`. 
 + Le nom de votre conteneur sera différent, alors n'oubliez pas de remplacer `inspiring_heyrovsky` par le nom ou l'ID du conteneur exécuté sur votre `hôte Docker`.
 
-![Alt Text](C:\DevOps_Tools_Step_By_Step\Section21_Docker\images\image22.jpeg)
+![Alt Text](images/image22.jpeg)
 
 + Notez que l'invite de votre shell a de nouveau changé. Vous êtes de retour à l'intérieur du conteneur. Le format de la commande de `docker exec` est:
   + `docker exec -options <'container-name or container-id><'command>`
@@ -254,15 +254,15 @@
 + Votre invite shell devrait être renvoyée à votre `hôte Docker`.
 + Exécutez à nouveau la commande `docker ps` pour vérifier que votre conteneur est toujours en cours d'exécution.
 
-![Alt Text](C:\DevOps_Tools_Step_By_Step\Section21_Docker\images\image23.jpeg)
+![Alt Text](images/image23.jpeg)
 
 + Arrêtez le conteneur et tuez-le à l'aide des commandes `docker stop` et `docker rm`.
 
-![Alt Text](C:\DevOps_Tools_Step_By_Step\Section21_Docker\images\image24.jpeg)
+![Alt Text](images/image24.jpeg)
 
 + Vérifiez que le conteneur a été supprimé avec succès en exécutant une autre commande `docker ps`.
 
-![Alt Text](C:\DevOps_Tools_Step_By_Step\Section21_Docker\images\image25.jpeg)
+![Alt Text](images/image25.jpeg)
 
 + Vous auriez maintenant le goût des images et des conteneurs `Docker`. Nous avons extrait une image, exécuté un conteneur, l'avons arrêté et supprimé.
 + Dans la section suivante, nous approfondirons plus en détail les images puis les conteneurs.
