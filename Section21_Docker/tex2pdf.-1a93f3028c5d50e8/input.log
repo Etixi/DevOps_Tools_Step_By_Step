@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.12) (preloaded format=pdflatex 2024.1.23)  29 JAN 2024 19:29
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.12) (preloaded format=pdflatex 2024.1.23)  5 FEB 2024 10:20
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**./tex2pdf.-6e544c8fe4477b84/input.tex
-(tex2pdf.-6e544c8fe4477b84/input.tex
+**./tex2pdf.-1a93f3028c5d50e8/input.tex
+(tex2pdf.-1a93f3028c5d50e8/input.tex
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-04>
 (C:\Program Files\MiKTeX\tex/latex/base\article.cls
@@ -398,7 +398,7 @@ File: l3backend-pdftex.def 2024-01-04 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count288
 \l__pdf_internal_box=\box54
 )
-(C:\DevOps_Tools_Step_By_Step\Section21_Docker\./tex2pdf.-6e544c8fe4477b84\inpu
+(C:\DevOps_Tools_Step_By_Step\Section21_Docker\./tex2pdf.-1a93f3028c5d50e8\inpu
 t.aux)
 \openout1 = `input.aux'.
 
@@ -480,48 +480,272 @@ Underfull \hbox (badness 10000) in paragraph at lines 108--112
 ualisation ni cloud
  []
 
-<./tex2pdf.-6e544c8fe4477b84/cf033aa126c652e823b4528c20cb9a51156a8e90.jpeg, id=
-3, 558.085pt x 324.21124pt>
-File: ./tex2pdf.-6e544c8fe4477b84/cf033aa126c652e823b4528c20cb9a51156a8e90.jpeg
- Graphic file (type jpg)
-<use ./tex2pdf.-6e544c8fe4477b84/cf033aa126c652e823b4528c20cb9a51156a8e90.jpeg>
+<./tex2pdf.-1a93f3028c5d50e8/images/image1.jpeg, id=3, 558.085pt x 324.21124pt>
 
-Package pdftex.def Info: ./tex2pdf.-6e544c8fe4477b84/cf033aa126c652e823b4528c20
-cb9a51156a8e90.jpeg  used on input line 119.
+File: ./tex2pdf.-1a93f3028c5d50e8/images/image1.jpeg Graphic file (type jpg)
+<use ./tex2pdf.-1a93f3028c5d50e8/images/image1.jpeg>
+Package pdftex.def Info: ./tex2pdf.-1a93f3028c5d50e8/images/image1.jpeg  used o
+n input line 119.
 (pdftex.def)             Requested size: 345.0128pt x 200.43008pt.
 [1
 
 {C:/Users/Caplogy_Data_002/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}{C:
 /Program Files/MiKTeX/fonts/enc/dvips/lm/lm-ec.enc}{C:/Program Files/MiKTeX/fon
 ts/enc/dvips/lm/lm-ts1.enc}]
-<./tex2pdf.-6e544c8fe4477b84/d9ab8d006aa3da5103eaaa43b276ddb553f825de.jpeg, id=
-16, 831.105pt x 241.90375pt>
-File: ./tex2pdf.-6e544c8fe4477b84/d9ab8d006aa3da5103eaaa43b276ddb553f825de.jpeg
- Graphic file (type jpg)
-<use ./tex2pdf.-6e544c8fe4477b84/d9ab8d006aa3da5103eaaa43b276ddb553f825de.jpeg>
-
-Package pdftex.def Info: ./tex2pdf.-6e544c8fe4477b84/d9ab8d006aa3da5103eaaa43b2
-76ddb553f825de.jpeg  used on input line 161.
+<./tex2pdf.-1a93f3028c5d50e8/images/image2.jpeg, id=16, 831.105pt x 241.90375pt
+>
+File: ./tex2pdf.-1a93f3028c5d50e8/images/image2.jpeg Graphic file (type jpg)
+<use ./tex2pdf.-1a93f3028c5d50e8/images/image2.jpeg>
+Package pdftex.def Info: ./tex2pdf.-1a93f3028c5d50e8/images/image2.jpeg  used o
+n input line 161.
 (pdftex.def)             Requested size: 345.0036pt x 100.41771pt.
- [2 <./tex2pdf.-6e544c8fe4477b84/cf033aa126c652e823b4528c20cb9a51156a8e90.jpeg>
- <./tex2pdf.-6e544c8fe4477b84/d9ab8d006aa3da5103eaaa43b276ddb553f825de.jpeg>]
-<./tex2pdf.-6e544c8fe4477b84/33eceeb984759de5040bcf9caddc338572ef95ec.jpeg, id=
-23, 469.755pt x 332.24126pt>
-File: ./tex2pdf.-6e544c8fe4477b84/33eceeb984759de5040bcf9caddc338572ef95ec.jpeg
- Graphic file (type jpg)
-<use ./tex2pdf.-6e544c8fe4477b84/33eceeb984759de5040bcf9caddc338572ef95ec.jpeg>
-
-Package pdftex.def Info: ./tex2pdf.-6e544c8fe4477b84/33eceeb984759de5040bcf9cad
-dc338572ef95ec.jpeg  used on input line 211.
+ [2 <./tex2pdf.-1a93f3028c5d50e8/images/image1.jpeg> <./tex2pdf.-1a93f3028c5d50
+e8/images/image2.jpeg>]
+<./tex2pdf.-1a93f3028c5d50e8/images/image3.jpeg, id=23, 469.755pt x 332.24126pt
+>
+File: ./tex2pdf.-1a93f3028c5d50e8/images/image3.jpeg Graphic file (type jpg)
+<use ./tex2pdf.-1a93f3028c5d50e8/images/image3.jpeg>
+Package pdftex.def Info: ./tex2pdf.-1a93f3028c5d50e8/images/image3.jpeg  used o
+n input line 211.
 (pdftex.def)             Requested size: 344.997pt x 244.00427pt.
 LaTeX Font Info:    Trying to load font information for TS1+lmtt on input line 
 222.
- (C:\Program Files\MiKTeX\tex/latex/lm\ts1lmtt.fd
+
+(C:\Program Files\MiKTeX\tex/latex/lm\ts1lmtt.fd
 File: ts1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-)
-[3 <./tex2pdf.-6e544c8fe4477b84/33eceeb984759de5040bcf9caddc338572ef95ec.jpeg>]
+) [3 <./tex2pdf.-1a93f3028c5d50e8/images/image3.jpeg>]
+Overfull \hbox (5.2305pt too wide) in paragraph at lines 258--261
+[]\T1/lmr/m/n/10 (-20) Livraison d'une ap-pli-ca-tion bun-dle avec toutes les d
+épen-dances/bibliothèques
+ []
+
+
+Underfull \hbox (badness 1184) in paragraph at lines 264--267
+[]\T1/lmr/m/n/10 (+20) Pensez à con-fig-urer une ap-pli-ca-tion dans une \T1/lm
+tt/m/n/10 VM ou une machine
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 267--272
+\T1/lmtt/m/n/10 de l\TS1/lmtt/m/n/10 '\T1/lmtt/m/n/10 application déployée et d
+e quelques modifications de
+ []
+
+
+Overfull \hbox (2.44154pt too wide) in paragraph at lines 287--292
+\T1/lmr/m/n/10 (-20) les \T1/lmtt/m/n/10 conteneurs \T1/lmr/m/n/10 (-20) sont u
+ne \T1/lmtt/m/n/10 virtualisation du système d\TS1/lmtt/m/n/10 '\T1/lmtt/m/n/10
+ exploitation\T1/lmr/m/n/10 (-20) .7 
+ []
+
 [4]
-(C:\DevOps_Tools_Step_By_Step\Section21_Docker\./tex2pdf.-6e544c8fe4477b84\inpu
+Underfull \hbox (badness 1661) in paragraph at lines 314--317
+[]\T1/lmr/m/n/10 (+20) Chaque \T1/lmtt/m/n/10 conteneur \T1/lmr/m/n/10 (+20) au
+ra une \T1/lmtt/m/n/10 adresse IP et un port \T1/lmr/m/n/10 (+20) sur lesquels
+ []
+
+<./tex2pdf.-1a93f3028c5d50e8/images/image4.jpeg, id=37, 833.1125pt x 610.28pt>
+File: ./tex2pdf.-1a93f3028c5d50e8/images/image4.jpeg Graphic file (type jpg)
+<use ./tex2pdf.-1a93f3028c5d50e8/images/image4.jpeg>
+Package pdftex.def Info: ./tex2pdf.-1a93f3028c5d50e8/images/image4.jpeg  used o
+n input line 325.
+(pdftex.def)             Requested size: 344.99794pt x 252.72137pt.
+
+Underfull \hbox (badness 1033) in paragraph at lines 332--335
+[]\T1/lmr/m/n/10 (+20) Les \T1/lmtt/m/n/10 conteneurs \T1/lmr/m/n/10 (+20) sont
+ très \T1/lmtt/m/n/10 légers \T1/lmr/m/n/10 (+20) car ils ne con-ti-en-nent que
+ \T1/lmtt/m/n/10 les
+ []
+
+[5 <./tex2pdf.-1a93f3028c5d50e8/images/image4.jpeg>]
+Underfull \hbox (badness 4168) in paragraph at lines 372--378
+\T1/lmtt/m/n/10 les espaces de noms et les groupes de contrôle\T1/lmr/m/n/10 (+
+20) , pour garan-tir
+ []
+
+<./tex2pdf.-1a93f3028c5d50e8/images/image5.jpeg, id=43, 327.2225pt x 247.92625p
+t>
+File: ./tex2pdf.-1a93f3028c5d50e8/images/image5.jpeg Graphic file (type jpg)
+<use ./tex2pdf.-1a93f3028c5d50e8/images/image5.jpeg>
+Package pdftex.def Info: ./tex2pdf.-1a93f3028c5d50e8/images/image5.jpeg  used o
+n input line 405.
+(pdftex.def)             Requested size: 327.2217pt x 247.92564pt.
+<./tex2pdf.-1a93f3028c5d50e8/images/image6.jpeg, id=44, 504.88625pt x 281.05pt>
+
+File: ./tex2pdf.-1a93f3028c5d50e8/images/image6.jpeg Graphic file (type jpg)
+<use ./tex2pdf.-1a93f3028c5d50e8/images/image6.jpeg>
+Package pdftex.def Info: ./tex2pdf.-1a93f3028c5d50e8/images/image6.jpeg  used o
+n input line 429.
+(pdftex.def)             Requested size: 345.00525pt x 192.05063pt.
+<./tex2pdf.-1a93f3028c5d50e8/images/image7.jpeg, id=45, 607.26875pt x 844.15375
+pt>
+File: ./tex2pdf.-1a93f3028c5d50e8/images/image7.jpeg Graphic file (type jpg)
+<use ./tex2pdf.-1a93f3028c5d50e8/images/image7.jpeg>
+Package pdftex.def Info: ./tex2pdf.-1a93f3028c5d50e8/images/image7.jpeg  used o
+n input line 443.
+(pdftex.def)             Requested size: 345.00705pt x 479.5883pt.
+[6] [7 <./tex2pdf.-1a93f3028c5d50e8/images/image5.jpeg> <./tex2pdf.-1a93f3028c5
+d50e8/images/image6.jpeg>] [8 <./tex2pdf.-1a93f3028c5d50e8/images/image7.jpeg>]
+
+Underfull \hbox (badness 6725) in paragraph at lines 470--473
+[]\T1/lmr/m/n/10 (+20) Les an-ci-ennes ver-sions de \T1/lmtt/m/n/10 Docker \T1/
+lmr/m/n/10 (+20) étaient ap-pelées \T1/lmtt/m/n/10 docker ou
+ []
+
+<./tex2pdf.-1a93f3028c5d50e8/images/image8.jpeg, id=63, 876.27374pt x 110.4125p
+t>
+File: ./tex2pdf.-1a93f3028c5d50e8/images/image8.jpeg Graphic file (type jpg)
+<use ./tex2pdf.-1a93f3028c5d50e8/images/image8.jpeg>
+Package pdftex.def Info: ./tex2pdf.-1a93f3028c5d50e8/images/image8.jpeg  used o
+n input line 477.
+(pdftex.def)             Requested size: 345.00786pt x 43.47177pt.
+<./tex2pdf.-1a93f3028c5d50e8/images/image9.jpeg, id=64, 873.2625pt x 107.40125p
+t>
+File: ./tex2pdf.-1a93f3028c5d50e8/images/image9.jpeg Graphic file (type jpg)
+<use ./tex2pdf.-1a93f3028c5d50e8/images/image9.jpeg>
+Package pdftex.def Info: ./tex2pdf.-1a93f3028c5d50e8/images/image9.jpeg  used o
+n input line 491.
+(pdftex.def)             Requested size: 344.99486pt x 42.43039pt.
+<./tex2pdf.-1a93f3028c5d50e8/images/image10.jpeg, id=65, 864.22874pt x 150.5625
+pt>
+File: ./tex2pdf.-1a93f3028c5d50e8/images/image10.jpeg Graphic file (type jpg)
+<use ./tex2pdf.-1a93f3028c5d50e8/images/image10.jpeg>
+Package pdftex.def Info: ./tex2pdf.-1a93f3028c5d50e8/images/image10.jpeg  used 
+on input line 503.
+(pdftex.def)             Requested size: 344.99963pt x 60.10446pt.
+<./tex2pdf.-1a93f3028c5d50e8/images/image11.jpeg, id=66, 871.255pt x 111.41624p
+t>
+File: ./tex2pdf.-1a93f3028c5d50e8/images/image11.jpeg Graphic file (type jpg)
+<use ./tex2pdf.-1a93f3028c5d50e8/images/image11.jpeg>
+Package pdftex.def Info: ./tex2pdf.-1a93f3028c5d50e8/images/image11.jpeg  used 
+on input line 515.
+(pdftex.def)             Requested size: 344.99944pt x 44.11858pt.
+<./tex2pdf.-1a93f3028c5d50e8/images/image12.jpeg, id=67, 874.26625pt x 110.4125
+pt>
+File: ./tex2pdf.-1a93f3028c5d50e8/images/image12.jpeg Graphic file (type jpg)
+<use ./tex2pdf.-1a93f3028c5d50e8/images/image12.jpeg>
+Package pdftex.def Info: ./tex2pdf.-1a93f3028c5d50e8/images/image12.jpeg  used 
+on input line 527.
+(pdftex.def)             Requested size: 345.00455pt x 43.57117pt.
+<./tex2pdf.-1a93f3028c5d50e8/images/image13.jpeg, id=68, 869.2475pt x 107.40125
+pt>
+File: ./tex2pdf.-1a93f3028c5d50e8/images/image13.jpeg Graphic file (type jpg)
+<use ./tex2pdf.-1a93f3028c5d50e8/images/image13.jpeg>
+Package pdftex.def Info: ./tex2pdf.-1a93f3028c5d50e8/images/image13.jpeg  used 
+on input line 542.
+(pdftex.def)             Requested size: 345.00032pt x 42.62704pt.
+[9 <./tex2pdf.-1a93f3028c5d50e8/images/image8.jpeg> <./tex2pdf.-1a93f3028c5d50e
+8/images/image9.jpeg> <./tex2pdf.-1a93f3028c5d50e8/images/image10.jpeg>]
+<./tex2pdf.-1a93f3028c5d50e8/images/image14.jpeg, id=77, 873.2625pt x 125.46875
+pt>
+File: ./tex2pdf.-1a93f3028c5d50e8/images/image14.jpeg Graphic file (type jpg)
+<use ./tex2pdf.-1a93f3028c5d50e8/images/image14.jpeg>
+Package pdftex.def Info: ./tex2pdf.-1a93f3028c5d50e8/images/image14.jpeg  used 
+on input line 559.
+(pdftex.def)             Requested size: 344.99486pt x 49.56822pt.
+<./tex2pdf.-1a93f3028c5d50e8/images/image15.jpeg, id=78, 879.285pt x 111.41624p
+t>
+File: ./tex2pdf.-1a93f3028c5d50e8/images/image15.jpeg Graphic file (type jpg)
+<use ./tex2pdf.-1a93f3028c5d50e8/images/image15.jpeg>
+Package pdftex.def Info: ./tex2pdf.-1a93f3028c5d50e8/images/image15.jpeg  used 
+on input line 573.
+(pdftex.def)             Requested size: 344.99937pt x 43.71567pt.
+
+[10 <./tex2pdf.-1a93f3028c5d50e8/images/image11.jpeg> <./tex2pdf.-1a93f3028c5d5
+0e8/images/image12.jpeg> <./tex2pdf.-1a93f3028c5d50e8/images/image13.jpeg>]
+<./tex2pdf.-1a93f3028c5d50e8/images/image16.jpeg, id=87, 888.31876pt x 123.4612
+4pt>
+File: ./tex2pdf.-1a93f3028c5d50e8/images/image16.jpeg Graphic file (type jpg)
+<use ./tex2pdf.-1a93f3028c5d50e8/images/image16.jpeg>
+Package pdftex.def Info: ./tex2pdf.-1a93f3028c5d50e8/images/image16.jpeg  used 
+on input line 630.
+(pdftex.def)             Requested size: 344.99257pt x 47.9481pt.
+<./tex2pdf.-1a93f3028c5d50e8/images/image17.jpeg, id=88, 870.25125pt x 472.7662
+5pt>
+File: ./tex2pdf.-1a93f3028c5d50e8/images/image17.jpeg Graphic file (type jpg)
+<use ./tex2pdf.-1a93f3028c5d50e8/images/image17.jpeg>
+Package pdftex.def Info: ./tex2pdf.-1a93f3028c5d50e8/images/image17.jpeg  used 
+on input line 655.
+(pdftex.def)             Requested size: 345.00034pt x 187.42232pt.
+
+Overfull \hbox (8.13994pt too wide) in paragraph at lines 662--664
+[]\T1/lmr/m/n/10 (-20) Exécutez à nou-veau la com-mande \T1/lmtt/m/n/10 docker 
+images \T1/lmr/m/n/10 (-20) pour voir l'\T1/lmtt/m/n/10 ubuntu:latest
+ []
+
+<./tex2pdf.-1a93f3028c5d50e8/images/image18.jpeg, id=89, 873.2625pt x 183.68625
+pt>
+File: ./tex2pdf.-1a93f3028c5d50e8/images/image18.jpeg Graphic file (type jpg)
+<use ./tex2pdf.-1a93f3028c5d50e8/images/image18.jpeg>
+Package pdftex.def Info: ./tex2pdf.-1a93f3028c5d50e8/images/image18.jpeg  used 
+on input line 668.
+(pdftex.def)             Requested size: 344.99486pt x 72.56787pt.
+[11 <./tex2pdf.-1a93f3028c5d50e8/images/image14.jpeg> <./tex2pdf.-1a93f3028c5d5
+0e8/images/image15.jpeg> <./tex2pdf.-1a93f3028c5d50e8/images/image16.jpeg>]
+[12 <./tex2pdf.-1a93f3028c5d50e8/images/image17.jpeg> <./tex2pdf.-1a93f3028c5d5
+0e8/images/image18.jpeg>]
+<./tex2pdf.-1a93f3028c5d50e8/images/image19.jpeg, id=104, 870.25125pt x 153.573
+75pt>
+File: ./tex2pdf.-1a93f3028c5d50e8/images/image19.jpeg Graphic file (type jpg)
+<use ./tex2pdf.-1a93f3028c5d50e8/images/image19.jpeg>
+Package pdftex.def Info: ./tex2pdf.-1a93f3028c5d50e8/images/image19.jpeg  used 
+on input line 700.
+(pdftex.def)             Requested size: 345.00034pt x 60.8824pt.
+<./tex2pdf.-1a93f3028c5d50e8/images/image20.jpeg, id=105, 873.2625pt x 235.8812
+6pt>
+File: ./tex2pdf.-1a93f3028c5d50e8/images/image20.jpeg Graphic file (type jpg)
+<use ./tex2pdf.-1a93f3028c5d50e8/images/image20.jpeg>
+Package pdftex.def Info: ./tex2pdf.-1a93f3028c5d50e8/images/image20.jpeg  used 
+on input line 738.
+(pdftex.def)             Requested size: 344.99486pt x 93.18826pt.
+ [13 <./tex2pdf.-1a93f3028c5d50e8/images/image19.jpeg> <./tex2pdf.-1a93f3028c5d
+50e8/images/image20.jpeg>]
+<./tex2pdf.-1a93f3028c5d50e8/images/image21.jpeg, id=114, 876.27374pt x 268.001
+25pt>
+File: ./tex2pdf.-1a93f3028c5d50e8/images/image21.jpeg Graphic file (type jpg)
+<use ./tex2pdf.-1a93f3028c5d50e8/images/image21.jpeg>
+Package pdftex.def Info: ./tex2pdf.-1a93f3028c5d50e8/images/image21.jpeg  used 
+on input line 781.
+(pdftex.def)             Requested size: 345.00786pt x 105.51785pt.
+ [14 <./tex2pdf.-1a93f3028c5d50e8/images/image21.jpeg>]
+<./tex2pdf.-1a93f3028c5d50e8/images/image22.jpeg, id=121, 873.2625pt x 160.6pt>
+
+File: ./tex2pdf.-1a93f3028c5d50e8/images/image22.jpeg Graphic file (type jpg)
+<use ./tex2pdf.-1a93f3028c5d50e8/images/image22.jpeg>
+Package pdftex.def Info: ./tex2pdf.-1a93f3028c5d50e8/images/image22.jpeg  used 
+on input line 820.
+(pdftex.def)             Requested size: 344.99486pt x 63.44733pt.
+
+Overfull \hbox (37.99905pt too wide) in paragraph at lines 834--835
+[]\T1/lmtt/m/n/10 docker exec -options <\TS1/lmtt/m/n/10 '\T1/lmtt/m/n/10 conta
+iner-name or container-id><\TS1/lmtt/m/n/10 '\T1/lmtt/m/n/10 command> 
+ []
+
+<./tex2pdf.-1a93f3028c5d50e8/images/image23.jpeg, id=122, 734.745pt x 145.54375
+pt>
+File: ./tex2pdf.-1a93f3028c5d50e8/images/image23.jpeg Graphic file (type jpg)
+<use ./tex2pdf.-1a93f3028c5d50e8/images/image23.jpeg>
+Package pdftex.def Info: ./tex2pdf.-1a93f3028c5d50e8/images/image23.jpeg  used 
+on input line 854.
+(pdftex.def)             Requested size: 345.00507pt x 68.34116pt.
+<./tex2pdf.-1a93f3028c5d50e8/images/image24.jpeg, id=123, 732.7375pt x 180.675p
+t>
+File: ./tex2pdf.-1a93f3028c5d50e8/images/image24.jpeg Graphic file (type jpg)
+<use ./tex2pdf.-1a93f3028c5d50e8/images/image24.jpeg>
+Package pdftex.def Info: ./tex2pdf.-1a93f3028c5d50e8/images/image24.jpeg  used 
+on input line 867.
+(pdftex.def)             Requested size: 345.00162pt x 85.06888pt.
+<./tex2pdf.-1a93f3028c5d50e8/images/image25.jpeg, id=124, 728.7225pt x 143.5362
+5pt>
+File: ./tex2pdf.-1a93f3028c5d50e8/images/image25.jpeg Graphic file (type jpg)
+<use ./tex2pdf.-1a93f3028c5d50e8/images/image25.jpeg>
+Package pdftex.def Info: ./tex2pdf.-1a93f3028c5d50e8/images/image25.jpeg  used 
+on input line 880.
+(pdftex.def)             Requested size: 344.99037pt x 67.95264pt.
+[15 <./tex2pdf.-1a93f3028c5d50e8/images/image22.jpeg> <./tex2pdf.-1a93f3028c5d5
+0e8/images/image23.jpeg>] [16 <./tex2pdf.-1a93f3028c5d50e8/images/image24.jpeg>
+ <./tex2pdf.-1a93f3028c5d50e8/images/image25.jpeg>]
+(C:\DevOps_Tools_Step_By_Step\Section21_Docker\./tex2pdf.-1a93f3028c5d50e8\inpu
 t.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
@@ -529,20 +753,20 @@ L3 programming layer <2024-01-04>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 12697 strings out of 474486
- 200234 string characters out of 5753537
+ 12937 strings out of 474486
+ 208775 string characters out of 5753537
  1939542 words of memory out of 5000000
- 34769 multiletter control sequences out of 15000+600000
- 579949 words of font info for 71 fonts, out of 8000000 for 9000
+ 34939 multiletter control sequences out of 15000+600000
+ 581111 words of font info for 85 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  77i,6n,81p,1030b,584s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Program Files/MiKTeX/fonts/type1/public/lm/lmbx10.pfb><C:/Program Files/M
 iKTeX/fonts/type1/public/lm/lmbx12.pfb><C:/Program Files/MiKTeX/fonts/type1/pub
 lic/lm/lmr10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/lm/lmtt10.pfb>
-Output written on C:\DevOps_Tools_Step_By_Step\Section21_Docker\tex2pdf.-6e544c
-8fe4477b84\input.pdf (4 pages, 208669 bytes).
+Output written on C:\DevOps_Tools_Step_By_Step\Section21_Docker\tex2pdf.-1a93f3
+028c5d50e8\input.pdf (16 pages, 806517 bytes).
 PDF statistics:
- 76 PDF objects out of 1000 (max. 8388607)
- 12 named destinations out of 1000 (max. 500000)
- 14384 words of extra memory for PDF output out of 14400 (max. 10000000)
+ 212 PDF objects out of 1000 (max. 8388607)
+ 54 named destinations out of 1000 (max. 500000)
+ 14558 words of extra memory for PDF output out of 17280 (max. 10000000)
 

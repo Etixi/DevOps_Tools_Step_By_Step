@@ -269,3 +269,272 @@
 
 # Images
 
++ Nous avons vu des éléments très basiques sur les images Docker, nous allons maintenant approfondir les `images Docker.
++ Les images sont construites et distribuées comme des logiciels. 
++ Comme nous l'avons vu dans le chapitre sur `l'intégration continue`, il devrait y avoir un `processus de création et de publication`, nous devons faire de même si nous publions des images.
++ Nous avons mentionné précédemment que les images sont à l'état arrêté du conteneur afin que vous puissiez arrêter un conteneur et créer une nouvelle image à partir de celui-ci.
+
+![Alt Text](images/image26.jpeg)
+
++ Nous voyons sur la figure ci-dessus que nous extrayons une image, exécutons un conteneur, le personnalisons selon nos besoins, validons le conteneur dans une image, puis l'expédions.
++ Cependant, une fois que vous avez démarré un conteneur à partir d'une image, les deux constructions deviennent dépendantes l'une de l'autre et vous ne pouvez pas supprimer l'image tant que le dernier conteneur qui l'utilise n'a pas été détruit.
++ Tenter de supprimer une image sans arrêter et détruire tous les conteneurs qui l'utilisent entraînera des erreurs.
++ Les images que nous expédions doivent être légères et ne doivent contenir que les fichiers et les bibliothèques nécessaires à l'exécution de l'application qu'elles contiennent..
++ Par exemple, si nous expédions une application `Java`, un serveur d'application comme `Tomcat` et des fichiers pour exécuter sur notre application et rien d'extra.
+
+![Alt Text](images/image27.jpeg)
+
++ Comme vous pouvez le voir maintenant, nous avons deux images téléchargées sur notre moteur `Docker`.
+
+
+### Registres D'images
+
++ Les `images Docker` sont stockées dans les `registres d'images`.
++ Les `registres d'images` le plus courant est [Docker Hub](https://hub.docker.com/).
++ D'autres registres existent, notamment des registres tiers et des registres sécurisés sur site, mais `Docker Hub` est la valeur par défaut et c'est celui que nous utiliserons dans cette partie.
+
++ Les `registres d'images` contiennent plusieurs référentiels d'images.
++ Les `référentiels d'images` contiennent des `imaes`.
++ Cela peut être déroutant, c'est pourquoi la figure ci-dessous montre une image d'une registre d'images contenant 3 référentiels, et chaque référentiel contient quelques images.
+
+![Alt Text](images/image28.jpeg)
+
++ `Docker Hub` contient des `référentiels officiels et non officiels`.
++ Les référentiels officiels proviennent de `Docker, Inc.`
++ Ce sont des images sûres et sécurisées avec le dernier logiciel à jour.
++ Les `reférentiels non officiels` sont téléchargés par n'importe qui et ne sont pas vérifiés par `Docker, Inc.`.
++ La liste ci-dessous contient quelques-uns des référentiels et montre leurs `URL` qui existent au niveau supérieur de l'espace de noms `Docker Hub`:
+
+  + **nginx - https://hub.docker.com/_/nginx/**
+  + **busybox - https://hub.docker.com/_/busybox/**
+  + **redis - https://hub.docker.com/_/redis/**
+  + **mongo - https://hub.docker.com/_/mongo/**
+  
++ Nos images personnelles vivent dans des `référentiels non officiels`. 
+
+### Balises D'images
+
++ Lors de l'extraction d'une image, nous donnons le nom de l'image: `TAG` et `Docker` atteindra par défaut le registre `DockerHub` et trouvera l'image avec le `TAG` que nous avons spécifié.
+
+![Alt Text](images/image30.jpeg)
+
++ La **balise** fait généralement référence à la version de l'image du référentiel.
++ Si nous recherchons une autre version comme la `1.12.0`, nous pouvons utiliser la commande ci-dessous.
+
+![Alt Text](images/image31.jpeg)
+
++ Si nous ne spécifions aucune balise, la balise par défaut est la plus récente.
++ La dernière balise ne signifie pas que les images sont la dernière version, c'est juste le nom de la balise et c'est tout.
+
+![Alt Text](images/image32.jpeg)
+
++ La commande ci-dessus téléchargera l'`image nginx` avec la dernière balise.
+
+### Images Et Calques
+
++ Toutes les `images Docker` sont construites d'un ou plusieurs calques en lecture seule, comme indiqué ci-dessous.
+
+![Alt Text](images/image33.jpeg)
+
++ Il existe plusieurs façons de voir et d'inspecter les calques qui composent une image, et nous en avons déjà vue une.
++ Jetons un deuxième coup d'oeil au résultat de la commande `docker pull node:latest` de plus tôt.
+
+![Alt Text](images/image34.jpeg)
+
++ Chaque ligne de la sortie ci-dessous qui se termine par `Pull Complete` représente un calque de l'image qui a été extrait.
++ Comme nous pouvons le voir, cette image comporte 5 calques.
+
+![Alt Text](images/image35.jpeg)
+
++ Chaque calque n'est qu'un ensemble de différences par rapport au calque qui le précède.
++ Lorsque vous créez un nouveau `conteneur`, vous ajoutez un nouveau calque inscriptible au-dessus des calques sous-jacents.
++ Cette couche est souvent appelée `couche conteneur`. 
++ Toutes les modifications apportées au conteneur en cours d'exécution, telles que l'écriture de nouveaux fichiers, la modification de fichiers existants et la suppression de fichiers, sont écrites sur cette fine couche de conteneur inscriptible.
++ Le diagramme ci-dessous montre un conteneur basé sur l'image `Ubuntu 15.04`.
+
+![Alt Text](images/image36.jpeg)
+
+### Conteneur Et Couches
+
++ La principale différence entre `un conteneur et une image` réside dans la couche supérieure inscriptible.
++ Toutes les écritures dans le conteneur qui ajoute de nouvelles données ou modifient des données existantes sont stockées dans cette couche inscriptible.
++ Lorsque le conteneur est supprimé, la couche inscriptible est également supprimée.
++ L'image sous-jacente reste inchangé tout en ayant leur propre état de données.
++ Le diagramme ci-dessus montre plusieurs conteneurs partageant la même image `Ubuntu 15.04`.
+
+
+![Alt Text](images/image37.jpeg)
+
++ Docker utilise des pilotes pour gérer le contenu des couches d'images et de la couche conteneur inscriptible.
++ Chaque pilote de stockage gère la mise en œuvre différemment, mais tous les pilotes utilisent des couches d'images empilables et la stratégie de copie sur écriture `(CoW)`.
++ Une autre façon de voir les calques qui composent une image consiste à inspecter l'image avec la commande `docker inspect`.
++ L'exemple ci-dessous inspecte la même image `ubuntu:latest`.
+
+![Alt Text](images/image38.jpeg)
+
+### Supression d'images
+
++ Lorsque vous n'avez plus besoin d'une image, vous pouvez la supprimer de vôtre hôte `Docker` avec la commande `docker rmi`.
++ `rmi` est l'abbreviation de supprimer l'image.
++ Supprimez l'image du noeud extraite à l'étape précédente avec la commande `docker rmi`.
++ L'exemple ci-dessous adresse l'image par son `ID`.
+
+![Alt Text](images/image39.jpeg)
+
+
+# Conteneurs
+
++ Le `conteneur` est l'instance d'exécution d'une image comme si nous démarrions une machine virtuelle à partir d'une `boîte vargrant`.
++ Nous pouvons démarrer plusieurs conteneurs à partir d'une seule image.
++ Nous créeons un conteneur à partir d'une image en donnant la commande `ducker run`.
++ Les conteneurs s'exécutent jusqu'à ce que les processus qui s'y exécutent existent.
++ Il doit y  avoir au moins un processus en cours d'exécution à l'intérieur du conteneur avec le `PID 1`.
++ Si ce processus meurt, les conteneurs meurent également.
+
+![Alt Text](images/image40.jpeg)
+
++ Dans le conteneur ci-dessus `/bin/bash` a le `PID 1`, ce processus sera tué si nous appuyons sur la commande `exit`.
+
+![Alt Text](images/image41.jpeg)
+
++ Comme la sortie se déconnectera et tuera le `shell` actuel et c'est notre `PID 1`, notre conteneur a également été tué avec lui.
++ `docker ps -a` affichera les conteneurs en cours d'exécution ou sortis.
+
+![Alt Text](images/image42.jpeg)
+
++ Nous pouvons démarrer un conteneur quitté en donnant `<docker start containerid>`.
+
+
+![Alt Text](images/image43.jpeg)
+
++ `docker stop` arrêtera un conteneur en cours d'exécution.
+
+![Alt Text](images/image44.jpeg)
+
++ `docker rm` supprimera le conteneur avec ses données.
+
+![Alt Text](images/image45.jpeg)
+
++ Exécuter un `webservice` dans un conteneur.
+
+![Alt Text](images/image46.jpeg)
+
+
++ Nous avons démarré le conteneur ci-dessus en arrière-plan par l'option `-d`.
++ Nous avons également donné le nom à nôtre conteneur par l'option `--name`.
++ L'image ci-dessus est `service Web Apache` qui s'exécute sur le port `80` des conteneurs.
++ Le port hôte `8070` est mappé au port `80` des conteneurs.
++ Cela signifie que si nous accédons à l'`IP` des machines hôtes sur le port `8070`, nous obtiendrons un service exécuté sur le port `80` à partir des conteneurs.
++ Les conteneurs ne sont pas directement accessibles par leurs addresses `IP` car les adresses `IP` des conteneurs ne sont pas permanentes.
++ Nous en discuterons en détail dans la section réseau.
++ Nous accédons au service exécuté dans le conteneur à partir du port hôte qui est redirigé vers le port du conteneur, c'est ce qu'on appelle une `redirection de port`.
+
+
++ `-p 8070:80` signifie que le port hôte `8070` est mappé au port `80` du conteneur. Vérifiez le service Web du conteneur en y accédant à partir du navigateur sur `http://hostip:8070`.
+
+![Alt Text](images/image47.jpeg)
+
++ Vérifie les registres `nginx, apache et jenkins` depuis `dockerhub` et exécutez-les pour en savoir plus.
+
+![Alt Text](images/image48.jpeg)
+
++ Ici, nous mappons deux ports `8080 et 5000`, les ports hôtes et conteneur sont identiques, ce qui est correct si vos ports hôte ne sont pas occupés.
++ Les données des conteneurs ne sont pas persistantes, ce qui signifie que si nous supprimons le conteneur, ses données sont également perdus, ce qui est évident.
++ Mais si nous voulons garder ces données en sécurité sur la machine hôte, nous pouvons utiliser l'indicateur `-v` qui concerne les volumes.
++ Le côté gauche est le chemin du repertoire de la machine hôte et le côté droit est le chemin du repertoire des conteneurs que vous souhaitez enregistrer sur la machine hôte.
++ C'est similaire à nos répertoires de `synchronisation vagrant`.
++ Désormais, même si nous supprimons le conteneur, ses données dans `/var/jenkins_home` seront en sécurité sur la machine hôte dans le repertoire `/your/home`.
+
+### Inspection Des Conteneurs
+
++ Dans l'exemple précédent, vous avez peut-être remarqué que nous n'avions pas spécifié de commande pour le conteneur lorsque nous avons exécuté l'exécution du `docker`.
++ Pourtant, le conteneur exécutait un simple service Web. Comment est-ce arrivé ? Lors de la création d'une `image Docker`, il est possible d'intégrer une commande ou un processus par défaut que vous souhaitez que les conteneurs utilisant l'image exécutent.
++ Si nous exécutons une commande `docker inspect` sur l'image que nous avons utilisée pour notre conteneur, nous pourrons voir la commande/le processus que le conteneur exécutera au démarrage.
+
+![Alt Text](images/image49.jpeg)
+
+# Images de construction et d'expédition
+
++ `Docker` peut créer des images automatiquement en lisant les instructions d'un `Dockerfile`, un fichier texte qui contient toutes les commandes, dans l'ordre, nécessaires pour créer une image donnée.
++ Les `Dockerfiles` adhèrent à un format spécifique et utilisent un ensemble d'instructions spécifique.
++ `Dockerfile` définira ce qui se passe dans l'environnement à l'intérieur de votre conteneur.
++ L'accès aux ressources telles que les interfaces réseau et les lecteurs de disque est virtualisé à l'intérieur de cet environnement, qui est isolé du reste de votre système.
++ Vous devez donc mapper les ports vers le monde extérieur et être précis sur les fichiers que vous souhaitez `copier` vers cet environnement.
++ Cependant, après cela, vous pouvez vous attendre à ce que la version de votre application définie dans ce fichier `Docker` se comporte exactement de la même manière partout où elle s'exécute.
+
+### Fichier Docker
+
++ Créez un répertoire vide et placez-y ce fichier, avec le nom `Dockerfile`.
++ Prenez note des commentaires qui expliquent chaque affirmation.
+
+![Alt Text](images/image50.jpeg)
+
++ Ce `Dockerfile` fait référence à quelques éléments que nous n'avons pas encore créés, à savoir `app.py et requirements.txt`. Mettons-les en place ensuite.
++ L'application elle-même récupère ces deux fichiers et placez-les dans le même dossier que `Dockerfile`.
++ Ceci complète notre application qui, comme vous pouvez le voir, est assez simple.
++ Lorsque le `dockerfile` ci-dessus est intégré dans une image, `app.py et requirements.txt` seront présents en raison de la commande `ADD` de ce `dockerfile`, et la sortie de `app.py` sera accessible via `HTTP` grâce à la commande `EXPOSE`.
+
+![Alt Text](images/image51.jpeg)
+
++ Nous voyons maintenant que `pip install -r requirements.txt` installe les bibliothèques `flask et redis` pour `Python` et que l'application imprime la variable d'environnement `NAME` ainsi que la sortie d'un appel à `socket.gethostname()`.
++ Enfin comme `Redis` n'est pas en cours d'exécution (car nous avons uniquement installé la bibliothèque `Python`, et non `Redis` lui-même), nous devons nous attendre à ce que la tentative de l'utiliser ici échoue et produise le message d'erreur.
+
+**Remarque :** L'accès au nom de l'hôte à l'intérieur d'un conteneur récupère `l'ID` du conteneur, qui est comme `l'ID` de processus pour un exécutable en cours d'exécution.
+
+### **Créer L'application**
+
++ C'est ça! Vous n'avez pas besoin de `Python` ou de quoi que ce que ce soit dans le fichier `requirements.txt` sur votre système, et la création ou l'exécution de cette image ne les installera pas non plus sur votre système.
++ Il ne semble pas que vous ayez vraiment configuré un environnement avec `Python et Flask`, mais c'est le cas.
+
++ Voici ce que cela devrait montrer
+
+![Alt Text](images/image52.jpeg)
+
++ Exécutez maintenant la commande `build`. Cela crée une `image docker` que nous allons baliser en utilisant `-t` pour qu'elle ait un nom convivial.
+
+![Alt Text](images/image53.jpeg)
+
++ Où est votre image construite ? Ilse trouve dans le registre d'images docker local de votre machine:
+
+![Alt Text](images/image54.jpeg)
+
+### Exécutez l'application
+
++ Exécutez l'application en mappant le `port 4000` de votre machine sur le port `EXPOSE 80` du conteneur à l'aide de `-p`.
+
+![Alt Text](images/image55.jpeg)
+
++ Vous devriez voir un avis indiquant que `Python` diffuse votre application à l'adresse `http://0.0.0.0:80`.
++ Mais ce message vient de l'intérieur du conteneur, qui ne sait pas que vous avez mappé le `port 80` de ce conteneur sur `4000`, créant ainsi `l'URL` correcte `http://localhost:4000`.
++ Accédez dans un navigateur Web pour voir le contenu affiché sur une page Web, y compris le texte `Hello World`, `l'ID` du conteneur et le message d'erreur `Redis`.
+
+![Alt Text](images/image56.jpeg)
+
++ Vous pouvez également utiliser la commande `curl` dans un `shell` pour afficher le même contenu.
+
+![Alt Text](images/image57.jpeg)
+
+**Remarque :**
+
++ Ce remappage de port de `4000:80` vise à démontrer la différence entre ce que vous exposez dans le fichier docker et ce que vous publiez à l'aide de `docker run -p`.
++ Dans les étapes ultérieures, nous mapperons simplement le `port 80` de l'hôte au `port 80` du conteneur et utiliserons `http://localhost`.
++ Appuyez sur `CTRL+C` dans votre terminal pour quitter. Exécutons maintenant l'application en arrière-plan, en mode détaché :
+
+![Alt Text](images/image58.jpeg)
+
++ Vous obtenez le long `ID` de conteneur pour votre application, puis êtes renvoyé vers votre terminal.
++ Votre conteneur s'exécute en arrière-plan. Vous pouvez également voir `l'ID` abrégé du conteneur avec `docker ps` (et les deux fonctionnent de manière interchangeable lors de l'exécution de commandes):
+
+![Alt Text](images/image59.jpeg)
+
++ Vous verrez que `CONTAINER ID` correspond à ce qui se trouve sur `http://localhost:4000`.
++ Utilisez maintenant `docker stop` pour terminer le processus, en utilisant `l'ID du CONTAINER`, comme ceci :
+
+![Alt Text](images/image60.jpeg)
+
+
+### Partagez votre image
+
+
+
+
