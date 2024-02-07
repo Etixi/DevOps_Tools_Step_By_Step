@@ -535,6 +535,172 @@
 
 ### Partagez votre image
 
++ Pour démontrer la portabilité de ce que nous venons de créer, téléchargeons notre image construite et exécutons-la ailleurs.
++ Après tout, vous devrez apprendre à pousser vers les registres, lorsque vous souhaiterez déployer des conteneurs en production
++ `Un registre` est une collection de référentiels, et un `référentiel` est une collection d'images, un peu comme un référentiel `Github`, sauf que le code est déjà construit.
++ Un compte sur un registre peut démontrer de nombreux référentiels.
++ Le `dockerCLI` utilise le registre public de `Docker` par défaut.
+
+<br/>
+
++ **Remarque :** Nous utiliserons le registre public de `Docker` simplement parce qu'il est gratuit et préconfiguré, mais il existe de nombreux registres publics parmi lesquels choisir, et vous pouvez même configurer votre propre registre privé à l'aide de `Docker Trusted Registry`.
+
+
+### Connectez-vous avec votre identifiant Docker
+
++ Si vous n'avez pas de compte `Docker`, créez-en un sur un `cloud.docker.com`.
++ Notez votre nom d'utilisateur. Connectez-vous au registre public `Docker` sur votre ordinateur local.
+
+![Alt Text](images/image61.jpeg)
+
+
+### Marquer l'image
+
++ La notation pour associer une image locale à un référentiel sur un référentiel est `username/repository.tag`.
++ La balise est facultative, mais recommandée, car c'est le mécanisme que les registres utilisent pour donner une version aux images `Docker`.
++ Donnez au référentiel et à la balise des noms significatifs pour le contexte, tels que `get-started-part1`.
++ Cela placera à l'image dans le référentiel de démarrage et la marquera comme part1.
++ Maintenant, rassemblez le tout pour marquer l'image.
++ Exécutez l'image de balise `docker` avec votre nom d'utilisateur, votre référentiel et les noms de balises afin que l'image soit téléchargé vers la destination souhaitée.
++ La syntaxe de la commande est :
+
+![Alt Text](images/image62.jpeg)
+
++ Par exemple :
+
+![Alt Text](images/image63.jpeg)
+
+### Publier l'image
+
++ Téléchargez votre image taguée dans le référentiel :
+
+![Alt Text](images/image64.jpeg)
+
++ Une fois terminé, les résultats de ce téléchargement sont accessibles au public.
++ Si vous vous connectez à `Docker Hub`, vous y verrez la nouvelle image, avec sa commande `pull`.
+
+### Extrayez et exécutez l'image à partir du référentiel distant
+
++ Désormais, vous pouvez utiliser `docker run` et exécuter votre application sur n'importe quelle machine avec cette commande : 
+
+![Alt Text](images/image65.jpeg)
+
++ Si l'image n'est pas disponible localement sur la machine, `Docker` pourrait l'extraire du référentiel.
+
+![Alt Text](images/image66.jpeg)
+
++ **Remarque :** 
+  + si vous ne spécifiez pas la partie : `tag` de ces commandes, la balise `:latest` sera prise en compte, à la fois lorsque vous créez et lorsque vous exécutez des images.
+  + `Docker` utilisera la dernière version de l'image exécutée sans balise spécifiée (pas nécessairement l'image la plus récente).
+  + Quelque soit l'endroit où `docker run` s'exécute, il extrait votre image, ainsi que `python` et toutes les dépendances du fichier `requirements.txt`, et exécute votre code.
+  + Tout est transporté ensemble dans un petit paquet soigné, et la machine hôte n'a pas besoin d'installer autre chose que `docker` pour l'exécuter.
+  + `Instructions Dockerfile` : Nous avons vu dans la section précédente que `Dockerfile` est utilisé pour créer des images `Docker`.
+  + Il contient la liste des instructions lues par `Docker` pour configurer une image.
+  + Il existe une douzaine d'instructions que nous pouvons utiliser dans notre `Dockerfile`.
+
+![Alt Text](images/image67.jpeg)
+
+### FROM
+
++ Cette instruction est utilisé pour définir l'image de base pour les instructions ultérieures.
++ Il est obligatoire de définir ceci dans la première ligne d'un `Dockerfile`.
++ Vous pouvez cependant l'utiliser plusieurs fois. Exemple :
+
+![Alt Text](images/image68.jpeg)
+
+### MAINTAINER
+
++ Il s'agit d'une instruction non exécutable utilisée pour indiquer l'auteur du `Dockerfile`. Exemple :
+
+![Alt Text](images/image69.jpeg)
+
+### RUN
+
++ Cette instruction vous permet d'exécuter une commande au-dessus d'un calque existant et de créer un nouveau calque avec les résultats de l'exécution de la commande.
++ Par exemple, s'il existe une condition préalable pour installer `PHP` avant d'exécuter une application, vous pouvez exécuter les commandes appropriées pour installer `PHP` au-dessus de l'image de base (par exemple `Ubuntu`), comme ceci :
+
+![Alt Text](images/image70.jpeg)
+
+### CMD
+
++ La principale différence entre `CMD et RUN`, est que `CMD` n'exécute rien pendant la construction.
++ Il spécifie simplement la commande prévue pour l'image. Alors que `RUN` exécute la commande pendant le temps de construction.
++ **Remarque :** il ne peut y avoir qu'une seule instruction `CMD` dans un `Dockerfile`, si vous en ajoutez d'autres, seule la dernière prend effet. Exemple :
+
+![Alt Text](images/image71.jpeg)
+
+### EXPOSE
+
++ Lors de l'exécution de votre service dans le conteneur, vous souhaiterez peut-être que votre conteneur écoute sur les ports spécifiés.
++ L'instruction `EXPOSE` vous aide à le faire. Exemple :
+
+![Alt Text](images/image72.jpeg)
+
+### ENV
+
++ Cette instruction peut-être utilisée pour définir les variables d'environnement dans le conteneur. Exemple :
+
+![Alt Text](images/image73.jpeg)
+
+### COPY
+
++ Cette instruction permet de copier des fichiers et répertoires d'une source spécifiée vers une destination (dans le système de fichiers du conteneur). Exemple :
+
+![Alt Text](images/image74.jpeg)
+
+### ADD
+
++ Cette instruction est similaire à l'instruction `COPY` avec quelques fonctionnalités supplémentaires telles que la prise en charge des `URL` distantes dans le champ source et l'extraction `tar` en local uniquement.
++ Mais si vous n'avez pas besoin d'une fonctionnalité, il est suggéré d'utiliser `COPY` car il est plus lisible. Par exemple :
+
+![Alt Text](images/image75.jpeg)
+
+### ENTRYPOINT
+
++ Vous pouvez utiliser cette instruction pour définir la commande principale de l'image.
++ Par exemple, si vous n'avez installé qu'une seule application dans votre image et vous souhaitez qu'elle s'exécute à chaque instruction de l'image, `ENTRYPOINT` est l'instruction qu'il vous faut.
++ **Remarque :** les arguments sont facultatifs et vous pouvez le transmettre pendant l'exécution avec quelque chose comme `docker run<'image-name>`.
++ De plus, tous les éléments spécifiés à l'aide de `CMD` seront remplacés, à l'exception des arguments. 
++ Ils seront transmises à la commande spécifiées dans `ENTRYPOINT`. Exemple : 
+
+![Alt Text](images/image76.jpeg)
+
+### VOLUME
+
++ Vous pouvez utiliser l'instruction `VOLUME` pour activer l'accès à un emplacement sur le système hôte à partir d'un conteneur.
++ Passez simplement le chemin de l'emplacement auquel vous souhaiterez accéder. Exemple :
+
+![Alt Text](images/image77.jpeg)
+
+### USER
+
++ Ceci est utilisé pour définir `l'UID(ou le nom de l'utilisateur)` à utiliser lors de l'exécution de l'image. Exemple : 
+
+![Alt Text](images/image78.jpeg)
+
+### WORKDIR
+
++ Ceci est utilisé pour définir le répertoire actuellement actif pour d'autres instructions telles que `RUN, CMD, ENTRYPOINT, COPY et ADD`.
++ Notez que si un chemin relatif est fourni, la prochaine instruction `WORKDIR` le prendra comme relatif au chemin de l'instruction `WORKDIR` précédente. Exemple :
+
+![Alt Text](images/image79.jpeg)
+
+### BUILD
+
++ Cette instruction ajoute une instruction de déclenchement à exécuter lorsque l'image comme base pour une autre image.
++ Il se comporte comme si une instruction `RUN` était insérée immédiatement après l'instruction `FROM` du `Dockerfile` en aval.
++ Ceci est généralement utile dans les cas où vous avez besoin d'une image statique avec une valeur de configuration dynamique qui change chaque fois qu'une nouvelle image doit être crée (au-dessus de l'image de base). Exemple :
+
+![Alt Text](images/image80.jpeg)
+
++ La capture d'écran ci-dessus provient du référentiel officiel `nginx` de `Dockerfile`.
++ Si vous voyez, il existe das liens vers `Dockerfile` pour chaque version de l'image. Les liens pointent vers `Dockerfile` hébergé dans `github`.
+
+![Alt Text](images/image81.jpeg)
+
+
++ Ces `Dockerfiles` 
+
 
 
 
