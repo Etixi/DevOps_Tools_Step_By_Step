@@ -699,8 +699,528 @@
 ![Alt Text](images/image81.jpeg)
 
 
-+ Ces `Dockerfiles` 
++ Ces `Dockerfiles` sont le meilleur endroit pour apprendre le `Dockerfile` tel qu'il a été vérifié auprès de `Dockerfile`.
++ L'une des meilleures pratiques est de combiner plusieurs commandes dans l'instruction `RUN` en utilisant `&&` chaque instruction `RUN` crée une couche sur les images, donc si vous avez dix instructions `RUN` cela crée dix calques supplémentaires dans votre image.
++ Pour éviter cela, nous pouvons corriger toutes les commandes dans une seule instruction `RUN` en combinant toutes les commandes avec `&&` comme indiqué dans la capture d'écran ci-dessus :
+
+![Alt Text](images/image82.jpeg)
+
+# Bases du réseau de conteneurs
+
+### Un Serveur Web Simple Et Statique
+
++ Exécutez l'image `Docker Hub nginx`, qui contient un serveur `Web base`:
+
+![Alt Text](images/image83.jpeg)
+
++ `Docker` téléchargera l'image depuis le `Docker Hub`.
+
+  + `-d` : indique à `Docker` d'exécuter en arrière-plan.
+  + `-P` : indique à `Docker` de rendre ce service accessible depuis d'autres ordinateurs. (`-P` est la version courte de `--publish-all`).
+
++ Mais comment pouvons-nous nous connecter à notre serveur Web maintenant ?
+
+
+### Trouver Le port de notre serveur Web
+
++ Nous utiliserons `docker ps` : 
+
+![Alt Text](images/image84.jpeg)
+
++ Le serveur `Web` s'exécute sur les ports `80` et `443` à l'intérieur du conteneur.
++ Ces ports sont mappés aux ports `32769` et `32768` sur notre hôte `Docker`.
++ Nous expliquerons le pourquoi et le comment de ce mappage de ports. Mais d'abord, assurons-nous que tout fonctionne correctement.
+
+### Connexion à notre serveur Web (GUI)
+
++ Pointez votre navigateur vers l'adresse `IP` de votre hôte `Docker`, sur le port indiqué par `docker ps` pour le port de connecter `80`.
+
+![Alt Text](images/image85.jpeg)
+
+### Connexion à notre serveur Web (CLI)
+
++ Vous pouvez également utiliser `curl` directement depuis l'hôte `Docker`.
++ Assurez-vous d'utiliser le bon numéro de port s'il est différent de l'exemple ci-dessous :
+
+![Alt Text](images/image86.jpeg)
+
+
+### Pourquoi Cartographions-nous les Ports ?
+
++ Nous n'avions plus d'adresses `IPv4`. Les conteneurs ne peuvent pas avoir d'adresses `IPv4` physiques.
++ Ils ont des adresses privées. Les services doivent être exposés port par port. Les ports doivent être mappés pour éviter les conflits.
+
+  + Trouver le port serveur `Web` dans un script.
+  + Analyser la sortie de `docker ps` serait pénible. Il existe une commande pour nous aider.
+  
+    + `$ docker port <containersID>`
+    + `8032 769` Allocation manuelle des numéros de port.
+
+![Alt Text](images/image87.jpeg)
+
++ Nous utilisons deux serveurs `Web NGINX`. Le premier est exposé sur le port `80`.
++ Le deuxième est exposé sur le port `8000`. Le troisième sur les ports `8000` et `8888`.
++ **Remarque :** la convention est `port-on-host : port-on-container`.
+
+### Plomberie dans votre infrastructure
+
++ Il existe de nombreuses façons d'intégrer des conteneurs dans votre réseau.
++ Démarrez le conteneur en laissant `Docker` lui allouer un port public.
++ Récupérez ensuite ce numéro de port intégrez-le à votre configuration.
++ Choisissez un numéro de port fixe à l'avance, lorsque vous générez votre configuration.
++ Démarrez ensuite votre conteneur en définissant les numéros de port manuellement.
++ Utilisez un plugin réseau, en connectant vos conteneurs avec par exemple des `VLAN`, des tunnels...
++ Activez le mode `Swarm` pour le déploiement sur un cluster. Le conteneur sera alors accessible via n'importe via n'importe quel noeud du cluster.
+
+
+### Trouvez l'adresse IP Du Conteneur
+
+![Alt Text](images/image88.jpeg)
+
++ `docker inspect` est une commande avancée, qui peut récupérer une tonne d'informations sur nos conteneurs.
++ Ici, nous lui fournissons une chaîne de format pour extraire exactement l'adresse `IP` privée du conteneur.
+
+### Epingler notre Conteneur
+
++ Nous pouvons tester la connectivité au conteneur en utilisant l'adresse `IP` que nous venons découvrir.
++ Voyons cela maintenant en utilisant l'outil `ping`.
+
+![Alt Text](images/image89.jpeg)
+
+### Les différents pilotes réseau
+
++ Un conteneur peut utiliser l'un des pilotes suivants :
+
+  + bridge (par défaut)
+  + aucun
+  + hôte
+  + conteneur
+  + Le pilote est sélectionné avec `docker run --net ...`
+
+### Le pont par défaut
+
++ Par défaut, le conteneur obtient une interface virtuelle `eth0`. (En plus de sa propre interface de bouclage lo privée). 
++ Cette interface est fournie par une `vethpai`. Il est connecté au pont `Docker`. (Nommé `docker0` par défaut; configurable avec `--bridge`).
++ Les adresses sont allouées sur un sous-réseau interne privé. (`Docker` utilise `127.17.0.0/16` par défaut; configurable avec `-bip`).
++ Le trafic sortant passe par une règle iptables `MASQUERADE`. Le trafic entrant passe par une règle iptables `DNAT`. Le conteneur peut avoir ses propres routes, règles iptables, etc.
+
+# Le modèle de réseau de conteneurs
+
+### Le modèle de réseau de conteneurs
+
++ Le `CNM` a été introduit dans `Engine 1.9.0 (novembre 2015)`.
++ Le `CNM` ajoute la notion de réseau, et une nouvelle commande de niveau supérieur pour manipuler et voir ces réseaux : `dicker network`.
++ Qu'y a-t-il dans un réseau ?
+
+  + Conceptuellement, `un réseau` est un commutateur virtuel.
+  + Il peut être **local** (sur un seul moteur) ou **global** (sur plusieurs hôtes).
+  + Un réseau est associé à un sous-réseau `IP`.
+  + Un réseau est géré par un pilote.
+  + Un réseau peut avoir un `IPAM` (allocateur `IP`) personnalisé.
+  + Les conteneurs avec des noms explicites sont détectables via `DNS`.
+  + Tous les pilotes que nous avons vus auparavant sont disponibles.
+  + Un nouveau pilote multi-hôtes, `overlay`, est disponible immédiatement.
+  + Plus de pilotes peuvent être fournis par des plugins `(OVS, VLAN ..)`.
+
+### Créer un réseau
+
++ Gérons un réseau appelé `dev`.
+
+![Alt Text](images/image90.jpeg)
+
++ Le réseau est désormais visible avec la commande `network ls` :
+
+![Alt Text](images/image91.jpeg)
+
+### Placer des conteneurs sur un réseau
+
++ Nous allons créer un conteneur nommé sur ce réseau. Il sera accessible avec son nom, recherchez.
+
+![Alt Text](images/image92.jpeg)
+
+### Communication entre les conteneurs
+
++ Maintenant, créez un autre conteneur sur ce réseau.
+
+![Alt Text](images/image93.jpeg)
+
++ A partir de ce nouveau conteneur, nous pouvons résoudre et pinger l'autre, en utilisant le nom qui lui est attribué.
+
+![Alt Text](images/image94.jpeg)
+
+
+### Résolution des adresses de conteneurs
+
++ Dans `Docker Engine 1.9`, la résolution de noms est implémentée avec `/etc/hosts` et mise  àjour à chaque fois que des conteneurs sont ajoutés/supprimés.
+
+![Alt Text](images/image95.jpeg)
+
++ Dans `Docker Engine 1.10`, cela a été remplacé par un résolveur dynamique. (Cela évite les conditions de concurrence lors de la mise à jour de `/etc/hosts`.)
+
+
+### Connecter plusieurs conteneurs ensemble
+
++ Essayons d'exécuter une application qui nécessite deux conteneurs.
++ Le premier conteneur est un serveur Web.
++ L'autre est un magasin de données `Redis`.
++ Nous les placerons tous les deux sur le réseau de développement créé précédemment.
+
+### Exécution du serveur Web
++ L'application est fournie par l'image conteneur `jpetazzo/trainingwheels`.
++ Nous n'en savons pas grand-chose, nous allons donc essayer de l'exécuter et voir ce qui se passe.
+
+![Alt Text](images/image96.jpeg)
+
+### Testez le serveur Web
+
++ Si nous nous connectons à l'application maintenant, nous verrons une page d'erreur :
+
+![Alt Text](images/image97.jpeg)
+
++ C'est parce que le service `Redis` n'est pas en cours d'exécution.
++ Ce conteneur tente de résoudre le nom `redis`.
+
++ Remarque : nous n'utiliserons pas ici de nom de domaine complet ou d'adresse `IP`, juste `redis`.
+
+### Démarrer le magasin de données
+
++ Nous devons démarrer un conteneur `redis`.
++ Ce conteneur doit être sur le même réseau que le serveur Web.
++ Il doit avoir le bon nom (redis) pour que l'application puisse le trouver. Démarrez le conteneur :
+
+![Alt Text](images/image98.jpeg)
+
+
+### Testez à nouveau le serveur web
+
++ Si nous nous connectons à l'application maintenant, nous devrions voir que l'application fonctionne correctement :
+
+![Alt Text](images/image99.jpeg)
+
++ Lorsque l'application tente de résoudre `Redis`, au lieu d'obtenir une erreur `DNS`,elle contient l'adresse `IP` de notre conteneur `Redis`.
+
+### Quelques mots sur la portée
+
++ Que faire si nous voulons exécuter plusieurs copies de notre application.
++ Puisque les noms sont uniques, il ne peut y avoir qu'un seul conteneur nommé `redis` à la fois.
++ Nous pouvons spécifier `--net-alias` pour définir des alias à l'échelle du réseau, indépendamment du nom du conteneur.
+
++ Supprimons le conteneur `Redis` :
++ Et créez-en un qui ne bloque pas le nom `redis` : 
+
+![Alt Text](images/image100.jpeg)
+
++ Vérifiez que l'application fonctionne toujours (mais le compteur est revenu à 1, puisque nous avons effacé l'ancien conteneur `Redis`).
+
+### Les noms sont locaux à chaque réseau
+
++ Essayons d'envoyer une requête `ping` à notre conteneur de recherche à partir d'un autre conteneur, lorsque cet autre conteneur n'est pas sur le réseau de développement.
+
+![Alt Text](images/image101.jpeg)
+
++ Les noms peuvent être résolus uniquement lorsque les conteneurs se trouvent sur le même réseau.
++ Les conteneurs ne peuvent se contacter que lorsqu'ils sont sur le même réseau (vous pouvez essayer d'effectuer un ping en utilisant l'adresse `ÌP` pour vérifier).
+
+
+### Alias de réseau
++ Nous aimerions avoir un autre réseau, prod, avec son propre conteneur de recherche.
++ Mais ile ne peut y avoir qu'un seul conteneur nommé `search` ! Nous utiliserons des alias de réseau.
++ Un conteneur peut avoir plusieurs alias réseau. Les alias de réseau sont locaux à un réseau donné (n'existent que dans ce réseau).
++ Plusieurs conteneurs peuvent avoir le même alias réseau (même sur le même réseau).
++ Dans `Docker Engine 1.11`, la résolution d'un alias réseau génère les adresses `IP` de tous les conteneurs contenant cet alias.
+
+### Créer des conteneurs sur un autre réseau
+
++ Crée le réseau de production
+
+![Alt Text](images/image102.jpeg)
+
++ Nous pouvons désormais créer plusieurs conteneurs avec l'alias de recherche sur le nouveau réseau de production.
+
+![Alt Text](images/image103.jpeg)
+
+### Résolution des alias de réseau
+
++ Essayons d'abord la résolution `DNS`, en utilisant l'outil `nslookup` fourni avec l'image `alpine`.
+
+![Alt Text](images/image104.jpeg)
+
++ `Adresse 1:172.23.0.3 prod-es-2.prod Adresse 2 : 172.23.0.2 prod-es-1.prod` (Vous pouvez ignorer les erreurs `null` impossible à résoudre).
+
+### Connexion à des conteneurs avec alias
+
++ Chaque instance `ElasticSearch` a un nom (généré lors de son démarrage).
++ Ce nom peut-être vu lorsque nous émettons une simple requête `HTTP` sur le point de terminaison de l' `API ElasticSearch`.
++ Essayez la commande suivante plusieurs fois : 
+
+![Alt Text](images/image105.jpeg)
+
+
++ Essayez ensuite plusieurs fois en remplaçant, `--net dev` par `--net prod` : 
+
+![Alt Text](images/image106.jpeg)
+
+### Bon à savoir ...
+
++ Docker ne créera pas de noms de réseau ni d'alias sur le réseau de pont par défaut.
++ Par conséquent, si vous souhaitez utiliser ces fonctionnalités, vous devez d'abord créer un réseau personnalisé.
++ Les alias réseau ne sont pas uniques : vous pouvez attribuer le même alias à plusieurs conteneurs sur le même réseau.
++ Dans `Engine 1.10` : un conteneur sera sélectionné et seule son adresse `IP` sera renvoyée lors de la résolution de l'alias réseau.
++ Dans `Engine 1.11`: lors de la résolution de l'alias réseau, la réponse `DNS` inclut les adresses `IP` de tous les conteneurs avec ect alias réseau. Cela permet un équilibrage de charge brut sur plusieurs conteneurs (mais ne remplace pas un véritable équilibreur de charge).
++ Dans `Engine 1.12` : l'activation du mode `Swarm` donne accès aux fonctionnalités de clustering, notamment un équilibreur de charge avancé utilisant `Linux IPVS`.
++ La création de réseaux et d'alias de réseau est généralement automatisé avec des outils comme `Compose`.
+
+
+# Workflow de développement local avec Docker
+
+### Utiliser un conteneur Docker pour le développement local
+
++ Plus jamais : 
+
+  + Fonctionne sur ma machine
+  + Pas la même version
+  + Dépendance manquante
+
++ En utilisant des conteneurs `Docker`, nous obtiendrons un environnement de développement cohérent.
+
+
+### Notre application "Namer"
+
++ Le code est disponible sur : https://github.com/jpetazo/namer. L'image `jpetazzo/namer` est automatiquement construite par le `Docker Hub`.
+
+### Regardons le code
+
++ Téléchargeons le code source de notre application.
+
+![Alt Text](images/image107.jpeg)
+
+### Où est mon code ?
+
++ D'après le `Dockerfile`, le code est copié dans `/src` : 
+
+![Alt Text](images/image108.jpeg)
+
++ Nous souhaitons supporter des modifications à l'intérieur du conteneur sans le reconstruire à chaque fois. Pour cela, nous utiliserons un volume.
 
 
 
+### Notre premier tome
++ Nous dirons à `Docker` de mapper le repertoire actuel sur `/src` dans le conteneur.
 
+![Alt Text](images/image109.jpeg)
+
++ L'indicateur `-d` indique que le conteneur doit s'exécuter en mode détaché (en arrière-plan).
++ L'indicateur `-v` permet le montage de volumes à l'intérieur de conteneurs.
++ L'indicateur `-p` mappage le port `9292` à l'intérieur du conteneur au port `80` sur l'hôte.
++ Nous n'avons pas besoin de donner une commande à exécuter car le `Dockerfile` spécifie déjà `rackup`.
+
+
+### Montage de volumes à l'intérieur de conteneurs
+
++ L'indicateur `-v` monte un repertoire de votre hôte dans votre conteneur `Docker`.
++ La structure du drapeau est la suivante : `[host-path]:[container-path]:[rw|ro]`
+
+  + Si `[host-path] ou [container-path]` n'existe pas, il est créé.
+  + Vous pouvez contrôler l'état d'écriture du volume avec les options `ro` et `rw`.
+  + Si vous ne spécifiez `rw` ou `ro`, ce sera `rw` par défaut.
+  + Si vous ne spécifiez `rw` ou `ro`, ce sera `rw` par défaut.
+
++ Il y aura un chapitre complet sur les volumes.
++ 
+
+### Tester le conteneur de développement
+
++ Voyons maintenant si notre nouveau conteneur est en cours d'exécution.
+
+![Alt Text](images/image110.jpeg)
+
++ Notre client n'aime vraiment pas la couleur de notre texte. Changeons-le
+
+![Alt Text](images/image111.jpeg)
+
+
+### Améliorer le flux de travail avec Compose
+
++ Vous pouvez également démarrer le conteneur avec la commande suivante :
+  + `$docker-compose up -d`
+
++ Cela fonctionne grâce au fichier `Compose`, `docker-compose.yml`:
+
+![Alt Text](images/image112.jpeg)
+
++ Pourquoi composer ?
+
+  + Spécifier tous ces paramètres `docker run` est fastidieux.
+  + Et sujet aux erreurs.
+  + Nous pouvons `encoder` ces paramètres dans un `fichier Compose`
+  + Lorsque vous voyez fichier `docker-compose.yml`, vous savez que vous pouvez utiliser `docker-compose up`.
+  + `Compose` peut également gérer des applications complexes et multi-conteneurs. (Nous en reparlerons plus tard)
+
+# Flux de travail expliqué
+
++ Nous pouvons voir un workflow simple :
+
+  + Construire une image contenant notre environnement de développement (Rails, Django ...)
+  + Démarrez un conteneur à partir de cette image. Utilisez l'option `-v` pour montrer le code source à l'intérieur du conteneur.
+  + Modifiez le code source en dehors des conteneurs, en utilisant les outils habituels (vim, emacs, textmate ...)
+  + Testez l'application (Certains frameworks récupèrent automatiquement les modifications. D'autres nécessitent que vous fassiez `CTRL + C` redémarrer après chaque modification)
+  + Répétez deux dernières étapes jusqu'à ce que vous soyez satisfait.
+  + Une fois terminé, `commit+push` les modifications du code source. (Vous utilisez le contrôle de version,n'est-ce pas ?)
+
+### Débogage à l'intérieur du conteneur 
+
++ `Docker` a introduit une fonctionnalité appelée `docker-exec`.
++ Il permet aux utilisateurs d'exécuter un nouveau processus dans un conteneur déjà en cours d'exécution.
++ Si parfois vous souhaitez pouvoir vous connecter pouvoir vous connecter en `SSH` dans un conteneur : vous pouvez utiliser `docker exec` à la place.
++ Vous pouvez obtenir une invite shell dans un conteneur existant de cette façon, ou exécuter un processus arbitraire pour l'automatisation. Exemple de `docker exec`.
+
+  + `$ #` Vous Vous pouvez exécuter des commandes `Ruby` dans la zone où l'application est en cours d'exécution et plus encore!
+
+![Alt Text](images/image113.jpeg)
+
+# Utilisation de Docker Compose pour les piles de développement
+
++ Les `Dockerfiles` sont parfaits pour créer un seul conteneur.
++ Mais lorsque vous souhaitez démarrer une pile complexe composée de plusieurs conteneurs, vous avez besoin d'un outil différent.
++ Cet outil est `Docker Compose`. Dans cette leçon, vous utiliserez `Compose` pour amorcer un environnement de développement.
+
+
+## Composer pour les piles de développement
+
+### Qu'est-ce que Docker Compose
+
++ `Docker Compose` (anciennement connu sous le nom de fig) est un outil externe.
++ C'est facultatif (vous n'avez pas besoin de `Compose` pour exécuter `Docker` et les conteneurs) mais le recommandons vivement!
++ L'idée générale de `Compose` est de permettre un `worflow` d'intégration très simple et puissant :
+
+  + Clonez votre code
+  + Exécutez `docker compose-up`.
+  + Votre application est opérationnelle !
+
+### Présentation de la rédaction
+
++ Voici comment travailler avec `Compose` :
+
+  + Vous décrivez un ensemble (ou une pile) de conteneurs dans un fichier `YAML` appelé `docker-compose.yml`
+  + Vous exécutez `docker-compose up`
+  + `Compose` extrait automatiquement les images, crée des conteneurs et les démarre.
+  + `Compose` peut configurer des liens, des volumes et d'autres options `Docker` pour vous.
+  + `Compose` peut exécuter les conteneurs en arrière-plan ou  au premier plan.
+  + Lorsque les conteneurs s'exécutent au premier plan, leur sortie agrégée est affichée.
+
+
+### Vérifiez si compose est installé
+
++ Si vous installez les machines virtuelles de formation officielles, `Compose` a été préinstallé.
++ Vous pouvez toujours vérifier qu'il est installé en exécutant :
+
+![Alt Text](images/image114.jpeg)
+
+
+
+### Installation de Composer
+
++ Si vous installez `Compose` sur votre machine, il existe (au moins) deux méthodes.
++ `Compose` est écrit en `Python`. Si vous avez `pip` et que vous l'utilisez pour gérer d'autres packages `Python`, vous pouvez installer `compose` avec :
+
+![Alt Text](images/image115.jpeg)
+
++ (Remarque : si vous êtes familier avec `virtualenv`, vous pouvez également installer `Compose`.)
+
++ Si vous n'avez pas `pip`, ou ne souhaitez pas l'utiliser pour installer `Compose`, vous pouvez également récupérer un fichier binaire tout-en-un.
+
+![Alt Text](images/image116.jpeg)
+
+
+### Lancement de notre première pile avec Compose
+
+
++ Première étape : démarrez votre application
+
+![Alt Text](images/image117.jpeg)
+
++ Deuxième étape : démarrez votre application
+
+![Alt Text](images/image118.jpeg)
+
++ Regardez `Compose` créer et exécuter votre application avec les paramètres corrects, notamment en reliant les conteneurs pertinents entre eux.
+
+### Lancement de notre première pile avec Compose
+
++ Vérifiez que l'application s'exécute sur `http:/<youHostIP>:8000`.
+
+### Arrétez l'application
+
++ Lorsque vous appuyez sur `^C`, `Compose` essaie de terminer correctement tous les conteneurs.
++ Après dix secondes (ou si vous appuyez à nouveau sur `^C`), cela les tuera de force.
+
+### Le fichier docker-compose.yml
+
++ Voici le fichier utilisé dans la démo :
+
+![Alt Text](images/image119.jpeg)
+
+### Composer des versions de fichiers
+
++ La version 1 dispose directement conteneurs (www, redis ...) au niveau supérieur du fichier. La version 2 comporte plusieurs sections :
+  + La version est obligatoire et doit être `2`.
+  + Les `services` sont obligatoires et correspondent au contenu du format `version 1`.
+  + Les `réseaux` sont facultatifs et peuvent définir plusieurs réseaux sur lesquels les conteneurs peuvent être placés.
+  + Les `volumes` sont facultatifs et peuvent définir des `volumes` à utiliser (et potentiellement partagés) par les conteneurs.
+
+
+### Conteneurs dans Docker-Compose.yml
+
++ Chaque service du fichier `yaml` doit contenir soit une `build`, soit une `image`.
+
+  + `build` indique un chemin contenant un `Dockerfile`.
+  + `image` indique un nom d'image (locale ou sur un registre).
+
++ Les autres paramètres sont facultatifs.
++ Ils codent les paramètres que vous ajoutez généralement à l'exécution de `Docker`.
++ Parfois, ils présentent plusieurs améliorations mineurs.
+
+
+### Paramètres du conteneur
+
++ La commande indique quoi exécuter (comme `CMD` dans un `Dockerfile`).
++ Les ports se traduisent en une (ou plusieurs) options `-p` pour mapper les ports. Vous pouvez spécifier des ports locaux (c'est-à-dire x, y pour exposer le port public x)
++ `volumes` se traduit par une (ou plusieurs) option `-v`. Vous pouvez utiliser des chemins relatifs ici.
++ Pour la liste complète, consultez : http://docs.docker.com/compose/yml/.
+
+### Composer des commandes
+
++ Nous avons déjà vu `docker-compose up`, mais un autre est `docker-compose build`.
++ Il exécutera `docker build` pour tous les conteneurs mentionnant de construction.
++ Il est courant d'exécuter les étapes de construction et d'exécution dans l'ordre.
+
+![Alt Text](images/image120.jpeg)
+
++ Une autre option courante consiste à démarrer les conteneurs en arrière-plan : 
+
+![Alt Text](images/image121.jpeg)
+
+
+### Vérifier l'état du conteneur
+
++ Il peut être fastidieux de vérifier l'état de vos conteneurs avec `docker -ps`, surtout lorsque vous exécutez plusieurs applications en même temps.
++ `Composer` facilite les choses, avec `docker-compose ps` vous ne verrez que l'état des conteneurs de la pile actuelle :
+
+![Alt Text](images/image122.jpeg)
+
+### Nettoyer
+
++ Si vous avez démarré votre application en arrière-plan avec `Compose` et que vous souhaitez l'arrêter facilement, vous pouvez utiliser la commande `kill` :
+
+![Alt Text](images/image123.jpeg)
+
++ Alternativement, `docker-compose down` arrêtera et supprimera les conteneurs.
+
+![Alt Text](images/image124.jpeg)
+
+
+### Traitement particulier des volumes
+
++ `Composer` est intelligent. Si votre conteneur utilise des volumes, lorsque vous redémarrez votre application.
++ `Compose` créera un nouveau conteneur, mais réutilisera les `volumes` qu'il utilisait précédemment.
++ Cela facilite la mise à niveau d'un service ace état,en extrayant sa nouvelle image et en redémarrant simplement votre pile avec `Compose`.
