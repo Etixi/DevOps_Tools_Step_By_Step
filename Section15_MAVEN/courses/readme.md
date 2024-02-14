@@ -66,7 +66,7 @@
 + Ce `bytecode` intermédiaire est enregistré sous la forme d'un fichier `.class`.
 + Dans la deuxième phase, la `machine virtuelle Java (JVM)`, également appelée `interpréteur Java`, prend le `.class` et génère une sortie en exécutant le `bytecode`.
 
-![Alt Text](C:\DevOps_Tools_Step_By_Step\Section15_MAVEN\images\image1.jpeg)
+![Alt Text](../images/image1.jpeg)
 
 
 ## Divers Outils de Construction Disponibles :
@@ -165,7 +165,7 @@
 
 + [Maven archives](https://maven.apache.org/download.cgi)
 
-![Alt Text](C:\DevOps_Tools_Step_By_Step\Section15_MAVEN\images\image2.jpeg)
+![Alt Text](../images/image2.jpeg)
 
 
 #### Extrayez l'archive Maven
@@ -173,13 +173,13 @@
 + Extrayez l'archive dans le repertoire dans lequel vous souhaitez installer `Maven 3.5.0`.
 + Le sous-répertoire `apache-maven-3.5.0` sera créé à partir de l'archive.
 
-![Alt Text](C:\DevOps_Tools_Step_By_Step\Section15_MAVEN\images\image3.jpeg)
+![Alt Text](../images/image3.jpeg)
 
 #### Définir les variables d'environnement Maven
 
 + Ajoutez `M2_HOME, MAVEN_OPTS` aux variables d'environnements.
 
-![Alt Text](C:\DevOps_Tools_Step_By_Step\Section15_MAVEN\images\image4.jpeg)
+![Alt Text](../images/image4.jpeg)
 
 + `Maven` aide à la structure du projet, à la gestion des dépendances, la raison en est que les référentiels `Maven`, `Maven` communiquent avec les référentiels et forment la structure du projet.
 
@@ -198,7 +198,7 @@
 + Le fichier `POM` doit se trouver dans le repertoire racine du projet auquel il appartient.
 + Voici un diagramme illustrant comment `Maven` utilise le fichier `POM` et ce que contient principalement le fichier `POM`.
 
-![Alt Text](C:\DevOps_Tools_Step_By_Step\Section15_MAVEN\images\image5.jpeg)
+![Alt Text](../images/image5.jpeg)
 
 
 + Ces concepts sont expliqués brièvement ci-dessous pour vous donner un aperçu, puis plus en détail dans leurs propres sections plus loin dans ce didacticiel.
@@ -253,7 +253,7 @@
 
 + Ouvrez l'invite de commande `[Ctrl + Alt + T]`
 
-![Alt Text](C:\DevOps_Tools_Step_By_Step\Section15_MAVEN\images\image6.jpeg)
+![Alt Text](../images/image6.jpeg)
 
 
 #### Choisissez un numéro (quel est le numéro de sélection) ?
@@ -262,7 +262,7 @@
 + Ensuite, la structure du projet se formera en conséquence.
 
 
-![Alt Text](C:\DevOps_Tools_Step_By_Step\Section15_MAVEN\images\image7.jpeg)
+![Alt Text](../images/image7.jpeg)
 
 #### Fichier pom.xml maven
 
@@ -279,7 +279,7 @@
 + `Maven` lit le fichier `pom.xml` puis exécute l'objectif.
 + Dans notre cas, le projet génère ce fichier `pom.xml`.
 
-![Alt Text](C:\DevOps_Tools_Step_By_Step\Section15_MAVEN\images\image.jpeg)
+![Alt Text](../images/image.jpeg)
 
 
 # MAVEN - Construire le cycle de vie
@@ -291,7 +291,7 @@
 
 + Chacun de ces cycles de vie de `build` est défini par une liste différente de phases de `build`, où une `phase de build` représente une étape du cycle de vie.
 
-![Alt Text](C:\DevOps_Tools_Step_By_Step\Section15_MAVEN\images\image8.jpeg)
+![Alt Text](../images/image8.jpeg)
 
 
 + Par exemple, le cycle de vie par défaut comprend les phases suivantes : 
@@ -318,7 +318,7 @@
 + **Phase de validation :**
   + Si nous exécutons une phase dans maven, dans la phase précédente est automatiquement lancée.
 
-![Alt Text](C:\DevOps_Tools_Step_By_Step\Section15_MAVEN\images\image9.jpeg)
+![Alt Text](../images/image9.jpeg)
 
 #### Résumé : 
 
