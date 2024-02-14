@@ -17,7 +17,7 @@
 + Nous pourrions finir par avoir plusieurs systèmes physiques exécutant chacun une seule instance de cette application.
 
 
-<img src="https://binarymist.files.wordpress.com/2012/01/bare-metal_hypervisor.png"/>
+![Alt Text](https://binarymist.files.wordpress.com/2012/01/bare-metal_hypervisor.png)
 
 
 + Ainsi, chaque fois que nous avons besoin d'exécuter une nouvelle application, nous achetons des serveurs, installons le système d'exploitation et configurons notre application sur celui-ci.
@@ -44,7 +44,7 @@
 + Comme généralement, nous installons le système d'exploitation sur le serveur physique, puis installons nos applications dessus.
 + En configurant `Hypervisor` sur le serveur physique, nous pouvons créer plusieurs `VM`, chacune avec son propre système d'exploitation.
 
-<img src="https://binarymist.files.wordpress.com/2012/01/bare-metal_hypervisor.png"/>
+![Alt Text](https://binarymist.files.wordpress.com/2012/01/bare-metal_hypervisor.png)
 
 
 + Il existe deux types d'hyperviseurs:
@@ -70,9 +70,11 @@
             + Vmware server/workstation/player
             + Oracle Virtualbox
 
-<img src= "https://www.hitechnectar.com/wp-content/uploads/2020/01/type-1-hypervisor-vs-type-2-hypervisor-Bare-metal-Native-vs-Hosted.png"/><br/>
-        
-<img src= "https://microkerneldude.files.wordpress.com/2012/01/type1-vs-2.png"/>
+![Alt Text](https://www.hitechnectar.com/wp-content/uploads/2020/01/type-1-hypervisor-vs-type-2-hypervisor-Bare-metal-Native-vs-Hosted.png)
+
+
+
+![Alt Text](https://microkerneldude.files.wordpress.com/2012/01/type1-vs-2.png)
 
 
 #### **5. Votre choix d'hyperviseur**
@@ -133,20 +135,25 @@
 
 #### **3. Manual : STEPS/TOOLS**
 
-<img src= "images/manually.jpg"/>
+![Alt Text](images/manually.jpg)
+
 
 #### **4. Automated : STEPS/TOOLS**
 
-<img src= "images/Automatically.jpg"/>
+![Alt Text](images/Automatically.jpg)
+
 
 #### **5. LAB :VM SETUP MANUALLY**
 
-<img src= "images/vm_setup_manually.jpg"/>
+![Alt Text](images/vm_setup_manually.jpg)
+
 
 
 #### **6. LAB :VM SETUP AUTOMATICALLY**
 
-<img src= "images/vm_setup_automatically.jpg"/>
+![Alt Text](images/vm_setup_automatically.jpg)
+
+
 
 
 ### **VM-Manually(Windows)**
@@ -161,27 +168,31 @@
 
 + centosvm
 
-<img src = "images/Etape1.jpg"/>
-<img src = "images/Etape2.jpg"/>
-<img src = "images/Etape3.jpg"/>
-<img src = "images/Etape4.jpg"/>
+![Alt Text](images/Etape1.jpg)
+![Alt Text](images/Etape2.jpg)
+![Alt Text](images/Etape3.jpg)
+![Alt Text](images/Etape4.jpg)
+
 
 
 + ubuntuvm
 
-<img src = "images/Etape1_ubuntu.jpg"/>
-<img src = "images/Etape2_ubuntu.jpg"/>
-<img src = "images/Etape3_ubuntu.jpg"/>
-<img src = "images/Etape4_ubuntu.jpg"/>
+![Alt Text](images/Etape1_ubuntu.jpg)
+![Alt Text](images/Etape2_ubuntu.jpg)
+![Alt Text](images/Etape3_ubuntu.jpg)
+![Alt Text](images/Etape4_ubuntu.jpg)
+
+
+
 
 #### **Deuxième étape**
 
 + [CentOS](https://repo.almalinux.org/almalinux/9/isos/x86_64/AlmaLinux-9.3-x86_64-boot.iso)
 
-<img src = "images/config1.jpg" alt=""/>
-<img src = "images/config2.jpg" alt=""/>
-<img src = "images/config3.jpg" alt=""/>
-<img src = "images/config3.jpg" alt=""/>
+![Alt Text](images/config1.jpg)
+![Alt Text](images/config2.jpg)
+![Alt Text](images/config3.jpg)
+![Alt Text](images/config4.jpg)
 
 + Passer ensuite aux configurations suivantes :
     + Installation Destination
@@ -202,9 +213,9 @@
 
 + [Ubuntu](https://releases.ubuntu.com/jammy/ubuntu-22.04.3-live-server-amd64.iso)
 
-<img src = "images/config1_ubuntu.jpg" alt=""/>
-<img src = "images/config2_ubuntu.jpg" alt=""/>
-<img src = "images/config3_ubuntu.jpg" alt=""/>
+![Alt Text](images/config1_ubuntu.jpg)
+![Alt Text](images/config2_ubuntu.jpg)
+![Alt Text](images/config3_ubuntu.jpg)
 
     Sélectionner la langue
     cliquer sur `continue without updating`
@@ -252,11 +263,12 @@
 
 #### **Vagrant architecture**
 
-<img src = "images/vagrant_architecture.png" alt=""/>
+![Alt Text](images/vagrant_architecture.png)
 
 #### **Steps**
 
-<img src = "images/steps.png"/>
+![Alt Text](images/steps.png)
+
 
 
 ### **Chatgpt**

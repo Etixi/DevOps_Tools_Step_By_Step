@@ -150,4 +150,54 @@
 
 + Sur la page sélectionner un `certificat`, effectuez l'une des opérations suivantes :
 + Si vous disposez d'un `certificat d'AWS (Certificate Manager)`, sélectionnez choisir existants d'`AWS` (Certificate Manager(ACM)), sélectionnez le certificat dans `Certificat`, puis choisissez Enregistrer.
-+ 
+  + **Remarque : Cette option est disponible uniquement dans les régions qui prennent en charge `AWS Certificate Manager`**
++ Si vous avez déjà téléchargé un certificat d' `IAM`, sélectionnez Choisir un Certificat existant depuis `AWS Identify and Access Management (IAM)`, sélectionnez le certificat depuis `Certificat`, puis choisissez `Enregistrer`.
++ Si vous avez un `Certificat SSL` à télécharger, sélectionnez `Télécharez un nouveau certificat SSL vers AWS Identity and Access Management (IAM)`. Entrez un nom pour le certificat, copiez les informations requises dans le formulaire, puis choisissez `Enregistrer`. Notez que la chaîne de certificats n'est pas requise si le certificat est un certificat auto-signé.
+
++ **Méthode 1 :** à l'aide du téléchargement `awscli (AWS Command Line Interface)` vers la commande `IAM` : 
+
+![Alt Text](../images/image12.jpeg)
+
+```
+aws iam upload-server-certificate --server-certificate-name yourselfcertificate --certificate-body file://mycertificate.pem --private-key file://privatekey.pem
+```
+
+![Alt Text](../images/image13.jpeg)
+
++ **Remarque :** dans ce certificat, stocké sous l'option de certificat existant `IAM`.
+
+![Alt Text](../images/image14.jpeg)
+
+
++ Cliquez sur `ENREGISTREZ` -> on peut voir comme ceci.
++ Entrez le nom du certificat.
++ Copiez le fichier `privatekey.pem` et collez-le dans la zone de clé privé.
++ Copiez le fichier `mycertificate.pem` et collez-le dans la zone de certificat de clé publique.
+
+![Alt Text](../images/image15.jpeg)
+
++ Cliquez sur Enregistrer 
+
+![Alt Text](../images/image16.jpeg)
+
+# Vérification
+
++ Etape 5 : Essayez maintenant d'ouvrir le site Web avec le protocole https
+
+![Alt Text](../images/image17.jpeg)
+
++ Le navigateur connaît le site `Web` sous auto-signé ou émis par `CA`.
++ Cliquez ensuite sur `Option avancée` -> cliquez sur `AddException`.
+
+![Alt Text](../images/image18.jpeg)
+
++ Si nous voulons voir les détails de l'autorité de certification émise.
++ Cliquez sur `Afficher` => Cliquez sur `Fermer` => `ConfirmSecurityException` => Votre site Web est maintenant ouvert sous https.
+
+![Alt Text](../images/image19.jpeg)
+
++ Maintenant, tout est fait, le site fonctionne également sous protocole `HTTPS`.
+
+# Diagramme d'algorithme : 
+
+![Alt Text](../images/image20.jpeg)
