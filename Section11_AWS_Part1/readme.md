@@ -426,4 +426,370 @@
 # AMAZON EBS
 
 
-+ 
++ `Amazon Elastic Store (Amazon EBS)` fournit des volumes de stockage de blocs persistants à utiliser avec les instances `Amazon ECS` dans le cloud `AWS`.
++ Chaque volume `AMAZON EBS` est automatiquement repliqué dans sa zone de disponibilité pour vous protéger contre les pannes de composants, offrant ainsi une haute disponibilité et durabilité.
++ Les volumes `AMAZON EBS` offrent les performances cohérentes et à faible latence nécessaires à l'exécution de vos charges de travail avec `AMAZON EBS`, vous appuyez augmenter ou réduire votre utilisation en quelques minutes, tout en payant un prix bas uniquement pour ce que vous fournissez.
+
++ Certaines des fonctionnalités et avantages clés que les `volume EBS` ont à offrir : 
+  + Des volumes hautes performances
+  + Disponibilité
+  + Capacité de cryptage
+  + Capacités d'instantané
+  + Gestion des accès
+  + Volumes élastiques
+
+
++ **Remarque :** les `volumes EBS` ne peuvent pas être copiés d'une région `AWS` à une autre. Pour rendre un volume disponible en dehors de la zone de disponibilité, vous pouvez créer un instantané et restaurer cet instantané sur un nouveau volume n'importe où dans cette région. Vous pouvez copier des instantanés vers d'autres régions, puis les restaurer sur de nouveaux volumes, ce qui facilite l'exploitation de plusieurs régions `AWS` pour l'expansion géographique, la migration du centre de données et la reprise après sinistre.
+
+
+### Types de volume Amazon EBS
+
++ Il existe 3 différentes de volumes `EBS`, chacun avec ses propres ensembles de caractéristiques de performances et coûts associés.
+
+#### 1) Volumes A Usage Général (SSD)
++ Ce volume offre des performances de base `3 IOPS/Gio`, avec la possibilité d'atteindre `3000 IOPS` pendant les périodes prolongées.
++ Les volumes `GP2` sont idéaux pour un large éventail de cas d'utilisation tels que les volumes de démarrage, les bases de données de petite et moyenne taille et les environnements de développement et de test.
++ Les volumes `GP2` prennent en charge jusqu'à `10 000 IOPS et 160 Mo/s` de débit.
+
+#### 2) Volumes IOPS Provisionnés (SSD)
+
++ Avec les volumes `SSD IOPS` provisionnés (iol), vous pouvez provisionner un niveau spécifique de performance d'`E/S`.
++ Les volumes `Io1` prennent en charge jusqu'à `20 000 IOPS et 320 Mo/s` de débit.
++ Cela vous permet d'évoluer de manière prévisible jusqu'à des dizaines de milliers d'`IOPS` par instance `EC2`.
+
+#### 3) Volumes Magnétiques
+
++ Les `volumes magnétiques` sont soutenus par des disques magnétiques et conviennent aux charges de travail où les données sont rarement consultées et aux scénarios dans lesquels un stockage à faible coût pour de petites tailles de volumes est important.
++ Ces volumes fournissent environ `100 IOPS` en moyenne, avec une capacité de rafale allant jusqu'à des centaines d'`IOPS` par instance `EC2`.
+
+
+### Création, Attache, Formatage et Montage d'un Volume EBS sur une instance EC2 : 
+
++ Avant de commencer à savoir comment créer un volume, créons une instance `EC2` de `CentOS 6`.
++ Pour afficher et accéder aux volumes `EBS` de votre compte à l'aide d'`AWS Management Console`, sélectionnez simplement l'option `Volumes` dans le volet de navigation du tableau de bord `EC2`.
++ Cliquez sur `Volumes` dans le volet de gauche, nous pouvons voir le tableau de bord de gestion des volumes.
++ A partir de là, sélectionnez l'option `Créer` un volume.
+
+  + Cela fera apparaître le tableau de bord de création de volume comme indiqué ci-dessous :
+    ![Alt Text](images/image34.jpeg)
+  + Remplissez les détails requis dans la boîte de dialogue. Créer un volume. Ici, j'ai crée un exemple de volume à usage général de 5 Go.
+  + Après avoir rempli les paramètres de configuration, sélectionnez `Créer` pour terminer le processus de création de volume. Le nouveau volume prendra quelques minutes pour être disponible, comme le montre la figure ci-dessous. Une fois le volume crée, nous pouvons désormais attacher ce volume à votre instance en cours d'exécution.
+    ![Alt Text](images/image35.jpeg)
+  + Le volume crée est disponible pour utilisation. Nous marquerons le volume par un nom qui sera utilisé pour une identification future.
+    ![Alt Text](images/image36.jpeg)
+  + Enfin, attachez le volume à l'instance `EC2`. Nous pouvons attacher plusieurs volumes à une seule instance à la fois, chaque volume ayant un nom de périphérique unique. Certains de ces noms de périphériques sont reservés, par exemple, `/dev/sdal` est reservé au volume du périphérique racine.
+  + Pour attacher un volume, sélectionnez le volume disponible pour l'utilisation dans le tableau de bord `Gestion des volumes`. Sélectionnez ensuite l'onglet `Actions` et cliquez sur l'option `Attacher un volume`. Cela fera apparaître la boite de dialogue `Attacher un volume`, comme indiqué ci-dessous :
+    ![Alt Text](images/image37.jpeg)
+  + Tapez votre `ID` d'instance dans le champ `Instance` et fournissez un nom approprié dans le champ `Périphérique` comme indiqué. Ici, j'ai fourni le nom de périphérique recommandé `/dev/sdf` pour ce volume. Cliquez sur `Joindre` une fois que vous avez donné les détails. Le processus de rattachement du volume prend quelques minutes. Vous êtes maintenant prêt à rendre le volume accessible depuis votre instance.
+  
+
+#### Montage du volume sur l'instance
+
++ Une fois le volume attaché à une instance, vous pouvez le formater et l'utiliser comme n'importe quel autre périphérique bloc.
++ Ici, j'utilise la même instance `EC2 (CentOS6)` que nous avons créée précédemment. Pour commencer, connectez-vous à l'instance en cours d'exécution à l'aide de `SSH`.
++ Comme il s'agit d'une machine `CentOS` par défaut, elle se connectera à l'utilisateur `CentOS`.
++ Alors, exécutez la commande suivante pour vous connecter à l'utilisateur `root` et exécutez la commande pour répertorier les partitions de votre instance.
++ Vous devriez voir une partition `/dev/xvda` par défaut avec sa table de partition et une partition de disque non formatée portant le nom `/dev/xvdf`, comme indiqué dans la capture d'écran suivante.
++ La commande `/dev/xvdf` est le volume `EBS` nouvellement ajouté qui doit être formaté.
+
+![Alt Text](images/image38.jpeg)
+
++ Créez maintenant une nouvelle partition avec la partition de disque disponible, comme indiqué ci-dessous.
+
+```
+#Fdisk/Dev/Xvdf
+```
+
+1. Utilisez `m` pour répertorier les différentes options pouvant être utilisées dans `fdisk`.
+
+2. Utilisez `p` pour répertorier d'abord les informations sur la partition et 
+
+3. Utilisez `n` pour créer une nouvelle partition.
+
+
+Suivez les étapes indiquées dans la capture d'écran ci-dessous.
+
+
+![Alt Text](images/image39.jpeg)
+
+
+Après avoir créé la partition, nous devons la formater avec un système de fichiers de votre choix. Ici, j'ai choisi le système de fichiers `ext4`.
+
+![Alt Text](images/image40.jpeg)
+
+Une fois le formatage terminé, nous pouvons montrer cette partition dans un répertoire. Créez un répertoire et montez-le sur un volume comme indiqué ci-dessous :
+
+![Alt Text](images/image41.jpeg)
+
+#### Restauration de sauvegarde
+
++ Nous créerons une situation dans laquelle nous devrons restaurer les données perdues. Nous supprimerons quelques fichiers du point de montage après avoir effectué la sauvegarde, puis restaurerons les données supprimées.
+
+
+#### Sauvegardez le volume EBS en prenant son instantané :
+
++ `Amazon EBS` offre la possibilité d'enregistrer des instantanés ponctuels de vos volumes sur `Amazon S3`.
++ Les instantanés `Amazon EBS` sont stockés de manière incrémentielle : seuls les blocs qui ont été modifiés après votre dernier instantané sont enregistrés et vous n'êtes facturé que pour les blocs modifiés.
++ Si vous disposez d'un appareil avec `100 Go` de données mais que seulement `5 Go` ont changé après votre dernier instantané, un instantané suivant ne consomme que `5 Go` supplémentaire et vous n'êtes facturé que pour les `5 Go` supplémentaires de stockage, même si le premier et le dernier instantané semblent terminés.
++ Lorsque vous supprimez un instantané, vous supprimez uniquement les données qui ne sont pas nécessaires à un autre instantané.
++ Tous les instantanés actifs contiennent toutes les informations nécessaires pour restaurer le volume à l'instant où cet instantané a été pris. 
++ Le temps de restauration des données modifiées sur le volume de travail est le même pour tous les instantanés.
+
+<br/>
+
++ Les instantanés peuvent être utilisés pour instancier et plusieurs nouveaux volumes, augmenter la taille d'un volume ou déplacer des volumes entre les zones de disponibilité.
++ Lorsqu'un nouveau volume est créé, vous pouvez choisir de le créer sur la base d'un instantané `Amazon EBS` existant. Dans ce scénario, le nouveau volume commence comme une réplique exacte de l'instantané.
+
+<br/>
+
++ Voici les principales fonctionnalités des instantanés `Amazon EBS` : 
+
+<br/>
+
+1. Accès immédiat aux données de volume `Amazon EBS`.
+2. Redimensionnement des volumes `Amazon EBS`.
+3. Partage d'instantanés `Amazon EBS`.
+4. Copie d'instantanés `Amazon EBS` dans les régions `AWS`.
+
+<br/>
+
++ Pour créer un instantané à partir d'`AWS Management Console`, accédez au tableau de bord de gestion des volumes, sélectionnez le volume, cliquez sur `Actions` et cliquez sur `Créer un instantané`.
+
+![Alt Text](images/image42.jpeg)
+
++ **Remarque :** Il est recommandé d'arrêter votre instance avant de prendre un instantané si vous prenez un instantané de son volume racine.
++ Vous verrez la boîte de dialogue `Créer un instantané` comme indiqué dans la capture d'écran suivante. Fournissez un nom et une description appropriés pour votre nouvel instantané. Ici, il n'y a pas de cryptage pour votre instantané car le volume n'est pas crypté. Les instantanés des volumes seront chiffrés automatiquement.
+![Alt Text](images/image43.jpeg)
+
++ Après avoir rempli les détails requis, cliquez sur `Créer` pour terminer le processus d'instantané. Le processus prendra quelques minutes.
+![Alt Text](images/image44.jpeg)
+
++ Après avoir créé l'instantané, nous supprimerons quelques fichiers du point de montage.
+![Alt Text](images/image45.jpeg)
+
+
+#### Créer un volume à partir d'un instantané et redimensionner
+
++ Maintenant, si nous voulons récupérer les données perdues, nous devrons créer un nouveau volume à partir d'un instantané et remplacer l'ancien volume par le nouveau.
++ Nous augmenterons également la taille du volume. Cliquez sur les `Instantanés` dans le volet gauche du tableau de bord `EC2`, sélectionnez l'instantané à partir duquel le nouveau volume doit être créé, cliquez sur `Actions` et sélectionnez `Créer un volume`, vous obtiendrez une boîte de dialogue contextuelle de création de volume comme indiqué ci-dessous : 
+
+![Alt Text](images/image46.jpeg)
+
++ Remplissez les détails pour créer un nouveau volume. Ici, la taille du nouveau volume doit être supérieure à `5 Go` car nous avons crée cet instantané à partir d'un volume de `5 Go` attaché à l'instance.
++ Et la zone de disponibilité doit être la même que celle où l'instance est créée. Une fois cela fait, cliquez sur `Créer` pour terminer le processus.
+
+![Alt Text](images/image47.jpeg)
+
++ Marquez l'ancien volume avec l'extension `-old` pour l'identification et marquez le nouveau volume avec un autre nom indiqué ci-dessous :
+![Alt Text](images/image48.jpeg)
+
++ Une fois le volume créé, il est disponible pour l'utilisation.
+![Alt Text](images/image49.jpeg)
+
+#### Démonter et détacher l'ancien volume
+
++ Pour démonter et détacher l'ancien volume de l'instance, vérifiez d'abord les points de montage dans la partition créée, puis démontez le répertoire monté comme indiqué ci-dessous :
+![Alt Text](images/image50.jpeg)
+
++ Une fois le démontage terminé, détachez l'ancien volume de l'instance. Sélectionnez le volume à détacher, cliquez sur actions et sélectionnez détacher le volume comme indiqué ci-dessous :
+![Alt Text](images/image51.jpeg)
+
+#### Attachez et montez un nouveau volume
+
++ Enfin, attachez le nouveau volume à l'instance en sélectionnant le nouveau volume, cliquez sur `Actions` et sélectionnez `Attacher le volume`.
++ Nous obtiendrons la boîte de dialogue contextuelle `Attach Volume` comme indiqué ci-dessous : Fournissez la partition de périphérique d'`ID` d'instance : 
+
+![Alt Text](images/image52.jpeg)
+
++ Après avoir attaché le montage du volume, à l'instance comme nous l'avons fait auparavant.
+
+![Alt Text](images/image53.jpeg)
+
+
++ Dans la capture d'écran ci-dessus, nous pouvons voir que les données sont restaurées. 
++ Mais la taille du point de montage est toujours d'environ `5 Go`, même si nous avons modifié la taille du `volume EBS à 9Go`.
++ En effet, le reste du volume n'est toujours pas redimensionné et nous devons le redimensionner.
+
+
+#### Redimensionner le volume augmenté
+
++ Nous avons déjà montré le nouveau volume mais pour le redimensionner, nous devons le démontrer, supprimer la partition, le recréer avec une nouvelle taille, le redimensionner et le monter.
++ Suivez les mêmes étapes pour démonter, supprimer et créer une nouvelle partition comme indiqué ci-dessous :
+![Alt Text](images/image54.jpeg)
+
+#### Redimensionner le volume 
+
++ Afin de redimensionner le volume, nous devons exécuter la commande `#resize2fs/dev/xvdf2` (Si nous exécutons cette commande, cela donne une erreur pour exécuter une autre commande car le nouveau volume est supérieur à l'ancien volume).
++ Suivez les étapes indiquées dans la capture d'écran ci-dessus pour redimensionner le volume.
+
++ **Remarque :** Si le nouveau volume a également la même taille que l'ancien volume, il n'est pas nécessaire de le redimensionner, il suffit de monter après l'avoir attaché à l'instance.
+![Alt Text](images/image55.jpeg)
+
++ Désormais, la taille du volume est augmentée et les données sont également restaurées.
+
+
+## VPC AWS
+
++ `Le cloud privé virtuel (VPC)` est un réseau virtuel dédié à votre compte `AWS`.
++ Il est logiquement isolé des autres réseaux virtuels du cloud `AWS`.
++ Vous pouvez lancer vos ressources `AWS`, telles que les instances `AMAZON EC2`, dans votre `VPC`.
++ Vous pouvez configurer votre `VPC`, vous pouvez sélectionner sa plage d'adresse `IP`, créer des sous-réseaux et configurer des tables de routages, des passerelles réseau et des paramètres de sécurité.
+
+<br/>
+
++ `Le sous-réseau` est une plage d'adresses `IP` dans votre `VPC`.
++ Vous pouvez lancer des ressources `AWS` dans un sous-réseau que vous sélectionnez.
++ Utilisez un sous-réseau public pour les ressources qui doivent être connectés à Internet et un sous-réseau privé pour les ressources qui ne seront pas connectées à Internet.
+
+<br/>
+
++ `Sous-réseau public :`un sous-réseau public achemine `0.0.0.0.0/0` via une passerelle Internet (igw).
++ Les instances d'un sous-réseau public nécessitent des adresses IP publiques pour communiquer avec Internet.
+
+<br/>
+
++ `Une passerelle Internet` est un composant `VPC` à l'échelle horizontale, redondant et hautement disponible qui permet la communication entre les instances de votre `VPC et Internet`.
++ Il n'impose donc aucun risque de disponibilité ni contraire de bande passante sur votre trafic réseau.
++ Une passerelle Internet a deux objectifs : fournir une cible dans vos tables de routage `VPC` pour le trafic routable sur `Internet` et effectuer d'adresses réseau `(NAT)` pour les instances auxquelles des adresses `IPV4` publiques ont été attribuées.
++ Une passerelle Internet prend en charge le trafic `IPV4` et `IPV6`.
+
+<br/>
+
++ Une table de routage contient un ensemble de règles, appelées `routes`, utilisées pour déterminer vers où le trafic réseau est dirigé.
+
+<br/>
+
++ Chaque sous-réseau de votre `VPC` doit être associé à une table de routage; la table de contrôle de routage du sous-réseau.
++ Un `sosu-réseau` ne peut être associé qu'à une seule table de routage à la fois, mais vous pouvez associer plusieurs sous-réseaux à la même table de routage.
+
+
+#### Création d'un VPC
+
++ Accédez au tableau de bord `VPC` à partir du tableau de bord principal d'`AWS`, comme indiqué ci-dessous, et cliquez sur `Démarrer l'assistant VPC`.
+
+![Alt Text](images/image56.jpeg)
+
++ Vous accédérez à une page de configuration `VPC`, sélectionnez `VPC`avec un seul sous-réseau public et cliquez sur `Sélectionner`.
+
+![Alt Text](images/image57.jpeg)
+
++ Spécifiez la page de blocs `CIDR IPV4` pour le sous-réseau, fournissez un nom pour le `vpc` et cliquez sur `créer un vpc`.
+
+![Alt Text](images/image58.jpeg)
+
++ Votre `VPC` est créé avec succès et est disponible pour l'attacher aux instances.
+
+![Alt Text](images/image59.jpeg)
+
++ Il faut quelques minutes pour atteindre l'état disponible. Une fois disponible, sélectionnez le `vpc` et cliquez sur les actions pour l'attacher à l'instance.
+
+![Alt Text](images/image60.jpeg)
+
++ Dans l'onglet résumé de `vpc`, vous pouvez voir les détails complets de `vpc`.
+
+
+## Création d'un VPC hautement disponible
+
+![Alt Text](images/image61.jpeg)
+
++ Un `VPC hautement disponible` s'étend sur plusieurs zones.
++ Même si une zone tombe en panne, nos services répartis sur l'autre zone continueront à désservir le trafic des utilisateurs.
++ Si vous voyez le diagramme ci-dessus, nous avons des services `Web`, base de données et backend dans deux zones.
++ Lors de la création de l'instance `EC2`, nous pouvons maintenant décider quel sous-réseau créer notre instance.
++ Ainsi, par exemple, nous créerons `Web01` dans un sous-réseau (situé dans la zone 1a) et `Web02` (situé dans la zone 1b) dans un autre sous-réseau.
++ Ainsi, si la `zone 1a` tombe en panne, nous avons toujours `Web02` qui déssert le trafic utilisateur de la `zone 1b`. 
++ Nous allons créer un `VPC HA` manuellement et non avec l'assistant.
++ Création d'un `VPC` : accédez au `VPC` à partir du tableau de bord principal d'`AWS`.
+
+![Alt Text](images/image62.jpeg)
+
++ Cliquez sur vos `VPC` sur le côté gauche du volet de navigation et cliquez sur `Créer un VPC`.
++ Créez le bloc `CIDR/16` et la plage `IP privée` de votre choix, comme indiqué ci-dessous.
+
+![Alt Text](images/image63.jpeg)
+
++ Accédez à `Sous-réseaux` et cliquez sur `Créer` des sous-réseaux.
++ Créer le premier sous-réseau public de la même plage `VPC` avec le bloc `CIDR/24`.
++ Sélectionnez la zone de disponibilité comme `us-east-2a`.
+
+![Alt Text](images/image64.jpeg)
+
++ Créer un deuxième sous-réseau public à partir de la même plage `VPC` avec le bloc `CIDR/24`.
++ Sélectionnez la zone de disponibilité comme `us-east-2b`.
+
+![Alt Text](images/image65.jpeg)
+
++ Créer un deuxième sous-réseau privé à partir de la même plage `VPC` avec le bloc `CIDR/24`.
++ Sélectionnez la zone de disponibilité comme `us-east-2b`.
+
+![Alt Text](images/image66.jpeg)
+
++ Vérifiez tous vos paramètres de sous-réseau.
+
+![Alt Text](images/image67.jpeg)
+
++ Accédez à `Internet Gateway` pour créer une passerelle Internet et mapper au sous-réseau public.
+
+![Alt Text](images/image68.jpeg)
+
++ Fournissez le nom de la passerelle Internet. Cliquez sur `Créer`.
+
+![Alt Text](images/image69.jpeg)
+
++ Attachez `IGW` à votre `VPC` : sélectionnez la passerelle Internet que vous avez créée, choisissez le `VPC`à attachez et cliquez sur `Attacher au VPC`.
+
+![Alt Text](images/image70.jpeg)
+
++ Créer une passerelle `NAT` à mapper à vos sous-réseaux privés.
++ Vous avez également besoin d'une adresse `IP Elastic (EIP)` à attribuer à votre passerelle `NAT`.
++ Accédez au volet de navigation de la passerelle `NAT` et cliquez sur créer une passerelle `NAT`.
+
+![Alt Text](images/image71.jpeg)
+
++ Sélectionnez l'un des sous-réseaux `PUBLIC` que nous avons crées précédemment, créez un nouvel `EIP` et attribuez-le à la passerelle.
+
+![Alt Text](images/image72.jpeg)
+
++ Une fois terminé, cliquez sur créer une passerelle `NAT`.
+
+![Alt Text](images/image73.jpeg)
+
++ La passerelle `NAT` est crée avec succès comme indiqué ci-dessous.
+
+![Alt Text](images/image74.jpeg)
+
++ Accédez à `Table de routage` pour créer des tables de routages pour les sous-réseaux.
+
+![Alt Text](images/image75a.jpg)
+
++ Cliquez sur créer une table de routage et donnez un nom, cliquez sur créer.
++ Nous avons besoin de deux tables de routage, une pour le sous-réseau public et une pour le sous-réseau privé.
+
+![Alt Text](images/image75.jpeg)
+
++ Appuyez une règle de table de routage sur `HAPubRT` pour acheminer vers `IGW` que nous avons créé et enregistré.
+
+![Alt Text](images/image76.jpeg)
+
++ Associez `HAPubRT` aux sous-réseaux public et enregistrez.
+
+![Alt Text](images/image77.jpeg)
+
++ Ajoutez une règle de table de routage sur `HAPrivRT` pour acheminer vers `NAT GW` et enregistrer.
+
+![Alt Text](images/image78.jpeg)
+
++ Associez `HAPrivRT` aux sous-réseaux privés et enregistrez
+
+![Alt Text](images/image79.jpeg)
+
++ Accédez à vos sous-réseaux et vérifiez chaque sous-réseau.
+
+![Alt Text](images/image80.jpeg)
+
++ Vous pouvez attacher ce `VPC` ayx instances `EC2` avec un sous-réseau public et un sous-réseau privé.
++ Si vous souhaitez vous connecter à l'instance de sous-réseau privé, vous devez d'abord vous connecter à l'instance de sous-réseau public.
+
+![Alt Text](images/image81.jpeg)
+
+## Equilibreur de charge élastique

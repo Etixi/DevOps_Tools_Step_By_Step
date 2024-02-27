@@ -89,7 +89,7 @@
   + `Tests` : la découverte et le debogage systématique des défauts.
   + `Opérations` : l'installation, la migration, le support et la maintenance de systèmes complets.
 
-<img src="https://www.devdude.com/wp-content/uploads/2023/11/waterfall.png"/>
+![Alt Text](https://www.devdude.com/wp-content/uploads/2023/11/waterfall.png)
 
 
 + Ainsi le modèle `Waterfall/ En Cascade` soutient qu'il ne faut passer à une phase que lorsque la phase précédente est examinée et vérifiée.

@@ -726,75 +726,75 @@
 + **# apt remove apache2 -y**
 <img src="../images/image_61.png"/>
 
-| Commands                                         | Description                                                                                                                         | ...    |
-|--------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------|--------|
-| `wget link`                                      | Pour télécharger le fichier à partir du lien.                                                                                       |        |
-| `curl link`                                      | Accéder au fichier à partir du lien.                                                                                                |        |
-| `curl link -o outputfile`                        | Accéder au fichier et stocker les o/p dans un fichier.                                                                              |        |
-| **REDHAT RPM COMMANDS**                          |                                                                                                                                     |        |
-| `rpm -ivh {rpm-file}`                            | rpm -ivh mozilla-mail-1.7.6-12.i586.rpm <br/> rpm -ivh --test mozilla-mail-1.71.6-12.i586.rpm                                       |        |
-| `rpm -Uvh {rpm-file}`                            | rpm -Uvh mozilla-mail-1.7.6-12.i586.rpm <br/> rpm -Uvh --test mozilla-mail-1.71.6-12.i586.rpm                                       |        |
-| `rpm -ev {package}`                              | rpm -ev mozilla-mail                                                                                                                |        |
-| `rpm -ev --nodeps {package}`                     | rpm -ev --nodeps mozilla-mail                                                                                                       |        |
-|                                                  | **dependencies**                                                                                                                    |        |
-|                                                  |                                                                                                                                     |        |
-| `rpm -qa`                                        | rpm -qa                                                                                                                             |        |
-| `rpm -qi {package}`                              | rpm -qi mozilla-mail                                                                                                                |        |
-| `rpm -qf {/path/to/file}`                        | rpm -qf /etc/passwd <br/> rpm -qf /bin/bash                                                                                         |        |
-| `rpm -qc {package-name}`                         | rpm -qc httpd                                                                                                                       |        |
-| `rpm -qcf {path/to/filee}`                       | rpm -qcf /usr/X11R6/bin/xeyes                                                                                                       |        |
-| `rpm -qa --last`                                 | rpm -qa --last <br/> rpm -qa --last  less`                                                                                          ||
-| `rpm -qpR {.rpm-file}` <br/> `rpm -qR {package}` | rpm -qpR mediawiki-1.4rc1-4.i586.rpm <br/> rpm -qR bash                                                                             |        |
-| **Centos_8 Commands***                           |                                                                                                                                     |        |
-| **DNF Commands Cheatsheet**                      | https://www.linuxtechi.com/dnf-command-examples-rpm-management-fedora-linux                                                         |        |
-| `dnf --help`                                     | montrer l'aide                                                                                                                      |        |
-| `dnf search PACKAGE`                             | recherche dans les référentiels disponibles.                                                                                        |        |
-| `dnf install PACKAGE -y`                         | pour installer le paquet.                                                                                                           |        |
-| `dnf install httpd -y`                           | pour installer le package `httpd`.                                                                                                  |        |
-| `dnf install vim -y`                             | pour installer l'éditeur `VIM`.                                                                                                     |        |
-| `dnf reinstall PACKAGE`                          | pour réinstaller le PACKAGE.                                                                                                        |        |
-| `dnf remove PACKAGE`                             | pour supprimer le package.                                                                                                          |        |
-| `dnf update`                                     | mettre à jour tous les packages.                                                                                                    |        |
-| `dnf update PACKAGE`                             | mettre à jour un package spécifique.                                                                                                |        |
-| `dnf grouplist`                                  | lister tous les forfaits de groupe disponibles.                                                                                     |        |
-| `dnf groupinstall "GROUPNAME"`                   | installe tous les packages dans un groupe.                                                                                          |        |
-| `dnf repolist`                                   | liste des référentiels `dnf` activés.                                                                                               |        |
-| `dnf clean all`                                  | nettoyer le cache `dnf`.                                                                                                            |        |
-| `dnf epel-release`                               | Référentiel de packages supplémentaire offrant un accès facile à l'installation de packages pour les logiciels couramment utilisés. |        |
-| `dnf history`                                    | Afficher l'historique de `dnf`.                                                                                                     |        |
-| `dnf info package name`                          | Affiche les informations du package telles que la version, la taille, la source, le référentiel, etc.                               |        |
-| **YUM Commnds Cheatsheet**                       | http://access.redhat.com/sites/default/files/attachementsrh_yum_cheatsheet_1214_jcs_print-1.pdf                                     |        |
-| `yum -help`                                      | montrer l'aide                                                                                                                      |        |
-| `yum search PACKAGE`                             | recherche dans les référentiels disponibles.                                                                                        |        |
-| `yum install PACKAGE -y`                         | pour installer le package.                                                                                                          |        |
-| `yum install httpd -y`                           | pour installer le package `httpd`.                                                                                                  |        |
-| `yum install vim -y`                             | pour installer l'éditeur `VIM`.                                                                                                     |        |
-| `yum reinstall PACKAGE`                          | pour réinstaller le PACKAGE.                                                                                                        |        |
-| `yum remove PACKAGE`                             | pour supprimer le package.                                                                                                          |        |
-| `yum update`                                     | mettre à jour tous les packages.                                                                                                    |        |
-| `yum update PACKAGE`                             | mettre à jour un package spécifique.                                                                                                |        |
-| `yum grouplist`                                  | lister tous les forfaits de groupe disponibles.                                                                                     |        |
-| `yum groupinstall "GROUP Name"`                  | installe tous les packages dans un groupe.                                                                                          |        |
-| `yum repolist`                                   | liste des référentiels `YUM` activés.                                                                                               |        |
-| `yum install epel-release`                       | Référentiel de packages supplémentaire offrant un accès facile à l'installation de packages pour les logiciels couramment utilisés. |        |
-| `yum clean all`                                  | nettoyer le cache `yum`.                                                                                                            |        |
-| `yum history`                                    | afficher l'historique de `yum`.                                                                                                     |        |
-| `yum info PACKAGE NAME`                          | Affiche les informations du package telles que la version, la taille, la source, le référentiel, etc.                               |        |
-| **UBUNTU20 COMMANDS**                            |                                                                                                                                     |        |
-| **apt commands cheatsheet**                      | https://itsfoss.com/apt-command-guide/                                                                                              |        |
-| `apt search PACKAGE`                             | recherche dans les référentiels disponibles.                                                                                        |        |
-| `apt install PACKAGE -y`                         | pour installer les package.                                                                                                         |        |
-| `apt install aache2 -y`                          | pour installer apache2.                                                                                                             |        |
-| `apt reinstall PACKAGE`                          | pour réinstaller apache2.                                                                                                           |        |
-| `apt remove PACKAGE`                             | pour supprimer le package.                                                                                                          |        |
-| `apt update`                                     | mettre à jour tous les packages.                                                                                                    |        |
-| `apt update PACKAGE`                             | mettre à jour uniquement un package                                                                                                 |        |
-| `apt grouplist`                                  | lister tous les forfaits de groupe disponibles.                                                                                     |        |
-| `apt groupinstall "GROUPNAME"`                   | installe tous les packages dans un groupe.                                                                                          |        |
-| `apt repolist`                                   | liste les référentiels `apt` activés.                                                                                               |        |
-| `apt clean all`                                  | nettoyer le cache `apt`.                                                                                                            |        |
-| `apt history`                                    | afficher l'historique de `apt`.                                                                                                     |        |
-| `apt show package name`                          | Affiche les informations du package telles que la version, la taille, la source, le référentiel, etc.                               |        |
+| Commands                                         | Description                                                                                                                         | ... |
+|--------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------|-----|
+| `wget link`                                      | Pour télécharger le fichier à partir du lien.                                                                                       |     |
+| `curl link`                                      | Accéder au fichier à partir du lien.                                                                                                |     |
+| `curl link -o outputfile`                        | Accéder au fichier et stocker les o/p dans un fichier.                                                                              |     |
+| **REDHAT RPM COMMANDS**                          |                                                                                                                                     |     |
+| `rpm -ivh {rpm-file}`                            | rpm -ivh mozilla-mail-1.7.6-12.i586.rpm <br/> rpm -ivh --test mozilla-mail-1.71.6-12.i586.rpm                                       |     |
+| `rpm -Uvh {rpm-file}`                            | rpm -Uvh mozilla-mail-1.7.6-12.i586.rpm <br/> rpm -Uvh --test mozilla-mail-1.71.6-12.i586.rpm                                       |     |
+| `rpm -ev {package}`                              | rpm -ev mozilla-mail                                                                                                                |     |
+| `rpm -ev --nodeps {package}`                     | rpm -ev --nodeps mozilla-mail                                                                                                       |     |
+|                                                  | **dependencies**                                                                                                                    |     |
+|                                                  |                                                                                                                                     |     |
+| `rpm -qa`                                        | rpm -qa                                                                                                                             |     |
+| `rpm -qi {package}`                              | rpm -qi mozilla-mail                                                                                                                |     |
+| `rpm -qf {/path/to/file}`                        | rpm -qf /etc/passwd <br/> rpm -qf /bin/bash                                                                                         |     |
+| `rpm -qc {package-name}`                         | rpm -qc httpd                                                                                                                       |     |
+| `rpm -qcf {path/to/filee}`                       | rpm -qcf /usr/X11R6/bin/xeyes                                                                                                       |     |
+| `rpm -qa --last`                                 | rpm -qa --last <br/> rpm -qa --last  less`                                                                                          |     |
+| `rpm -qpR {.rpm-file}` <br/> `rpm -qR {package}` | rpm -qpR mediawiki-1.4rc1-4.i586.rpm <br/> rpm -qR bash                                                                             |     |
+| **Centos_8 Commands***                           |                                                                                                                                     |     |
+| **DNF Commands Cheatsheet**                      | https://www.linuxtechi.com/dnf-command-examples-rpm-management-fedora-linux                                                         |     |
+| `dnf --help`                                     | montrer l'aide                                                                                                                      |     |
+| `dnf search PACKAGE`                             | recherche dans les référentiels disponibles.                                                                                        |     |
+| `dnf install PACKAGE -y`                         | pour installer le paquet.                                                                                                           |     |
+| `dnf install httpd -y`                           | pour installer le package `httpd`.                                                                                                  |     |
+| `dnf install vim -y`                             | pour installer l'éditeur `VIM`.                                                                                                     |     |
+| `dnf reinstall PACKAGE`                          | pour réinstaller le PACKAGE.                                                                                                        |     |
+| `dnf remove PACKAGE`                             | pour supprimer le package.                                                                                                          |     |
+| `dnf update`                                     | mettre à jour tous les packages.                                                                                                    |     |
+| `dnf update PACKAGE`                             | mettre à jour un package spécifique.                                                                                                |     |
+| `dnf grouplist`                                  | lister tous les forfaits de groupe disponibles.                                                                                     |     |
+| `dnf groupinstall "GROUPNAME"`                   | installe tous les packages dans un groupe.                                                                                          |     |
+| `dnf repolist`                                   | liste des référentiels `dnf` activés.                                                                                               |     |
+| `dnf clean all`                                  | nettoyer le cache `dnf`.                                                                                                            |     |
+| `dnf epel-release`                               | Référentiel de packages supplémentaire offrant un accès facile à l'installation de packages pour les logiciels couramment utilisés. |     |
+| `dnf history`                                    | Afficher l'historique de `dnf`.                                                                                                     |     |
+| `dnf info package name`                          | Affiche les informations du package telles que la version, la taille, la source, le référentiel, etc.                               |     |
+| **YUM Commnds Cheatsheet**                       | http://access.redhat.com/sites/default/files/attachementsrh_yum_cheatsheet_1214_jcs_print-1.pdf                                     |     |
+| `yum -help`                                      | montrer l'aide                                                                                                                      |     |
+| `yum search PACKAGE`                             | recherche dans les référentiels disponibles.                                                                                        |     |
+| `yum install PACKAGE -y`                         | pour installer le package.                                                                                                          |     |
+| `yum install httpd -y`                           | pour installer le package `httpd`.                                                                                                  |     |
+| `yum install vim -y`                             | pour installer l'éditeur `VIM`.                                                                                                     |     |
+| `yum reinstall PACKAGE`                          | pour réinstaller le PACKAGE.                                                                                                        |     |
+| `yum remove PACKAGE`                             | pour supprimer le package.                                                                                                          |     |
+| `yum update`                                     | mettre à jour tous les packages.                                                                                                    |     |
+| `yum update PACKAGE`                             | mettre à jour un package spécifique.                                                                                                |     |
+| `yum grouplist`                                  | lister tous les forfaits de groupe disponibles.                                                                                     |     |
+| `yum groupinstall "GROUP Name"`                  | installe tous les packages dans un groupe.                                                                                          |     |
+| `yum repolist`                                   | liste des référentiels `YUM` activés.                                                                                               |     |
+| `yum install epel-release`                       | Référentiel de packages supplémentaire offrant un accès facile à l'installation de packages pour les logiciels couramment utilisés. |     |
+| `yum clean all`                                  | nettoyer le cache `yum`.                                                                                                            |     |
+| `yum history`                                    | afficher l'historique de `yum`.                                                                                                     |     |
+| `yum info PACKAGE NAME`                          | Affiche les informations du package telles que la version, la taille, la source, le référentiel, etc.                               |     |
+| **UBUNTU20 COMMANDS**                            |                                                                                                                                     |     |
+| **apt commands cheatsheet**                      | https://itsfoss.com/apt-command-guide/                                                                                              |     |
+| `apt search PACKAGE`                             | recherche dans les référentiels disponibles.                                                                                        |     |
+| `apt install PACKAGE -y`                         | pour installer les package.                                                                                                         |     |
+| `apt install aache2 -y`                          | pour installer apache2.                                                                                                             |     |
+| `apt reinstall PACKAGE`                          | pour réinstaller apache2.                                                                                                           |     |
+| `apt remove PACKAGE`                             | pour supprimer le package.                                                                                                          |     |
+| `apt update`                                     | mettre à jour tous les packages.                                                                                                    |     |
+| `apt update PACKAGE`                             | mettre à jour uniquement un package                                                                                                 |     |
+| `apt grouplist`                                  | lister tous les forfaits de groupe disponibles.                                                                                     |     |
+| `apt groupinstall "GROUPNAME"`                   | installe tous les packages dans un groupe.                                                                                          |     |
+| `apt repolist`                                   | liste les référentiels `apt` activés.                                                                                               |     |
+| `apt clean all`                                  | nettoyer le cache `apt`.                                                                                                            |     |
+| `apt history`                                    | afficher l'historique de `apt`.                                                                                                     |     |
+| `apt show package name`                          | Affiche les informations du package telles que la version, la taille, la source, le référentiel, etc.                               |     |
 
 
 
@@ -819,28 +819,28 @@
 
 ## **11. FILE TRANSFER**
 
-| Commandes                                    | Description |
-|----------------------------------------------|-------------|
-| **SCP**                                      |             |
-| `$ scp file.txt user@remote:/temp/`          |sécurisez le fichier.txt dans le dossier /tmp de l'hôte distant.|
-| `$ scp nixsavy@server2:/www/*.html /www/tmp` |copiez les fichiers `*.html` de l'hôte distant vers le dossier `/www/tmp` du système actuel.|
-| `$ scp -r nixsavy@server2:/www  /www/tmp`    |Copiez tous les dossiers et de manière récursive du serveur distant vers le dossier `/www/tmp` du système actuel.|
-| **rsync**                                    |             |
-| `$ rsync -a /home/apps /backup/`             |Synchronisez la source avec la destination.             |
-| `$ rsync -avz /home/apps`                    |Synchronisez les « fichiers/répertoires » entre le système local et distant avec la compression activée.             |
+| Commandes                                    | Description                                                                                                       |
+|----------------------------------------------|-------------------------------------------------------------------------------------------------------------------|
+| **SCP**                                      |                                                                                                                   |
+| `$ scp file.txt user@remote:/temp/`          | sécurisez le fichier.txt dans le dossier /tmp de l'hôte distant.                                                  |
+| `$ scp nixsavy@server2:/www/*.html /www/tmp` | copiez les fichiers `*.html` de l'hôte distant vers le dossier `/www/tmp` du système actuel.                      |
+| `$ scp -r nixsavy@server2:/www  /www/tmp`    | Copiez tous les dossiers et de manière récursive du serveur distant vers le dossier `/www/tmp` du système actuel. |
+| **rsync**                                    |                                                                                                                   |
+| `$ rsync -a /home/apps /backup/`             | Synchronisez la source avec la destination.                                                                       |
+| `$ rsync -avz /home/apps`                    | Synchronisez les « fichiers/répertoires » entre le système local et distant avec la compression activée.          |
 
 
 ## **12. DISK USAGE**
 
-| Commandes                       | Descriptions                                                                                                                                                              |
-|---------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `df`                            | Afficher des informations sur l'utilisation de l'espace disque sur les systèmes de fichiers montés.                                                                       |
-| `df -i`                         | Cette commande affiche des informations sur les inodes (nombre d'inodes utilisés et disponibles) sur chaque système de fichiers.                                          |
-| `fdisk -l`                      | Informations sur la partition de disque                                                                                                                                   |
-| `du`                            | Utiliser pour estimer l'utilisation de l'espace fichier                                                                                                                   |
-| `du -sh`                        | Résumez l'utilisation du disque dans le répertoire actuel                                                                                                                 |
+| Commandes                       | Descriptions                                                                                                                                                                  |
+|---------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `df`                            | Afficher des informations sur l'utilisation de l'espace disque sur les systèmes de fichiers montés.                                                                           |
+| `df -i`                         | Cette commande affiche des informations sur les inodes (nombre d'inodes utilisés et disponibles) sur chaque système de fichiers.                                              |
+| `fdisk -l`                      | Informations sur la partition de disque                                                                                                                                       |
+| `du`                            | Utiliser pour estimer l'utilisation de l'espace fichier                                                                                                                       |
+| `du -sh`                        | Résumez l'utilisation du disque dans le répertoire actuel                                                                                                                     |
 | `mount device-path mount-point` | Remplacez `device-path` par le chemin d'accès au périphérique que vous souhaitez monter et `mount-point` par le répertoire dans lequel vous souhaitez monter le périphérique. |
-| `ncdu`                          | Utilisation du disque NCurses                                                                                                                                             |
+| `ncdu`                          | Utilisation du disque NCurses                                                                                                                                                 |
 
 ## **13. DIRECTORY TRAVERSE**
 
