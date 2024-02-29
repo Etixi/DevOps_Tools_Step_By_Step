@@ -306,6 +306,307 @@
 
 + Pour transférer un fichier directement vers plusieurs serveurs : 
 
-![Alt Text](images/image21.jpeg)
+![Alt Text](images/image21a.jpeg)
 
-+ Le module de fichiers permet de modifier la propriété et les autorisations sur les fichiers. Ces mêmes options
++ Le module de fichiers permet de modifier la propriété et les autorisations sur les fichiers. Ces mêmes options peuvent également être transmises directement au module de copie : 
+
+![Alt Text](images/image22a.jpeg)
+
++ Assurez-vous qu'un package est installé, mais ne le mettez pas à jour :
+
+![Alt Text](images/image23a.jpeg)
+
++ Assurez-vous qu'un package est installé sur version spécifique :
+
+![Alt Text](images/image24a.jpeg)
+
++ Assurez-vous qu'un package est la dernière version :
+
+![Alt Text](images/image25a.jpeg)
+
++ Assurez-vous qu'aucun package n'est installé : 
+
+![Alt Text](images/image26a.jpeg)
+
+## Configuration Ansible
+
++ Certains paramètres dans `Ansible` sont réglables via un fichier de configuration.
++ La configuration d'origine devrait être suffisante pour la plupart des utilisateurs, mais il peut y avoir des raisons pour lesquelles vous souhaiterez la modifier. 
++ Des modifications peuvent être apportées dans le fichier `ansible.cfg` global `/etc/ansible/ansible.cfg` ou vous pouvez créer votre propre `ansible.cfg` (repertoire de travail actuel) qui aura une priorité plus élevée sur le fichier global.
+
+![Alt Text](images/image27.jpeg)
+
++ Ce fichier `ansible.cfg` se trouve au même endroit où se trouve le fichier d'inventaire.
+
+#### Explication
+
++ `[default]` est la section principale d'`ansible.cfg`.
++ `hostfile` aura la valeur où se trouve le fichier d'inventaire s'il se trouve dans le repertoire de travail actuel, spécifiez le nom ou bien le chemin complet du fichier doit être spécifié. 
+  + Après avoir mentionné le chemin d'inventaire dans `ansible.cfg`, il n'est pas nécessaire de transmettre le chemin d'inventaire avec l'option `-i`.
++ `host_key_checking=False` indique à ansible de ne pas vérifier les empreintes digitales de l'hôte avant d'effectuer `ssh` sur l'hôte. 
+  + Il existe une longue liste de paramètres de configuration `Ansible` parmi lesquels vous pouvez choisir.
+  + La liste des configurations ansible est spécifiée dans la [documentation Ansible](https:/docs.ansible/ansible/intro_configuration.html).
+
+
+## Setup -Rassemble des informations sur les hôtes distants
+
++ Il peut être exécuté directement par `/usr/bin/ansible` pour vérifier quelles variables sont disponibles pour un hôte.
++ `Ansible` fournit automatiquement de nombreuses informations sur le système.
+
+![Alt Text](images/image28.jpeg)
+
+
+#### Output trimmed
+
+![Alt Text](images/image29a.jpeg)
+![Alt Text](images/image29.jpeg)
+
+## Playbook
+
++ Les `playbooks` sont les langages de configuration, de déploiement et d'orchestration d'`Ansible`.
++ Ils peuvent décrire une politique que vous souhaitez que vos systèmes distants appliquent ou un ensemble d'étapes dans un processus informatique général.
++ Si les `modules Ansible` sont les outils de votre atelier, les `playbooks` sont vos manuels d'instructions et votre inventaire d'hôtes est votre manière première.
++ A un niveau de base, les `playbooks` peuvent être utilisés pour gérer les configurations et les déploiements sur des machines distants.
++ A un niveau plus avancé, ils peuvent séquencer des déploiements à plusieurs niveaux impliquant et les équilibreurs de charge en cours de route.
++ Les `playbooks` sont une façon complètement différente d'utiliser `ansible` qu'en mode d'exécution de tâches `ad hoc`, et ce sont particulièrement puissants.
++ Bien que vous puissiez exécuter le programme principal `/usr/bin/ansible` pour diffuser votre configuration ou garantir que les configurations de vos systèmes distants sont conformes aux spécifications.
+
+## Exemple de langage de playbook
+
++ Les `playbooks` sont exprimés au format `yaml` et ont un minimum de syntaxe, qui tente intentionnellement de ne pas être un langage de programmation ou un script, mais plutôt un modèle de configuration ou de processus.
++ Chaque `playbook` est composé d'une ou plusieurs `plays` dans une liste.
++ Le but d'un `plays` est de mapper un groupe d'hôtes à des rôles bien définis, représentés par des choses qu'`Ansible` appelle des `plays`.
++ A la base, une tâche n'est rien de plus qu'un appel à un module `ansible`.
+
+#### Playbook pour les débutants
+
+![Alt Text](images/image30.jpeg)
+
+## Bases de YAML
+
++ Pour `Ansible`, presque tous les fichiers `yaml` commencent par une liste.
++ Chaque élément de la liste est une liste de paires `clés/valeur`, communément appelée `hachage` ou `dictionnaire`.
++ Nous devons donc savoir comment écrire des listes et des dictionnaires en `yaml`.
++ Il y a une autre petite bizarrerie dans `yaml`. Tous les fichiers `yaml`(indépendamment de leur association avec `Ansible` ou non) peuvent éventuellement commencer par `---` et se terminer par `...` Cela fait partie du format `yaml` et indique le début et la fin du document.
++ Tous les membres d'une liste sont des lignes commençant au même niveau d'indentation commençant par `"-"` (un tiret et un espace) :
+
+```
+# A list of tasty fruits
+fruits : 
+- Apple
+- Orange
+- Strawberry
+- Mango
+....
+```
+
++ Un `dictionnaire` est représenté sous une forme simple `key:value` (les deux points doivent être suivis d'un espace).
+
+```
+# An employee record
+martin:
+name: Martin D'vloper
+job: Developer
+skill: Elite
+```
+
++ Des structures de données plus compliquées sont possibles, comme des listes de dictionnaires, des dictionnaires dont les valeurs sont des listes ou un mélange des deux :
+
+```
+# Employee records
+- martin: 
+name: Martin D'vloper
+job: Developer
+skills:
+- python
+- perl
+- pascal
+- tabitha : 
+name : Tabitha Bitumen
+job : Developer
+skills : 
+- lisp
+- fortran
+- erlang
+```
+
++ Les dictionnaires et les listes peuvent également être représentés sous une forme abrégée si vous le souhaitez vraiment : 
+
+```
+martin : {name: Martin D'vloper, job: Developer, skill: Elite}
+fruits: ['Apple', 'Orange', 'Strawberry', 'Mango']
+```
+
+## Premier exercice du Playbook
+
++ Nous avons besoin de deux serveurs `centos 6` pour cet exercice.
++ Nous allons déployer un serveur `Web Apache` sur `web1` avec un exemple de site `Web` et une base de données `MySQL` sur le noeud `db1`.
+
+
+#### Dossier d'inventaire
+
+![Alt Text](images/image31a.jpeg)
+
+#### Fichier de configuration ansible
+
+![Alt Text](images/image31b.jpeg)
+
+#### Manuel de jeu
+
+![Alt Text](images/image31c.jpeg)
+
+#### Explication
+
++ `---` n'est pas obligatoire mais spécifie un début de fichier `YAML`.
++ `-hosts` : les serveurs `Web` représentent le nom de `l'hôte/du groupe` où les tâches seront exécutées. C'est le début d'une pièce de théâtre.
++ `become :` oui dire à ansible d'exécuter toutes les tâches avec les privilèges `sudo` l'ancienne version d'ansible avait `sudo:yes`.
++ `tasks :` spécifie la liste des tâches ou des modules qui seront sur le groupe de serveurs `Web`. 
++ `- name :` n'est pas une option obligatoire mais nous aidera toujours à lire le résultat de la tâche une fois exécutée. Si l'option `-name` n'est pas spécifiée, le nom du module doit commencer par un `-` par exemple `- yum`.
++ `yum :` est le nom du module qui sera exécuté avec les arguments `"name=httpd state=present"`. Si l'option `- name` n'est pas fournie, `yum` commencera par un `-` qui représente l'élément dans la liste `yaml` comme spécifié ci-dessous.
+
+![Alt Text](images/image32.jpeg)
+
+#### La documentation ansible donne une très belle description de chaque module avec des exemples.
+
++ https://docs.ansible/ansible/list_of_all_modules.html
++ https://docs.ansible.com/ansible/yum_module.html
++ https://docs.ansible.com/ansible/file_module.html
++ https://docs.ansible.com/absible/copy_module.html
++ https://docs.ansible.com/ansible/service_module.html
++ https://docs.ansible.com/ansible/iptables_module.html
+
+
+![Alt Text](images/image33.jpeg)
+
+1. Le module `iptables` modifie la règle du `pare-feu` du système, une connaissance d'`iptables` est requise pour comprendre ses options. Nous autorisons l'accès au port `80/http` de partout.
+
+2. `hosts:dbservers` est le début d'une prochaine lecture qui sera exécuté sur le groupe `dbservers`. Comme mentionné précédemment, le playbook est la liste des `plays`, `os -hosts:dbservers` n'est que que le deuxième `play` du `playbook`. De même, nous pouvons avoir plusieurs jeux dans le même `playbook`.
+
+3. Le module `mysql_db` est utilisé pour `créer/supprimer` des bases de données dans le `service mysql db`. https://docs.ansible.com/ansible/mysql_db_module.html.
+
+4. Le module `mysql_user` est utilisé pour créer un utilisateur dans le `service mysql db`. https://docs.ansible.com/ansible/my_user_module.html.
+
+
++ **Remarque :** il est fortement recommandé de lire la documentation du module `ansible` pour en savoir plus sur les modules utilisés dans le `playbook`.
+
+## Exécution du Playbook
+
++ La commande `ansible-playbook` est utilisée pour exécuter le `pàlaybook` comme indiqué ci-dessous.
+
+![Alt Text](images/image34.jpeg)
+
+#### Explication
+
+1. `Playbook` est exécuté de haut en bas. Le premier jeu est `PLAY[webservers]`.
+
+2. `TASK[Gathering Facts]` est une tâche par défaut qui exécute le module de configuration pour chaque hôte de `play`. Nous pouvons désactiver la collecte de faits en spécifiant `collect_facts` : `False` dans le `playbook`, comme indiqué ci-dessous.
+
+```
+---
+- hosts : webservers
+become : yes
+gather_facts : False
+tasks :
+```
+
+1. Si l'option `-name` est utilisée dans la tâche, elle en affectera le contenu.
+
+2. modifié : `[web1]` est un message d'état pour la tâche, cela signifie que la tâche a apporté des modifications à l'hôte cible.
+
+3. ok : `[web1]` signifie que la tâche n'a apporté aucune modification sur l'hôte cible. Cela pourrait être dû à la nature du module qui pourrait être destiné à la collecte d'informations comme le module de configuration. Cela pourrait également signifier que le système est dans le même état, par exemple `httpd` est déjà installé donc il retournera ok :
+
+4. `PLAY RECAP` affiche le resumé de toutes les tâches exécutées sur tous les hôtes inacessible affcihe le nombre d'hôtes qui ne disposent pas d'une connectivité appropriée avec le serveur `ansible.failed` affiche le nombre de tâches ayant échoué.
+
+
+## Variabes
+
+#### Variables définies dans un playbook
+
++ les variables peuvent être définies avec une valeur personnalisée dans le `playbook`, comme indiqué ci-dessous.
++ Ces variables peuvent être utilisés dans le playbook en plaçant le nom de la variable entre `{{varname}}`.
+
+![Alt Text](images/image35.jpeg)
+
+
+#### Variables dans `Group_vars` et `Host_vars`
+
++ Ces variables sont spécifiques à l'inventaire et ne sont accessibles que par l'hôte et les groupes à partir de l'inventaire situé dans le repertoire actuel.
++ Vous pouvez avoir plusieurs inventaires dans une structure de repertoires distincte, comme indiqué ci-dessous.
++ Chaque inventaire peut avoir son propre repertoire `group-vars & host_vars` où nous stockons les variables.
+
+#### Disposition du repertoire
+
+![Alt Text](images/image35a.jpeg)
+
++ Les variables peuvent être définies dans une structure. `gourp_vars` contient des variables qui peuvent être utilisées par tous les groupes. `host_vars` contient une variables spécifiques au nom d'hôte.
+
+1. `group_vars/all` contiendra des variables qui pourront être utilisées par tous les hôtes du fichier d'inventaire.
+
+2. Les variables `group_vars/dbservers` ne seront accessibles que pour le groupe `dbservers` et non pour tout autre hôte ou groupe de l'inventaire.
+
+3. Les variables `host_vars/web1` ne seront accessibles que pour l'hôte `web1`et non pour tout autre hôte du fichier d'inventaire.
+
+![Alt Text](images/image36.jpeg)
+
++ Pour l'hôte `web1`, nous avons créé des variables dans `host_vars/web1`.
++ La variable `host_vars` aura une priorité plus élevée, elle ignorera donc la variable utilisateur du fichier `group_vars/all` et la valeur de récupération du fichier `host_vars/web1`.
+
+![Alt Text](images/image37.jpeg)
+
+## Y compris les playbooks
+
++ Dans `site.yml`, nous appelons d'autres `playbooks`. Notez que c'est super court, car il inclut simplement d'autres `playbooks`.
++ N'oubliez pas que les `playbooks` ne sont rien de plus que des listes de jeux : 
+
+![Alt Text](images/image38jpeg.jpeg)
+
+## Stocker la sortie d'une commande
+
++ Le module `Register` est utilisé pour stocker la sortie de n'importe quel `module/commande` et la stocker dans une variable.
+
+![Alt Text](images/image39.jpeg)
+
++ Le module shell est utilisé pour exécuter le registre des commandes shell Linux : le nom d'utilisateur stockera la sortie de commande shell dans la variable de nom d'utilisateur.
++ Le module de fichier attribue ici la propriété au fichier `/tmp/info.txt`.
+
+## Module de débogage
+
++ Le `module de débogage` est utilisé pour imprimer des messages ou des valeurs de variables pendant l'exécution du playbook.
++ Cela aide à trouver le problème si les valeurs des variables ne sont pas correctement attribuées ou accessibles.
+
+![Alt Text](images/image40.jpeg)
+
+## Demande de saisie
+
++ Prenez les entrées de l'utilisateur lors de l'exécution du playbook avec `vars_prompt` et stockez-les dans une variable comme indiqué ci-dessous. 
+
+![Alt Text](images/image41.jpeg)
+
+
+## Gestionnaires
+
++ Les `gestionnaires` sont des tâches particulières. A première vue, cela ressemblera exactement à n'importe quelle autre tâche, mais la différence réside dans l'exécution.
++ Les tâches que nous avons vues jusqu'à présent sont exécutées au fur et à mesure que nous exécutons notre playbook, mais les gestionnaires se trouvant dans le même playbook ne seront exécutés que lorsqu'ils seront notifiés.
++ Une notification serait envoyée depuis la tâche si l'état de la tâche est modifié : vrai.
++ Par exemple, si nous copions un fichier à l'aide du module de copie, il est copié si le fichier de destination est différent ou absent.
++ Dans ce cas, l'état de la tâche est modifié : vrai, mais si le fichier de destination est identique à la source, le fichier n'est pas écrasé et l'état sera modifié : faux.
++ Ainsi, si nous informons un gestionnaire d'une telle tâche, le gestionnaire ne sera averti que si le fichier est copié, sinon il n'enverra pas de notification.
+
+![Alt Text](images/image42.jpeg)
+
++ Dans le code ci-dessus, le gestionnaire nommé `Apache Restart` ne sera exécuté que lorsque le fichier `httpd.conf` sera copié, sinon il n'en informera pas le gestionnaire.
+
+
+## Exécution conditionnelle
+
++ Parfois, vous souhaitez une tâche particulière à partir du `playbook` uniquement lorsqu'elle répond à certains critères. 
++ Ce serait similaire à la condition `if else` que nous avons dans le langage de programmation.
++ Dans `ansible`, nous avons le module `when` pour vérifier la condition, s'il renvoie vrai, la tâche est exécutée ou bien ignorée.
++ Par exemple, vous écrivez un `playbook` qui doit s'exécuter sur les systèmes `Ubuntu et CentOS`.
++ Comme nous le savons, si nous voulons installer un package dans `Ubuntu OS`, nous utilisons le module `apt`, pour les `CentOS` nous utilisons le module `yum`.
++ Donc, dans ce cas, notre tâche devrait vérifier une condition de la famille du système d'exploitation et exécuter `apt` s'il s'agit d'`Ubutnu et miam` lorsqu'il s'agit de `CentOS`.
++ Nous pouvons utiliser la variable de fait `ansible_os_family` qui stocke la valeur du type de système d'exploitation pour vérifier la condition.
+
+![Alt Text](images/image43.jpeg)
+
++ ``
