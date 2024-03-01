@@ -511,3 +511,376 @@ if True:
 
 ## Fonctions Python
 
++ Une `fonction` est un bloc de code organisé et réutilisable utilisé pour effectuer une action unique.
++ Les fonctions offrent une meilleure modularité à votre application et un haut degré de réutilisation du code.
++ Nous avons déjà utilisé certaines fonctions intégrées comme `range(), len(), type(), etc`.
++ Nous allons maintenant apprendre à écrire nos propres fonctions.
+
+#### Règle de fonctions
++ Le bloc fonctionnel commence par le mot-clé `def` suivi du nom de la fonction et des parenthèses. Syntaxe : 
+
+![Alt Text](images/image46.jpeg)
+
++ Si des arguments doivent être transmis à la fonction, ils doivent être définis sous parenthèses : 
+
+![Alt Text](images/image47.jpeg)
+
+
++ Le bloc de code commence par deux points `:`. Syntaxe : 
+
+![Alt Text](images/image48.jpeg)
+
++ Le mot clé `return` dans le bloc de code quitte la fonction et peut renvoyer une valeur, si aucune valeur n'est renvoyée, la valeur de retour par défaut est `None`. Syntaxe :
+
+![Alt Text](images/image49.jpeg)
+
+![Alt Text](images/image49a.jpeg)
+
+
+#### Arguments de fonction
++ Vous pouvez appeler une fonction en utilisant les types d'arguments formels suivants : 
+
+  + Arguments obligatoires
+  + Arguments de mots clés
+  + Arguments par défaut
+  + Arguments de longueur variable
+  
+#### Arguments requis
+
++ Les arguments obligatoires sont les arguments transmis à une fonction dans l'ordre de position correct.
++ Ici, le nombre d'arguments dans l'appel de fonction doit correspondre exactement à la définition de la fonction.
++ Pour appeler la fonction `printime()`, vous devez impérativement passer un argument, sinon cela donne une erreur de syntaxe comme suit : 
+
+![Alt Text](images/image50.jpeg)
+
+#### Arguments de mots clés
+
++ Les `arguments de mots clés` sont liés aux appels de fonction.
++ Lorsque vous utilisez des arguments de mots clés dans un appel de fonction, l'appelant identifie les arguments par le nom du paramètre.
++ Cela vous permet d'ignorer des arguments ou de les placer dans le désordre car l'interpréteur `Python` est capable d'utiliser les mots-clés à la fonction `printime()` des manières suivantes.
+
+![Alt Text](images/image51.jpeg)
+
++ Lorsque le code ci-dessus est exécuté, il produit le résultat suivant : 
+
+```
+output : My string
+```
+
++ L'exemple suivant donne une image plus claire. Notez que l'ordre des paramètres n'a pas d'importance.
+
+![Alt Text](images/image52.jpeg)
+
++ Lorsque le code ci-dessus est exécuté, il produit le résultat suivant :
+
+```
+name : miki
+age : 50
+```
+
+#### Arguments par défaut
+
++ Un `argument par défaut` est un argument qui prend une valeur par défaut si aucune valeur n'est fournie dans l'appel de fonction pour cet argument.
++ L'exemple suivant donne une idée sur les arguments par défaut, il affiche l'âge par défaut s'il n'est pas transmis : 
+
+![Alt Text](images/image53.jpeg)
+
++ Lorsque le code ci-dessus est exécuté, il produit le résultat suivant : 
+
+```
+Name: miki
+Age: 50
+Name: miki
+Age: 35
+```
+
+
+#### Arguments de longueur variable
+
++ Vous devrez peut-être traiter une fonction pour plus d'arguments que ce que vous avez spécifié lors de la définition de la fonction.
++ Ces arguments sont appelés arguments de longueur variable et ne sont pas nommés dans la définition de la fonction, contrairement aux arguments obligatoires et par défaut.
++ La syntaxe d'une fonction avec des arguments variables autres que les mots-clés est la suivante : 
+
+![Alt Text](images/image54.jpeg)
+
++ Un astérisque `(*)` est placé avant le nom de la variable qui contient les valeurs de tous les arguments de variable non mot-clé. 
++ Ce tuple reste vide si aucun argument supplémentaire n'est spécifié lors de l'appel de la fonction. Voici un exemple simple :
+
+![Alt Text](images/image55.jpeg)
+
++ Lorsque le code ci-dessus est exécuté, il produit le résultat suivant :
+
+![Alt Text](images/image55a.jpeg)
+
+#### La déclaration de retour
+
++ L'instruction `return[expression]` quitte une fonction, en renvoyant éventuellement une expression à l'appelant.
++ Une instruction `return` sans argument est identique à `return None`. Tous les exemples ci-dessus me renvoient aucune valeur. 
++ Vous pouvez aussi renvoyer une valeur de la fonction comme suit :
+
+![Alt Text](images/image56.jpeg)
+
+#### Moduler Python
+
++ Les modules en Python sont simplement des fichiers Python avec l'extension `.py`, qui implémente un ensemble de fonctions.
++ Les modules sont importés depuis d'autres modules à l'aide de la commande import.
++ Nous utilisons des modules pour décomposer les gros programmes en petits fichiers gérables et organisés.
++ De plus, les modules permettent la réutilisabilité du code.
++ Nous pouvons définir nos fonctions les plus utilisées dans un module et l'importer, au lieu de copier leurs définitions dans les différents programmes.
++ L'exemple de nom de script est `Operations.py`.
+
+![Alt Text](images/image57.jpeg)
+
+#### Importer mon module
+
++ Importer un module et appeler des méthodes à l'intérieur.
++ Récupère tous les éléments du module, mais doit faire référence à [module].
+
+![Alt Text](images/image58.jpeg)
+
+#### La déclaration from ... import
+
++ L'instruction `from` de python vous permet d'importer des attributs spécifiques d'un module dans l'espace de noms actuel.
++ Le `from ... import` a la syntaxe suivante :
+
+```
+from Modname Import Name1[, Name2[, ...NameN]]
+
+Example : from myomodule import x
+```
+
++ Importe `x` depuis `mymodule` directement dans cet espace de noms.
+
+![Alt Text](images/image59.jpeg)
+
+
++ **Remarque :** Cette instruction n'importe pas l'intégralité du module dans l'espace de noms actuel; il introduit simplement l'élément `fibonacci` du module `fib` dans la table des symboles globales du module d'importation.
+
+
+#### L'instruction `from ... import * :`
+
++ Il est également possible d'importer tous les noms d'un module dans l'espace de noms actuel en utilisant l'instruction d'importation suivante :
+
+#### From Modname Import*
+
++ Cela fournit un moyen simple d'importer tous les éléments d'un module dans l'espace de noms actuel.
+
+![Alt Text](images/image60.jpeg)
+
+#### La fonction Dir()
+
++ La fonction intégrée `dir()` renvoie une liste triée de chaines contenant les noms définis par un module.
++ La liste contient les noms de tous les modules, variables et fonctions définis dans un module. Voici un exemple simple :
+
+![Alt Text](images/image61.jpeg)
+
++ Lorsque le code ci-dessus est exécuté, il produit le résultat suivant : 
+
+![Alt Text](images/image61a.jpeg)
+
++ Ici, la variable de chaîne spéciale `__name__` est le nom du module et `__file__` est le nom du fichier à partir duquel le module a été chargé.
+
+#### Python pour les tâches du système d'exploitation
+
++ `Python` est très largement utilisé comme langage de script pour automatiser les tâches quotidiennes d'administration système ou même une orchestration à grande échelle de plusieurs systèmes.
++ Le `module OS` en `Python` fournit un moyen d'utiliser les fonctionnalités dépendantes du système d'exploitation.
++ Les fonctions fournies par le `module OS` vous permettent d'interfacer avec le système d'exploitation sous-jacent sur lequel `Python` s'exécute (Windows, Mac ou Linux).
++ Vous pouvez trouver des informations importantes sur votre emplacement ou sur le processus.
++ Avant de commencer, assurez-vous d'avoir importé le module du système d'exploitation `import os`.
+
+
+![Alt Text](images/image62.jpeg)
+
+## Fabric pour l'automatisation
+
++ Comme le dit le `README` : 
+
+  + `Fabric` est une bibliothèque `Python (2.5-2.7)` est outil de ligne de commande permettant de rationaliser l'utilisation de `SSH` pour le déploiement d'applications ou les tâches d'administration de systèmes.
+  + Plus précisément, `Fabric` est : un outil qui vous permet d'exécuter des fonctions `Python` arbitraire via la ligne de commande; Une bibliothèque de sous-programmes (construite au-dessus d'une bibliothèque de niveau inférieur) pour rendre l'exécution des commandes shell sur `SSH` facile et `Pythonique`.
+  + Naturellement, la plupart des utilisateurs combinent ces deux choses, en utilisant `Fabric` pour écrire et exécuter des fonctions ou des tâches `Python` afin d'automatiser les interactions avec les serveurs distants.
+  
+#### Installation de Fabric
+
++ Le module `Fabric` n'est pas intégré à `Python` mais peut être installé avec le gestionnaire de packages Python comme `pip`.
++ `Pip` est un système de gestion de packages utilisé pour installer et gérer des packages logiciels écrits en `Python`. Nous devons d'abord installer `pip`.
+
+
+#### Dois-je installer pip?
+
++ `pip` est déjà installé si vous utilisez les binaires `Python 2>=2.7.9 ou Python 3>= 3.4` et téléchargés depuis `python.org`, mais vous devrez mettre à niveau `pip`.
+
+
+#### Installation avec get-pip.py
+
++ Pour installer `pip`, téléchargez en toute sécurité : https://bootstrap.pypa.io/get-pip.py
++ Ensuite, exécutez ce qui suit : 
+
+![Alt Text](images/image63.jpeg)
+
+
+#### Fabfile ou Fabscripts
+
++ `Fabric` chargera `fabfile.py` et exécutera les fonctions que nous y avons définies.
++ Créez un script python nommé `fabfile.py` et définissez-y des fonctions. Par exemple : 
+
+![Alt Text](images/image64.jpeg)
+
++ Les commandes `Fab` sont exécutées à partir du `shell bash`, lorsque la commande `fab` est exécutée, elle recherche le script `fabfile.py` localement et appelle la fonction qu'il contient.
+
+#### Arguments de tâche
+
++ Il est souvent utile de transmettre des paramètres d'exécution à vos tâches, comme vous le feriez lors d'une programmation `Python` classique.
+
+![Alt Text](images/image65.jpeg)
+
+
+#### Fonctions Fabric
+
++ `Fabric` fournit un ensemble de commandes dans l'`API Fabric` qui sont simples mais puissantes.
++ Avec `Fabric`, vous pouvez utiliser des appels `Fabric` simples comme
+
+![Alt Text](images/image66.jpeg)
+
++ Pour tester les fonctions `run, sudo, get, put et reboot`, vous aurez besoin d'un système `Linux distant`.
++ Il peut s'agir d'une instance de `machine virtuelle ou de cloud`.
+
+![Alt Text](images/image67.jpeg)
+
+#### Appels de fonctions Fab
+
++ Lorsque nous appelons des fonctions `fab` à partir du `shell`, nous pouvons ou non avoir besoin de transmettre certains arguments en fonction de ce qui s'exécute dans la fonction `fab`.
++ Par exemple, si j'appelle une méthode locale, elle s'exécute simplement les tâches/commandes du système d'exploitation, mais si j'appelle la méthode `run ou sudo`, elle a besoin de l'adresse `IP` et des informations d'identification du serveur distant pour créer une session `SSH`.
++ Si nous devons transmettre l'adresse IP du serveur distant et l'utilisateur passe, nous utilisons la syntaxe ci-dessous.
+
+![Alt Text](images/image68.jpeg)
+
++ Ces informations sur le serveur distant peuvent également être ajoutées au fichier `fab` en utilisant les variables `env.hosts, env.user et env.password` que nous verrons dans l'exemple suivant.
+
+![Alt Text](images/image69.jpeg)
+
+#### Aides Fab
+
++ Le gestionnaire de contexte `cd` permet de conserver l'état du repertoire (c'est-à-dire où le bloc de commentaires suivant doit être exécuté).
++ Cela revient à exécuter la commande `cd` pendant une session `SSH` et à exécuter diverses commandes différentes. Exemples d'utilisation :
+
+![Alt Text](images/image70.jpeg)
+
++ Le gestionnaire de contexte `lcd (cd local)` fonctionne de manière très similaire à celui-ci dessus (cd); cependant, cela n'affecte que l'état du système local.
++ Exemples d'utilisation :
+
+![Alt Text](images/image71.jpeg)
+
++ Consultez la documentation `Fab` pour plus d'aides : https://docs.fabfile.org/en/1.13/api/core/context_managers.html
+
+
+#### Exemple de fabfile pour automatiser la configuration d'apache
+
++ Dans ce fichier fabuleux, nous écrirons des fonctions pour pour configurer `Apache` et nettoyer la configuration d'`Apache` sur une machine distante.
++ Nous utiliserons les variables `env.hosts, env.user, env.password` pour définir les informations du serveur distant.
++ `env.hosts` est une liste et nous pouvons ajouter `n` nombre d'adresses `IP/noms d'hôte` dans la liste séparés par une virgule.
+
+![Alt Text](images/image72.jpeg)
+
+
++ A partir du script ci-dessus, nous avons vu qu'au départ, lors de la configuration, nous n'avions donné qu'une seule méthode `Fabric` dans une fonction.
++ Mais lors du démontage/nettoyage d'`Apache`, nous avons donné toute la méthode de fabric requise en une seule fonction.
++ Les deux approches fonctionnent bien, mais si j'ai une fonction distincte pour démarrer ou installer `Apache` ou configurer une règle de pare-feu, je peux également les appeler individuellement à partir du `shell bash`.
++ C'est très pratique si je viens de démarrer `Apache` sur un tableau d'hôtes distants. J'ai déjà une fonction distincte définie pour cela.
++ De cette façon, nous pouvons également réutiliser ce code pour d'autres tâches.
+
+#### Exemple de fichier fabfile pour automatiser la configuration de tomcat
+
+![Alt Text](images/image73.jpeg)
+
+
+## Boto pour AWS
+
++ `Boto` est une bibliothèque `Python` qui fournit une interface pour interagir avec les services AWS.
+
+#### Installation
+
+![Alt Text](images/image74.jpeg)
+
+#### Configuration
+
++ Nous devons configurer l'authentification `AWS`, afin de pouvoir nous authentifier auprès des services `AWS`.
++ Pour ce faire, un utilisateur `IAM` doit être créé avec un accès par programmation.
++ Créez un fichier `~/.boto` avec la syntaxe ci-dessous :
+
+```
+[Credentials]
+aws_access_key_id = YOURACCESSKEY
+aws_secret_access_key = YOURSECRETKEY
+```
+
+![Alt Text](images/image75.jpeg)
+
++ ... liste des clés dans le `bucket`
+
+#### Supprimer un compartiment
+
++ La suppression d'un `bucket` peut être effectuée à l'aide de la méthode `delete_bucket`. Par exemple :
+
+![Alt Text](images/image76.jpeg)
+
+#### Lancement d'instances
+
++ Pour lancer une instance et y avoir accès, vous devez d'abord configurer un groupe de sécurité et une paire de clés.
++ Maintenant, disons que vous disposez déjà d'une paire de clés, que vous souhaitez un type d'instance spécifique et que votre groupe de sécurité est entièrement configuré.
++ Dans ce cas, nous pouvons utiliser les arguments de mots-clés pour y parvenir : 
+
+![Alt Text](images/image77.jpeg)
+
+#### Travailler avec des instantanés
+
++ Les `instantanés` vous permettent de créer des instantanés à un moment donné d'un volume `EBS` pour une récupération future.
++ Les `instantanés` vous permettent de créer des sauvegardes incrémentielles et peuvent également être utilisés pour instancier plusieurs nouveaux volumes.
++ Les instantanés peuvent également être utilisés pour déplacer des `volumes EBS` entre les zones de disponibilité ou pour effectuer des sauvegardes sur `S3`.
++ Créer un instantané est simple :
+
+![Alt Text](images/image78.jpeg)
+
++ Une fois que vous avez un instantané, vous pouvez créer un nouveau volume à partir de celui-ci.
++ Les volumes sont créés paresseusement à partir d'instantanés, ce qui signifie que vous pouvez commencer à utiliser à un tel volume immédiatement :
+
+![Alt Text](images/image79.jpeg)
+
+#### Un exemple de script de création de table Dynamo DB
+
++ `DynamoDB` est le service de base de données `AWS NOSQL`.
++ `Amazon DynamoDB` est un service de base de données `NoSQL` entièrement géré qui offre des performances rapides et prévisibles avec une évolutivité transparente.
++ `DynamoDB` vous permet de vous décharger des charges administratives liées à l'exploitation et à la mise à l'échelle d'une base de données distribuée, de sorte que vous n'ayez pas à vous soucier de l'approvisionnement matériel, de l'installation et de la configuration, de la réplication, des correctifs logiciels ou de la mise à l'échelle du cluster.
+
+![Alt Text](images/image80.jpeg)
+
+
+#### Resumé
+
++ `Python` est un langage interprété, hautement extensible et livré avec de nombreux avantages.
++ `Python` est très facile à lire et à écrire par rapport à tout autre langage de programmation.
++ `Les nombres, les chaînes, la liste, les tuples et le dictionnaire` sont des types de données Python. `Python` est livré avec de nombreuses méthodes qui peuvent être appliquées à ces types de données pour manipuler ou présenter les données de différentes manières.
++ `La prise de décision (if/elif/else) et les boucles (for & while)` en python ont une syntaxe très simple et les blocs de code à l'intérieur sont principalement indentés de deux ou trois espaces.
++ Les fonctions Python sont utilisés lorsque nous souhaitons regrouper du code et le rendre accessible à n'importe quel autre code `Python`. Nous pouvons également utiliser ces fonctions comme modules et les importer dans d'autres scripts Python. Cela nous donne une structure très modulaire pour notre code complexe.
++ La bibliothèque `OS Python` est utilisée pour exécuter des commandes systèmes à partir de scripts Python tels que `cd, mkdir, chmod, cp, mv, etc`. Il existe également d'autres bibliothèques pour les tâches système telles que les sous-processus et les commandes.
++ `Fabric` est une bibliothèque `Python` utilisée pour exécuter des commandes systèmes sur un système local et distant. La plupart du code Python nous est retiré, nous appelons simplement des fonctions `Fabric` pour automatiser les tâches `Linux` sur le système local et distant.
++ `Boto` est une bibliothèque système Python permettant d'appeler, d'exploiter et de gérer les services `AWS` à partir de Python.
+
+
+#### Conclusion
++ Etant de nature si polyvalente, gérer un énorme code Python devient difficile.
++ Lorsqu'il s'agit de partager notre code avec nos coéquipiers ou d'autres équipes, c'est un gros problème.
++ Tout le monde a son propre style de codage et la plupart d'entre nous, lorsque nous effectuons l'automatisation, ne suivons aucune bonne pratique, ce qui rend le code difficile à lire et à comprendre.
++ C'est la raison pour laquelle le monde évolue ou s'oriente vers des outils de gestion de configuration pour l'automatisation.
++ Les différences seront discutées dans le chapitre `Ansible`.
+
+
+#### Quelques liens importants
+
++ Pour pratiquer Python avec des exercices
+  + https://www.codeacademy.com/learn/python
++ Erreurs de publications et questions
+  + https://stackoverflow.com/
++ Documentation Fabric
+  + https://docs.fabric.io/
++ Documentation Boto
+  + https://boto3.readthedocs.io/en/latest/
