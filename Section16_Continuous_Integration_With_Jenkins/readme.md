@@ -979,4 +979,288 @@ sonar.jacoco.reportPath = gameoflife-web/target/jacoco.exec
 
 #### Docker
 
-+ 
++ Utilisez `Artifactory` pour gérer vos `images Docker` internes.
++ Distribuez et partagez vos images entre les équipes de votre organisation, que ce soit sur site ou à distance, tout comme avec `Docker Hub Enterprise`.
++ Contrôlez l'accès à vos images à l'aide du `docker pull` sécurisé et n'ayez jamais besoin de dépendre d'internet pour y accéder.
++ Une fois vos images stockées dans votre référentiel, retrouvez-les facilement grâce à la recherche intelligente.
+
+#### Référentiel De Distribution
++ `Artifactory` fait passer avec `JFrog Binary` à l'étape suivante avec le logiciel liquide de diffusion de référentiels de distribution d'`Artifactory Binary`.
++ Les référentiels de distribution offrent un moyen simple de déplacer des `artefacts d'Artifactory vers Binary`, pour les distribuer aux utilisateurs finaux.
++ Contrairement aux autres référentiels d'Artifactory, les référentiels de distribution ne sont pas typés selon un format de paquet particulier, mais sont plutôt régis par un ensemble de règles qui donnent un contrôle précis sur la manière de spécifier exactement où un artefact du référentiel de distribution doit être acheminé dans son référentiel correspondant dans `Binary`.
+
+
+#### Stockage Google Cloud
+
++ Téléchargez des `artefacts` indéfiniment sur le stockage sécurisé et hautement de `Google` et laissez `Artifactory` les gérer pour vous grâce à la prise en charge complète de `Google Cloud Storage (GCS)`.
++ Lorsqu'il est utilisé avec `Artifactory HA`, l'ensemble de votre système est hautement disponible, sans point de défaillance unique.
++ Prêt à commencer à utiliser `GCS`? Configurez simplement un fichier `XML` et effectuez une simple migration de votre magasin de fichier actuel.
++ `GCS` est disponible sur Artifactory avec une licence Entreprise.
+
+
+#### Construire l'intégration : Jenkins/Hudson, TeamCity et Bamboo
++ Diffusez vos builds de logiciels liquides dans `Artifactory` à partir de votre serveur `CI` préféré avec des informations exhaustives sur l'environnement de builds capturées lors du déploiement pour permettre des builds entièrement reproductibles qui mettent à jour en permanence les systèmes et appareils informatiques.
++ Faites la promotion des `builds` et utilisez la nomenclature de la build pour afficher les modules déployés avec leurs artefacts et dépendances publiés dans toutes les étendues.
++ Découvrez où des artefacts spécifiques sont utilisés et recevez des avertissements lorsque les dépendances de construction requises sont supprimées.
++ Créez un lien vers les informations de build sur le serveur `CI` et vice versa.
++ Actuellement, `Jenkins, Hudson, JetBrains TeamCity et Atlassian Bamboo` sont pris en charge.
+
+#### Git LFS
+
++ Utilisez-vous `Git` pour le contrôle du code source ? Et bien d'autres aussi.
++ Mais qu'en est-il des `actifs binaires` qui accompagnent votre code source ? `Git` n'est pas la meilleure solution pour cela.
++ `Github LFS`, dites-vous ? Eh bien, il existe encore une meilleure solution. 
++ `Artifactory` est un référentiel `Git LFS (Large File Storage)` à part entière et peut optimiser votre flux de travail avec des fichiers multimédias volumineux et d'autres ressources binaires.
++ `Artifactory` prend entièrement en charge `l'API Git LFS`, il vous suffit donc de configurer votre client `Git` pour qu'il pointe vers `Artifactory` en tant que référentiel de stockage de fichiers volumineux.
+
+
+#### Artefact vs. Nexus la matrice d'intégration
++ L'évolution de l'intégration continue, des outils de création et de la création de serveurs au cours des dernières années a été très impressionnante.
++ La quantité de projets (open source ou non) et d'outils lancés puis adoptés par la communauté `(Maven, Gradle, Jenkins/Hudson, TeamCity, Bamboo et plus ...)` montre que c'est l'avenir du développement logiciel et c'est ainsi que les gens construiront et conditionneront leurs applications.
++ L'un des plus grands avantages, notamment dans le monde `Java`, est que les équipes de développement ont la liberté de choisir et de créer des environnements modulaires en intégrant les outils qu'elles aiment, dont elles ont besoin et qui ont été adoptés apr leur organisation.
++ C'est pourquoi nos utilisateurs construisent leurs projets en utilisant `Maven, TeamCity, Ivy, Hudson, Gradle, Bamboo` et récemment `Jenkins`.
++ Enfin de compte, vous ne devriez pas vous soucier de la capacité des outils à s'intégrer lors qe la conception de votre pile `CI`! mais les choses changent.
++ Maintenant encore plus avec le `for Hudson CI` (actuellement détenu par Oracle), `Artifactory` est devenu le seul gestionnaire de référentiel binaire qui vous donne une réelle liberté de choix.
++ Au cours de l'année écoulée, l'équipe de `JFrog` a developpé pour les utilisateurs d'`Artifactory` un certain nombre de plug-ins open source étroitement intégrés aux outils principaux et fournisseurs mondiaux.
++ Les tableaux comparatifs suivants sont plus qu'une simple liste de fonctionnalités : c'est que nous envisageons lorsque nous réflichissons aux outils de développement logiciel et à la manière dont nous garantissons que nos utilisateurs conservent leurs liberté de choix : `Intégration des outils de construction`.
+
+#### Intégration de serveurs de build : Pourquoi devrais-je utiliser Jcenter plutôt que Maven Central pour télécharger les dépendances ?
+
++ `Jcenter` est le référentiel public hébergé sur `binary` dont l'utilisateur est gratuite pour les éditeurs de bibliothèques open source.
++ Il existe de nombreuses bonnes raisons d'utiliser `Jcenter` sur `Maven Central`. Voici quelques-uns des principaux
+
+1. `Jcenter` fournit une bibliothèque via `CDN`, ce qui signifie des améliorations des versions `CI` et développeurs.
+
+2. Evitez les codes de chevaux de Troie.
+
+3. `Jcenter` est le plus grand référentiel `Java` au monde, donc tout ce qui est disponible sur `Maven Cnetral` est également disponible sur `Jcenter`.
+
+4. Il est incroyablement simple de télécharger votre propre bibliothèque sur `Binary`. Pas besoin de les signer ou de faire des choses complexes comme vous devez le faire sur `Maven Central`.
+
+5. Friendly-UI
+
+6. Si vous souhaitez téléchargez votre bibliothèque sur `Maven Central`, vous pouvez le faire facilement en un seul clic sur le site `Binary`.
+
+
+#### J-Frog Installation 
+
++ Allez sur www.jfrog.com/downaloads-artifacts-pro/
++ et cliquez sur `Artifactory Pro Standalone`
+
+![Alt Text](images/image78.jpeg)
+
++ Ouvrez le terminal et parcourez le répertoire des téléchargements et exécutez les commandes suivantes : 
+
+  + sudo apt-get zip unzip (pour installer, décompressez pour extraire le fichier téléchargé)
+  + sudo unzip jfrog-artifactory-pro-5.3.1 (pour extraire jfrog-artifactory-pro-5.3.1)
+
++ Avant d'exécuter les services `JFrog`, veuillez vous assurer que les éléments essentiels tels que `JAVA, GIT, MAVEN et JENKINS` sont installés.
++ Pour ma commodité, j'ai écrit un script pour installer toutes les prérequis (Création d'un fichier avec le nom `script.sh`).
+
+![Alt Text](images/image78a.jpeg)
+
+**Après l'installation de JAVA, MAVEN, Git, Jenkins, accédez au répertoire ci-dessous pour démarrer les services JFrog**
+
+```
+# cd Downloads\artifactory-pro-5.3.1\bin
+# bash install services.sh
+# bash artifactory.sh
+```
+
+![Alt Text](images/image79.jpeg)
+
++ Maintenant, construisons un exemple de projet `Maven`.
++ Accédez à `github` et téléchargez `jfrogdev/project-examples`
+
+```
+# cd /home
+# git clone https://github.com/JFrogDev/project-examples.git
+```
+
+![Alt Text](images/image80.jpeg)
+
+```
+# cd /home/project-examples/artifactory-maven-plugin-example#
+```
+
++ Créons maintenant un référentiel local séparé pour stocker notre build
+
+```
+# Ouvrez l'onglet Admin et appuyez sur le référentiel local comme indiqué ci-dessous
+```
+
+![Alt Text](images/image81.jpeg)
+
++ Maintenant, afin de dire à `Maven` où copier l'artefact après avoir construit le code, nous devons éditer le `pom.xml` du code.
++ Dans la page d'accueil de `JFrog Artifactory`, appuyez sur `SET ME UP`, copiez l'extrait de déploiement et collez-le dans votre fichier `pom.xml`.
+
+```
+# cd /home/project-examples/artifactory-maven-plugin-example
+# vi pom.xml
+```
+
++ Veuillez suivre les étapes fournies dans les captures d'écran ci-dessous pour plus d'informations.
+
+```
+# Collez l'extrait de code comme indiqué ci-dessous
+```
+
+![Alt Text](images/image82.jpeg)
+
++ Ici, nous créons un fichier d'inventaire maven afin que nous puissions dire à `maven` de téléchargher les dépendances depuis `Jcenter` au lieu de maven central.
+
+```
+# Dans l'ensemble, appuyez sur la page suivante pour générer les paramètres Maven
+# copiez l'extrait
+```
+
+#### Veuillez vous référer à la capture d'écran fournie ci-dessous pour plus d'informations
+
+![Alt Text](images/image83.jpeg)
+
+## Intégration de JFrog avec Jenkins
+
++ En tant que premier et unique gestionnaire de référentiel d'artefacts universel sur le marché, `JFrog Artifactory` prend entièrement en charge les progiciels créés par n'importe quel langage ou technologie.
++ `Artifactory` est le seul gestionnaire de référentiels prêt pour l'entreprise disponible aujourd'hui, prenant en charge les registres Docker, en cluster et à haute disponibilité.
++ S'intégrant à tous les principaux outils `CI/CD et DevOps, Artifactory` fournit une solution de bout en bout, automatisée et à toute épreuve pour suivre les `artefacts` du développement à la production.
++ Allez sur le site www.jfrog.com et clique sur `Start Your Free Trail`.
+
+![Alt Text](images/image84.jpeg)
+
++ Nous obtenons 3 options
+  + Version Pro
+  + Version Saas
+  + Version Entreprise
+
+
+![Alt Text](images/image85.jpeg)
+
++ Cliquez sur Version Pro et remplissez le formulaire pour démarrer votre essai de 30 jours. 
++ Saisissez correctement les détails comme `l'ID EMAIL`. Et cliquez sur Continuer.
+
+![Alt Text](images/image86.jpeg)
+
++ Vérifiez maintenant votre identifiant de messagerie.
++ Un email a été envoyé par `JFROG`.
++ Dans cet email, il y aura un lien pour télécharger le fichier d'installation, les informations sur la clé de licence.
+
+![Alt Text](images/image87.jpeg)
+
+
+1. Téléchargement et installation
+
++ Pour télécharger et installer `JFrog Artifactory`, cliquez ici : https://www.jfog.com/ qui est mentionné dans votre courrier. Il vous redigera vers l'URL  de jfrog.
+
+![Alt Text](images/image88.jpeg)
+
++ Sélectionnez `Enregistrez` le fichier et cliquez sur OK. 
++ Le fichier ci-dessus sera téléchargé dans le répertoire de téléchargements.
++ Avec ce fichier `zip`, nous sommes prêts à configurer `JFrog Server`.
+
+<br/>
+
++ Allez maintenant dans téléchargements et extrayez le fichier et nous pourrons l'installer sur
+
+1. Machine Locale
+
+2. Vagrant
+
+3. Instance AWS
+
+
+<br/>
+
++ J'installe `JFrog` sur la machine locale et le `Serveur JFrog` sera ma machine locale, procédez comme suit
+
+  + Connectez-vous à l'utilisateur `root` et installez ce qui suit : 
+  
+```
+1. apt-get update -y
+2. apt-get install openjdk-8-jdk -y
+3. apt-get install unzip
+4. apt-get install maven
+5. apt-get isntall git
+```
+
++ Décompressez le fichier téléchargé : 
+
+```
+==> décompressez jfrog.artifacory-pro-5.3.1.zip
+```
+
++ Allez dans le répertoire `bin` dans le fichier téléchargé
+
+```
+==> cd craftcraftory-pro-5.3.1/bin/
+./installService.sh
+./artifactory.sh
+```
+
++ Cela configurera le serveur jfrog, vérifiera l'adresse IP et vérifiera l'URL `:: ip:8081`.
+
+
+![Alt Text](images/image89.jpeg)
+
++ Lorsque vous cliquez sur Terminer, l'écran ci-dessus apparaîtra.
++ Nous devons maintenant définir notre propre référentiel maven afin de pouvoir télécharger des artefacts de Jenkins.
++ Suivez les étapes pour créer le référentiel `JFrog`. Accédez à `WELCOME ADMIN@` en haut à droite de l'écran, vous trouverez une liste déroulante dès que vous placez le curseur dessus.
++ Sélectionnez `maintenant ==> Dépôt local`.
+
+![Alt Text](images/image90.jpeg)
+
++ Notre propre référentiel est maintenant créé où nous pouvons télécharger les artefacts.
+
++ Nous devons maintenant configurer le serveur jenkins.
+
+```
+1. apt-get update -y
+2. apt-get install openjdk-8jdk -y
+3. apt-get install Jenkins -y
+4. apt-get install git
+5. apt-get install maven -y
+```
+
++ Ouvrez maintenant l'url `:: ip:8080`. La page `Jenkins` est ouverte, créez un utilisateur et connectez-vous à Jenkins.
++ Installez maintenant quelques plugins avant de démarrer le projet
+
+```
+1. plugin Zentiemstamp
+2. plugin Artifcatory
+3. plugin Maven Invoker
+4. Plugin d'authentification Github
+```
+
++ Maintenant allez dans `Jenkins -> Gérer Jenkins -> Configurer le système`
++ Entrez les détails dans `propriétés globales et Artifactory` comme indiqué ci-dessous, puis enregistrez.
+
+![Alt Text](images/image91.jpeg)
+
++ Maintenant, allez dans Gérer `Gérer Jenkins --> Configuration globale` de l'outil et procédez comme suit : 
+
+```
+Dans JDK, tapez : jdk8
+Dans Maven, tapez : mvn3
+puis cliquez sur Enregistrer
+
+Jenkins --> Nouvel élément --> Entrez le nom du projet, sélectionnez le projet de style libre et puis cliquez sur OK.
+
+maintenant avant de faire la configuration du projet
+
+Passons au Github pour ce projet
+
+Créez un utilisateur et un mot de passe github et connectez-vous au github
+Sélectionnez un démarrage d'un projet et ciquez sur gérer un référentiel
+```
+
+![Alt Text](images/image92.jpeg)
+
+
+#### Conclusion
+
++ `L'intégration continue` est la procédure obligatoire que nous devons suivre pour configurer les pipelines de livraison de code et c'est la première chose que nous devons automatiser dans `DevOps Lifecycle`.
++ `Jenkins` est un outil `CI` le plus connu. Jenkins, vous offre de nombreuses fonctionnalités et peut également et peut également être utilisé à d'autres fins, comme les `déploiements et l'automatisation du cloud`.
++ `Jenkins` s'intègre à presque tous les `DevOps` ou outils de développement du marché.
++ Plus tard dans le livre, nous verrons `ansible, puppet et docker, Jenkins` s'intègre très bien à tous ces outils via ses plugins. 
++ C'est l'un des outils le plus important du DevOps.
+
+
