@@ -609,4 +609,413 @@ tasks :
 
 ![Alt Text](images/image43.jpeg)
 
-+ ``
+## Modèle
+
++ Les `modèles` sont similaires au module de copie, il copie le fichier source vers la destination de l'hôte cible.
++ Mais ici, nous n'avons pas de fichiers statiques simples, nous avons un fichier modèle qui contient des variables qui contient des variables prédéfinies.
++ Ces variables peuvent être définies dans `playbook` ou `host-vars` ou `group_vars` etc.
++ Pendant que le module modèle est exécuté, il lira le fichier modèle et modifiera toutes les variables à sa valeur et copiera le fichier sur l'hôte cible.
++ Le fichier modèle se termine par l'extension `.j2` qui signifie modèles `Jinja2`.
+
+<br/>
+
++ Nous utilisons le modèle pour copier le fichier modèle et la variable utilisée dans le fichier modèle peu être définie dans le `playbook` comme indiqué ci-dessous.
+
+![Alt Text](images/image44.jpeg)
+
+#### Un exemple de playbook avec des variables, des modules, des conditions et des gestionnaires
++ Nous avons besoin d'un noeud `vm centos 6` pour exécuter ce code.
+
+![Alt Text](images/image45.jpeg)
+
+#### Modèle pour le fichier Index.html
+
+![Alt Text]()
+
+#### Détails des variables des modèles à partir du modèle httpd.j2
++ Vous pouvez obtenir le fichier `httpd.conf` après avoir installé `httpd sur centos`, son emplacement est `/etc/httpd/conf/httpd.conf`.
++ Copiez le contenu du fichier `httpd.conf` dans `templates/httpd.j2` et remplacez ses valeurs comme indiqué ci-dessous.
++ Les variables mentionnées ci-dessous sont définies dans le playbook
+
+![Alt Text](images/image46.jpeg)
+
+## Les rôles
+
++ Bien qu'il soit possible d'écrire un playbook dans un très gros fichier, vous souhaiterez éventuellement réutiliser les fichiers et commencer à organiser les choses.
++ Dans l'exemple ci-dessus, nous avons vu dans notre playbook que nous avons des variables, des tâches, des gestionnaires et modèles.
++ Cela peut croire lentement et finira par devenir difficile à lire et à gérer.
++ Les `rôles` sont une structure de répertoires dans laquelle nous distribuons le contenu de notre playbook principal dans une structure de répertoire appropriée.
++ Structure du répertoire des rôles.
+
+![Alt Text](images/image47.jpeg)
+
++ Voici à quoi ils servent : 
+
+  + `fichiers` : ce répertoire contient des fichiers qui doivent être transférés vers les hôtes que vous configurez pour ce rôle. Cela peut également inclure des fichiers de script à exécuter.
+  + `gestionnaires` : tous les gestionnaires qui figuraient auparavant dans votre playbook peuvent désormais être ajoutés ce repertoire.
+  + `méta` : ce repertoire peut contenir des fichiers établissent des dépendances de rôle. Vous pouvez répertorier les rôles qui doivent être appliqués pour que le rôle actuel puisse fonctionner correctement.
+  + `modèles` : vous pouvez placer tous les fichiers qui utilisent des variables pour remplacer les informations lors de la création dans ce repertoire.
+  + `tâches` : ce repertoire contient toutes les tâches qui seraient normalement dans un playbook. Ceux-ci peuvent référencer des fichiers et des modèles contenus dans leurs répertoires respectifs sans utiliser le chemin.
+  + `vars` : les variables pour les rôles peuvent être spécifiées dans ce repertoire et utilisées dans vos fichiers de configuration.
+  
++ Au lieu de regrouper tout notre code dans un seul playbook, nous pouvons le distribuer dans différentes structures de répertoires.
++ Par exemple, toutes les tâches de notre `playbook` seront placées dans le fichier `roles/apache:tasks/main.yml`, de même que les `vars` vont dans `vars/main.yml`.
+
+<br/>
+
++ Nous pouvons créer la structure du répertoire des rôles avec la commande `ansible-galaxy`.
+
+```
+$ mkdir roles
+$ cd roles/
+.../roles$ ansible-galaxy init apache
+```
+
+![Alt Text](images/image48.jpeg)
+
+```
+$ cd...
+```
+
+#### Notre playbook principal appellera simplement le rôle par son nom et n'aura aucune tâche
+
+![Alt Text](images/image49.jpeg)
+
+
+
++ Ce serait une bonne idée d'écrire d'abord un playbook intégré, puis nous pourrons commencer à copier le conte contenu du `playbook` principal dans la structure du répertoire des rôles.
++ A mesure que la complexité augmente, nous pourrons alors gérer la structure des rôles.
+
+#### Exécution du playbook
++ Nous exécutons le playbook principal qui, à son tour, lira la structure du repertoire des rôles et exécutera toutes les tâches et gestionnaires pour nous.
+
+```
+$ ansible-playbook webservers.yml
+```
+
++ Remplacer les variables des rôles. Nous avons peu de variables définies dans rôles `Apache` dans le fichier `roles/apache/vars/main.yml`.
++ Lorsque nous exécutons notre playbook, il utilise toutes ces variables définies mais nous pouvons remplacer ces variables sans modifier le contenu du fichier `roles/apache/vars/main.yml`.
+
+![Alt Text](images/image50.jpeg)
+
++ Comme indiqué ci-dessus, nous transmettons maintenant un dictionnaire {} au lieu du nom du rôle.
++ Le dictionnaire contient des paires `clé=valeur` pour le nom de rôle et les variables que nous souhaitons remplacer.
+
+## Galaxie Ansible
+
++ Jusqu'à présent, nous avons une idée de ce que sont les `rôles ansible` et de la manière de les créer.
++ Il existe de nombreux rôles prédéfinis sur le site `Web Ansible Galaxy` que nous pouvons télécharger et utiliser librement.
++ Par exemple, si nous voulons configurer le `service MySQL`, nous pouvons créer un rôle `MySQL` à partir dé zéro ou utiliser un rôle existant d'Ansible Galaxy.
++ https://galaxy.ansible.com/list#roles?page=1&page_size=10
+
+![Alt Text](images/image51.jpeg)
+
+#### Téléchargez le rôle de Galaxie Ansible
+
++ Le rôle par défaut est téléchargé dans le repertoire `/etc/ansible/roles`.
++ Une fois téléchargé, vous pouvez commencer à utiliser ce rôle à partir de votre playbook.
++ Reportez-vous à l'exemple donné dans la section `REDAME` du rôle.
+
+```
+$sudo ansible-galaxy install bennojov.mysql
+```
+
++ téléchargement du rôle 'mysql', propriété de bennojoy
++ téléchargement du rôle depuis https://github.com/bennojoy/mysql/archive/master.tar.gz
++ extraction de `bennojoy.mysql` vers `/etc/ansible/roles/bennojoy.mysql`
++ `bennojoy.mysql` (master) a étét installé avec succès
+
+## Ansible Vault - Gestion des secrets avec Ansible Vault.
+
++ La fonctionnalité de vault peut crypter n'importe quel fichier de données structurées utilisé par `Ansible`.
++ Cela peut inclure des variables d'inventaire `group_vars` ou `host_vars/` des variables par `include_vars` ou `var_files`, ou des fichiers de variables transmis sur la ligne de commande `ansible-playbook` avec `-e@file.yml` ou `e@file.json`.
++ Les variables de rôle et les valeurs par défaut sont également incluses! Nous pouvons stocker nos mots de passe/secrets cryptés dans `ansible-vault`.
+
++ Nous allons créer un `vault` dans le repertoire `group_vars/all`.
+
+
+```
+mkdir -p group_vars:all
+cd group_vars/all
+export EDITOR=vim
+ansible-vault create vault
+```
+
++ Donnez un mot de passe de vault et placez les variables que vous souhaitez crypter.
++ L'exemple ci-dessous de stockage du mot de passe `Tomcat` est mentionné.
+
+```
+---
+vault_tomcat_pass : <-Enter password for tolcat here>
+```
+
++ Reportez-vous à `vault_tomcat_pass` dans le fichier `group_vars/all/vars`
+
+```
+cd group_var/all/
+vi vars
+
+---
+tomcatuser tomcat
+tomcatpass : "{{vault_tomcat_pass}}"
+```
+
+
++ Si vous exécutez votre playbook maintenant là où vous utilisez `tomcatpass`, vous devriez obtenir une erreur commise ci-dessous.
++ Par exemple, j'utilise la variable `{{tomcatpass}}` dans mon playbook `tomcat.yml`
+
+```
+# ansible-playbook tomcat.yml
+ERROR! Decryption failed
+ERROR!A vault password must be specified
+```
+
++ Vous pouvez l'option `--ask-vault-pass` lors de l'exécution du playbook qui vous demandera le mot de passe `vault`.
+
+```
+# ansible-playbook tomcat.yml --ask-vault-pass
+```
+
+
++ Vous pouvez également utiliser un fichier dans lequel vous spécifiez le mot de passe `vault`.
++ Disons que `vaultpass` est notre mot de passe `vault`.
+
+```
+# echo "vaultpass">~/.vault_pass.txt
+# chmod 0600 ~/.vault_pass.txt
+```
+
+#### Example d'exécution
+
+![Alt Text](images/image52t.jpeg)
+
+
+#### Modification de vault
++ Pour modifier un fichier chiffré sur place, utilisez la commande `ansible-vault edit`.
++ Cette commande décryptera le fichier dans un fichier temporaire et vous permettra de modifier le fichier, de le sauvegarder une fois terminé et de supprimer le fichier temporaire.
+
+```
+ansible-vault edit vault
+```
+
+## Boucle dans Ansible
+
++ Pour économiser un peu de saisie, les tâches répétées peuvent être écrites en raccourci comme ceci : `with_items` est une `boucle for` ansible qui s'exécute sur une liste d'éléments.
++ `with_items` lors de l'exécution de la variable de retour nommée `item` qui contient la valeur de l'élément dans la liste.
+
+![Alt Text](images/image53.jpeg)
+
++ Si vous avez défini une liste `YAML` dans un fichier de variables, ou la section `vars`, vous pouvez également faire : `with_items : "{{somelist}}` ce qui précède serait l'équivalent de : 
+
+![Alt Text](images/image54.jpeg)
+
++ Les modules `yum` et `apt` utilisent `with_items` pour exécuter moins de transactions du gestionnaire de packages.
+
+![Alt Text](images/image55.jpeg)
+
+## Configurer Apache à l'aide d'Ansible
+
+#### Introduction
+
++ `Apache` est l'un des serveurs `Web` les plus populaires actuellement sur Internet.
++ Il est facile à installer et à configurer sur les distributions `Linux` comme `Ubuntu` et `Debian`, car il est fourni dans les référentiels de packages et inclut une configuration par défaut qui fonctionne immédiatement.
+
+
+#### Conditions Préalables
+
++ Nous allons installer `Ansible` sur un serveur `Ubuntu` et l'utiliser pour configurer `Apache` sur un deuxième serveur.
++ Pour ce tutoriel, vous aurez besoin de :
+
+    + Deux serveurs `Ubuntu` : un serveur maître avec `Ansible` et un secondaire qui exécutera `Apache` configuré via `Ansible`
+    + `Ansible` installé sur le serveur maître
+    + Echange des clés `SSH` pour autoriser le maître à se connecter au serveur secondaire. Reportez-vous au chapitre sur les `scripts Bash` pour l'échange de clés `SSH`.
+    + Configurez manuellement un fichier d'hôtes locaux sur votre machine locale (en utilisant l'adresse IP de votre serveur secondaire), afin de configurer et d'utiliser les hôtes virtuels qui seront configurés.
+  
+**Configuration d'Ansible**
+
++ Créez un nouveau répertoire
+
+```
+$mkdir ansible-repo
+```
+
++ Accédez au nouveau répertoire
+
+```
+$ cd ~/.ansible-repo/
+```
+
++ Créez un nouveau fichier appelé `ansible.cfg` et ouvrez-le pour le modifier
+
+```
+$ vi ansible.cfg
+```
+
++ Dans ce fichier, nous souhaitons ajouter l'option de configuration du fichier hôte avec la valeur des hôtes, dans le groupe `[defaults`. 
++ Copiez ce qui suit dans le fichier `ansible.cfg`, puis enregistrez-le et fermez-le
+
+```
+[defaults]
+inventory=hosts
+```
+
++ Créez un fichier hosts (inventaire) et ouvrez-le pour le modifier
+
+```
+$ vi hosts
+```
+
++ Copiez ce qui suit dans le fichier hosts.
+
+
+```
+[apache]
+apache_server_ip ansible_ssh_user=username
+```
+
++ Ceci spécifie un groupe d'hôtes appelé `Apache` qui contient un hôte.
++ Remplacez `apache_server_ip` par le nom d'hôte ou l'adresse IP du serveur secondaire, et le nom d'utilisateur par votre nom d'utilisateur `SSH`.
++ `Ansible` devrait maintenant pouvoir se connecter à votre serveur. Testez la connectivité avec le module `ping`.
+
+```
+$ ansible apache -m ping
+```
+
++ Le résultat devrait ressembler à ceci :
+
+```
+192.168.1.51 | success >> {
+
+"changed":false;
+"ping":"pong"
+}
+```
+
++ Un autre module `Ansible` utile pour les tests est le module de commande.
++ Il exécute des commandes personnalisées sur l'hôte et renvoie les résultats.
++ Pour exécuter la commande à l'aide de `echo`, une commande `Unix` qui renvoie une chaîne au terminal, entrez la commande suivante :
+
+```
+$ ansible apache -m command -a "/bin/echo hello devops"
+```
+
++ Le résultat devrait ressembler à ceci :
+
+```
+192.168.1.51 | success | rc=0 >> 
+hello devops
+```
+
+**Installation d'apache**
+
++ Nous allons écrire la tâche pour installer le serveur Web Apache dans le playbook.
++ Pour installer Apache via Ansible, nous utilisons le module d'Ansible. 
++ Le module `Apt` contient de nombreuses options pour les fonctionnalités spécialisées `apt-get`.
++ Les options qui nous intéressent sont : 
+    + `name` : Le nom du package à installer, soit un nom de package unique, soit une liste de packages.
+    + `state` : Accepte soit le dernier, soit l'absent, soit le présent. `Latest` garantit que la dernière version soit installée, présent verifie simplement qu'elle est installée et absent la supprime si elle est installée.
+    + `update_cache` : met à jour le cache (via `apt-get update`) s'il est achevé, pour garantir qu'il est à jour.
+  
++ Créons maintenant notre playbook `apache.yml` avec le module `apt`. Ouvrez le fichier `apache.yml` pour le modifier.
+
+```
+$ vi apache.yml
+```
+
++ Copiez-y le texte suivant :
+
+```
+--- -hosts:apache become:yes tasks:-name:install apache2 apt:name=apache2 update_cache=yes state=latest
+```
+
++ La ligne `apt` installe le package `apache2(name=apache2)` et garantit que nous avons mis à jour le cache `(update_cache=yes)`
++ Maintenant, exécutez le playbook
+
+```
+$ ansible-playbook apache.yml --ask-sudo-pass
+```
+
++ L'indicateur `--ask-sudo` vous demandera le mot de passe `sudo` aur le serveur secondaire.
++ Cela est nécessaire, car l'installation nécessite les privilèges `root`; les autres commandes que nous avons exécutées jusqu'à présent ne l'ont pas fait.
++ La sortie devrait ressembler à ceci :
+
+
+![Alt Text](images/image56.jpeg)
+
++ Si vous visitez le nom d'hôte ou l'adresse `IP` de votre serveur secondaire dans votre navigateur, vous devez maintenant obtenir une page par défaut `Apache2 Ubuntu` pour vous accueillir.
++ Cela signifie que vous disposez d'une installation `Apache` fonctionnelle sur votre serveur et que vous ne vous y êtes pas encore connecté manuellement pour exécuter une commande.
+
+**Configuration des modules Apache**
+
++ Maintenant qu'`Apache` est installé, nous devons activer un module pour qu'il soit utilisé par `Apache`.
++ Assurons-nous que le module `mod_rewise` est activé pour `Apache`.
++ Via `SSH`, cela peut être fait facilement en utilisant `a2enmod` et en redémarrant `Apache`
++ Cependant, on peut aussi le faire très facilement avec `Ansible` en utilisant le module `apache_module` est un gestionnaire de tâches pour redémarrer `apache`
++ Le module `apache2_module` prend deux options : 
+
+1. `name` -- le ,om du module à activer, tel que `rewrite`
+
+2. `state` -- Présent ou absent, selon que le module doit être activé ou désactivé.
+
++ Ouvrez `apache.yml` pour le modifier.
+
+```
+$ vi apache.yml
+```
+
++ Mettez à jour le fichier pour inclure cette tâche. Le fichier devrait maintenant ressembler à ceci : 
+
+
+![Alt Text](images/image57.jpeg)
+
++ Nous devons redémarrer `Apache2` une fois que le module activé.
++ Une option consiste à ajouter une tâche pour redémarrer `Apache2`, mais nous ne voulons pas qu'elle s'exécute à chaque fois que nous appliquons notre `playbook`.
++ Pour contourner ce problème, nous devons utiliser un gestionnaire de tâches.
++ La façon dont fonctionnent les gestionnaires est qu'une tâche peut être invitée à avertir un gestionnaire lorsqu'elle a changé, et le gestionnaire ne s'exécute que lorsque la tâche a été modifié.
++ Pour ce faire, nous devons ajouter l'option `notify` dans la tâche `apache2_module`, puis nous pouvons utiliser le module de service pour redémarrer apache2 dans un gestionnaire.
+
+![Alt Text](images/image58.jpeg)
+
++ Maintenant, réexécutez le playbook
+
+```
+$ ansible-playbook apache.yml --ask-sudo-pass
+```
+
++ La sortie devrait ressembler à : 
+
+![Alt Text](images/image59.jpeg)
+
++ Ca a l'air bien jusqu'à présent. Maintenant, exécutez à nouveau la commande et il ne devrait y avoir aucun changement, et la tâche de redémarrage ne sera pas repertoriée.
++ Configuration des options d'`Apache` Maintenant que nous avons une installation `Apache` fonctionnelle, avec nos modules requis activés, nous devons configurer `Apache`.
+
+<br/>
+
++ Par, défaut `Apache` écoute sur le port `80` tout le trafic `HTTP`.
++ Pour les besoins du didacticiel, supposons que nous souhaitons qu'Apache écoute sur le port `9090`.
++ Avec la configuration `Apache` par défaut sur `Ubuntu x64`, deux fichiers doivent être mis à jour :
+
+![Alt Text](images/image60a.jpeg)
+
++ Pour ce faire, nous pouvons utiliser le module `lineinfile`.
++ Il vous permet d'effectuer toutes sortes de modifications sur un fichier existant sur l'hôte.
++ Pour cet exemple, nous utiliserons les options suivantes : 
+
+  + `dest` --- Le fichier à mettre à jour dans le cadre de la commande.
+  + `regexp` -- Expression régulière pour correspondre à une ligne existante à remplacer.
+  + `line` -- La ligne à insérer dans le fichier, soit en remplacement de la ligne d'expression rationnelle, soit en tant que nouvelle ligne à la fin.
+  + `state` -- Présent ou absent
+  
++ Ce que nous devons faire pour mettre à jour le port `80 à 9090`, c'est rechercher les lignes existantes qui définissent le port 80 et les modifier pour définir le port `9090`.
++ Ouvrez le fichier `apache.yml` pour le modifier 
+
+```
+$ vi apache.yml
+```
+
+![Alt Text](images/image60.jpeg)
+
++ Il est important de noter que nous devons également redémarrer `Apache2` dans le cadre de ce processus, et que nous pouvons réutiliser le même gestionnaire, mais le gestionnaire ne sera déclencher qu'une seule fois malgré plusieurs tâches modifiées.
++ Maintenant, exécutez le `playbook`
+
+

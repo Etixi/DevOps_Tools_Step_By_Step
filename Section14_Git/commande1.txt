@@ -1,0 +1,105 @@
+
+$ mkdir gitrepos
+
+$ mkdir titanwork
+
+$ cd titanwork/
+
+$ git init
+
+$ ls
+
+$ ls -a
+
+$ mkdir nebula
+
+$ mkdir jupiter
+
+$ mkdir pluto
+
+$ ls
+jupiter  nebula  pluto
+
+$ touch saturn{1..10}.py
+
+$ ls
+jupiter  pluto       saturn10.py  saturn3.py  saturn5.py  saturn7.py  saturn9.py
+nebula   saturn1.py  saturn2.py   saturn4.py  saturn6.py  saturn8.py
+
+$ touch jupiter/test1
+
+$ touch nebula/testter32
+
+$ touch pluto/taster89
+
+$ ls
+jupiter  pluto       saturn10.py  saturn3.py  saturn5.py  saturn7.py  saturn9.py
+nebula   saturn1.py  saturn2.py   saturn4.py  saturn6.py  saturn8.py
+
+
+$ git status
+On branch master
+
+No commits yet
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        jupiter/
+        nebula/
+        pluto/
+        saturn1.py
+        saturn10.py
+        saturn2.py
+        saturn3.py
+        saturn4.py
+        saturn5.py
+        saturn6.py
+        saturn7.py
+        saturn8.py
+        saturn9.py
+
+nothing added to commit but untracked files present (use "git add" to track)
+
+
+$ git add .
+
+
+$ git status
+On branch master
+
+No commits yet
+
+Changes to be committed:
+  (use "git rm --cached <file>..." to unstage)
+        new file:   jupiter/test1
+        new file:   nebula/testter32
+        new file:   pluto/taster89
+        new file:   saturn1.py
+        new file:   saturn10.py
+        new file:   saturn2.py
+        new file:   saturn3.py
+        new file:   saturn4.py
+        new file:   saturn5.py
+        new file:   saturn6.py
+        new file:   saturn7.py
+        new file:   saturn8.py
+        new file:   saturn9.py
+
+
+
+$ git commit -m "new files committed"
+[master (root-commit) b2846d1] new files committed
+ 13 files changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 jupiter/test1
+ create mode 100644 nebula/testter32
+ create mode 100644 pluto/taster89
+ create mode 100644 saturn1.py
+ create mode 100644 saturn10.py
+ create mode 100644 saturn2.py
+ create mode 100644 saturn3.py
+ create mode 100644 saturn4.py
+ create mode 100644 saturn5.py
+ create mode 100644 saturn6.py
+ create mode 100644 saturn7.py
+ create mode 100644 saturn8.py
+ create mode 100644 saturn9.py

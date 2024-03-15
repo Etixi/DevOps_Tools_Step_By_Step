@@ -790,6 +790,39 @@ Une fois le formatage terminé, nous pouvons montrer cette partition dans un ré
 + Vous pouvez attacher ce `VPC` ayx instances `EC2` avec un sous-réseau public et un sous-réseau privé.
 + Si vous souhaitez vous connecter à l'instance de sous-réseau privé, vous devez d'abord vous connecter à l'instance de sous-réseau public.
 
-![Alt Text](images/image81.jpeg)
 
 ## Equilibreur de charge élastique
+
++ `Elastic Load Balancing` distribue le trafic applicatif entrant sur plusieurs `instances EC2`, dans plusieurs zones de disponibilité.
++ Cela augmente la tolérance aux pannes de vos applications. Un équilibreur de charge accepte le trafic entrant des clients et achemine les demandes vers ses `instances EC2` enregistrées dans une ou plusieurs zones de disponibilité.
++ L'équilibreur de charge surveille également l'état de santé de ses instances enregistrées et garantit qu'il achemine le trafic uniquement vers des instances saines.
++ Lorsque l'équilibreur de charge détecte une instance défectueuse, il arrête le routage du trafic vers cette instance, puis reprend le routage du trafic vers cette instance lorsqu'il détecte que l'instance est à nouveau saine.
++ `Elastic Load Balancing` prend en charge deux types de charge : `les équilbreurs de charges d'application et les équilibreurs de charge classiques`.
++ Il existe une différence essentielle entre la façon dont vous configurez ces équilibreurs de charge. Avec une application `Load Balancer`, vous enregistrez les instances en tant que cibles dans un groupe cible et acheminez le trafic vers un groupe cible.
++ Lorsque vous créez un équilibreur de charge, vous devez choisir d'en faire un équilibreur de charge interne ou un équilibreur de charge accessible sur Internet.
++ Notez que lorsque vous créez un équilibreur de charge classique dans `EC2-Classic`, il doit s'agir d'un équilibreur de charge accessible sur Internet. 
++ Le nom `DNS` d'un équilibreur de charge Internet peut être résolu publiquement en adresses `IP` publiques des noeuds. Par conséquent, les équilibreurs de charge connectés à `Internet` peuvent acheminer les requêtes des clients via Internet.
+
+<br/>
+
++ Les noeuds d'un équilibreur de charge interne n'ont que des adresses `IP Privées`. Le nom `DNS` d'un équilibreur de charge interne peut être résolu publiquement en adresses `IP` privées des noeuds.
++ Par conséquent, les équilibreurs de charge internes peuvent uniquement acheminer les requêtes des clients ayant accès au `VPC` pour l'équilibreur de charge.
++ **`Remarque :`** Les équilibreurs de charge internet et internes acheminent les requêtes vers nos instances à l'aide d'adresses `IP` privées. Par conséquent, vos instances n'ont pas besoin d'adresses `IP` publiques pour recevoir les demandes d'un équilibreur de charge interne ou accessible sur Internet.
+
+<br/>
+
++ Si votre application comporte plusieurs niveaux, par exemple des serveurs Web qui doivent être connectés à Internet et des serveurs de base de données qui sont uniquement connectés aux serveurs Web, vous pouvez concevoir une architecture qui utilise à la fois des équilibreurs de charge internes et accessibles sur Internet.
++ Créez un équilibreur de charge accessible sur Internet et enregistrez les serveurs Web avec celui-ci.
++ Créez un équilibreur de charge interne et enregistrez les serveurs de base de données avec celui-ci.
++ Les serveurs Web reçoivent les requêtes de l'équilibreur de charge accessible sur Internet et envoient les requêtes des serveurs de base de données à l'équilibreur de charge interne.
++ Les serveurs de base de données reçoivent les requêtes de l'équilibreur de charge interne.
+
+
+![Alt Text](images/image81.jpeg)
+
+
+#### Création d'un équilibreur de charge élastique : 
+
+**Conditions Préalables :**
+
+1. Choissez
