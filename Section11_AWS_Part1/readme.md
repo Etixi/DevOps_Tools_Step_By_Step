@@ -825,4 +825,5 @@ Une fois le formatage terminé, nous pouvons montrer cette partition dans un ré
 
 **Conditions Préalables :**
 
-1. Choissez
+1. Choissez deux zones de dsiponiblité que vous utiliserez pour vos instances `EC2`. Vérifiez que votre cloud privé ``
+
