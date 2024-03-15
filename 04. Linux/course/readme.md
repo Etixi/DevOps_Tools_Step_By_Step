@@ -347,18 +347,18 @@
 + **Il est utilisé pour afficher les 10 premières lignes du fichier.**
   
   + Ex : `#head /etc/passwd`
-    <img src="images/image_23.png"/>
+    <img src="../images/image_23.png"/>
 
 #### **4. tail**
 
 + **Il permet d'afficher les 10 dernières lignes du fichier.**
 
   + Ex : `#tail /etc/passwd`
-    <img src="images/image_24.png"/>
+    <img src="../images/image_24.png"/>
 
 #### **5. Cut**
 + `#cut -d -f filename` (où `d` représente le délimiteur ex. :, " " etc et `f` représente le champ)
-  <img src="images/image_25.png"/>
+  <img src="../images/image_25.png"/>
 
 + **Pour délimiter les espaces et imprimer le champ**
 
@@ -371,7 +371,7 @@
 + **Remarque: cela modifiera uniquement la sortie, mais il n'y aura aucun changement dans le fichier original.**
 
   + **`#sed 's/searchfor/replacewith/g' filename`**
-    <img src="images/image_26.png"/>
+    <img src="../images/image_26.png"/>
 
 #### **Redirection d'E/S**
 
